@@ -1,0 +1,97 @@
+<div id="trainer" class="page-layout carded fullwidth inner-scroll">
+    <div class="top-bg accent"></div>
+    <div class="center">
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center">
+            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Trainer Management
+                </span>
+            </div>
+
+            <div class="filters" fxLayout="row">
+                <div class="search-wrapper mx-32 mx-md-0">
+                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon style="color: gray;">search</mat-icon>
+                        <input #SearchInput placeholder="Search">
+                        <mat-spinner *ngIf="showSearchLoader" diameter="20"></mat-spinner>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row">
+                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                    <span>Verified</span>
+                </button>
+
+                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
+                    <span>Unverified</span>
+                </button>
+
+                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                    <span>Rejected</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <mat-table *ngIf="!noUser" class="trainer-table" #table [dataSource]="dataSource"
+                [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef>Trainer Name</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <p class="text-truncate">{{trainer.name ? trainer.name : '---'}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="phone">
+                    <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <p>{{trainer.isoCode ? trainer.isoCode+'-' : ''}}</p>
+                        <p class="text-truncate">
+                            {{trainer.phone ? trainer.phone : '---'}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <p class="text-truncate" [matTooltip]="trainer.emailAddress ? trainer.emailAddress : '---'">
+                            {{trainer.emailAddress ? trainer.emailAddress : '---'}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="registeredAt">
+                    <mat-header-cell *matHeaderCellDef >Registered At</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <p class="text-truncate">
+                            {{trainer.createdAt ? moment(trainer.createdAt).format("DD/MM/YYYY") : '---'}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="active">
+                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs></mat-header-cell>
+                    <mat-cell *matCellDef="let trainer" fxHide fxShow.gt-xs>
+                        <button mat-raised-button aria-label="More" style="margin: 0 5px; margin-left: auto;" [routerLink]="'/trainers/' + trainer.id">
+                            More
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let trainer; columns: displayedColumns;" class="product" matRipple>
+                </mat-row>
+            </mat-table>
+
+            <div class="no-user-found" *ngIf="noUser">
+                <h4>No Record Found</h4>
+            </div>
+
+            <mat-paginator *ngIf="!noUser" #paginator [length]="totalLength" [pageSize]="limit"
+                [pageSizeOptions]="pageLimit" (page)="changePage($event)">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{
+  "projects": {
+    "default": "dev-gymrabbit",
+    "dev": "dev-gymrabbit",
+    "qa": "qa-gymrabbit"
+  },
+  "targets": {
+    "dev-gymrabbit": {
+      "hosting": {
+        "admin": [
+          "dev-gymrabbit-admin"
+        ]
+      }
+    },
+    "qa-gymrabbit": {
+      "hosting": {
+        "admin": [
+          "qa-gymrabbit-admin"
+        ]
+      }
+    }
+  }
+}
