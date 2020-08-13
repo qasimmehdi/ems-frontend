@@ -14,9 +14,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "bundle-report": "webpack-bundle-analyzer dist/stats.json",
-    "deploy-dev-admin": "firebase use dev && node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --configuration=dev &&  firebase target:apply hosting admin dev-gymrabbit-admin &&  firebase deploy  -m 'commit message dev-admin' --only hosting:admin",
-    "deploy-qa-admin": "firebase use qa && node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --configuration=qa &&  firebase target:apply hosting admin qa-gymrabbit-admin &&  firebase deploy  -m 'commit message qa-admin' --only hosting:admin"
+    "bundle-report": "webpack-bundle-analyzer dist/stats.json"
   },
   "private": true,
   "dependencies": {
