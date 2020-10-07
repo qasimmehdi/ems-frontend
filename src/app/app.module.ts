@@ -39,6 +39,7 @@ import { ForgetPasswordModule } from './main/authorizations/forget-password/forg
 import 'firebase/firestore';
 import { ToastrModule } from 'ngx-toastr';
 import { AppAuthGuard } from './main/app.authguard';
+import { InitialSetupModule } from './main/initialSetup/initial-setup.module';
 
 const appRoutes: Routes = [
     { path: '**', redirectTo: 'dashboard' }
@@ -92,6 +93,9 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
+
+        //Initial Setup
+        InitialSetupModule,
 
         // ngrx
         StoreModule.forRoot({

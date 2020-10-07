@@ -10,7 +10,7 @@ const routes = [
     {
         path     : 'promo-code',
         component: PromoCodeComponent,
-        canActivate: [AppAuthGuard]
+        //canActivate: [AppAuthGuard]
     }
 ];
 

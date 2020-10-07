@@ -20,7 +20,7 @@ const routes: Routes = [
         resolve: {
             data: TrainerService
         },
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: 'trainers/:id',

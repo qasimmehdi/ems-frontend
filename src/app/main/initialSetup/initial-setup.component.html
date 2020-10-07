@@ -1,0 +1,102 @@
+<div id="initial-setup" fxLayout="column">
+
+    <div id="initial-setup-form-wrapper" fxLayout="column" fxLayoutAlign="center stretch">
+
+        <div id="initial-setup-form" (submit)="initialSetup()"
+            [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+
+            <div class="title">Complete Initial Setup</div>
+
+            <mat-horizontal-stepper #stepper>
+                <mat-step [stepControl]="firstFormGroup">
+                    <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Settings</ng-template>
+                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="account-form">
+
+                            <mat-form-field class="mx-4">
+                                <input matInput placeholder="Admin Email" type="email" formControlName="email" required>
+                            </mat-form-field>
+                            <mat-form-field class="mx-4">
+                                <input matInput placeholder="Admin Phone" formControlName="phone" required>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayoutAlign="center">
+                            <button class="mx-4" mat-raised-button color="accent" matStepperNext
+                                [disabled]="firstFormGroup.invalid">
+                                Next
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup">
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Types of Training</ng-template>
+                        <mat-form-field>
+                            <input matInput placeholder="Types of training" formControlName="trainingTypes" required>
+                        </mat-form-field>
+                        <div fxLayoutAlign="center">
+                            <button class="mx-4" mat-raised-button color="accent" matStepperPrevious>
+                                Back
+                            </button>
+                            <button class="mx-4" mat-raised-button color="accent" matStepperNext
+                                [disabled]="secondFormGroup.invalid">
+                                Next
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="thirdFormGroup">
+                    <form [formGroup]="thirdFormGroup">
+                        <ng-template matStepLabel>Training Associations</ng-template>
+                        <mat-form-field>
+                            <input matInput placeholder="Associations" formControlName="associationsNames" required>
+                        </mat-form-field>
+                        <div fxLayoutAlign="center">
+                            <button class="mx-4" mat-raised-button color="accent" matStepperPrevious>
+                                Back
+                            </button>
+                            <button class="mx-4" mat-raised-button color="accent" matStepperNext
+                                [disabled]="thirdFormGroup.invalid">
+                                Next
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="accountInfo">
+                    <form [formGroup]="accountInfo">
+                        <ng-template matStepLabel>Account Details</ng-template>
+                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="account-form">
+                            <mat-form-field class="mx-4">
+                                <input matInput placeholder="Name" type="text" formControlName="name" required>
+                            </mat-form-field>
+                            <mat-form-field class="mx-4">
+                                <input matInput placeholder="Date of Birth" type="date" formControlName="dateOfBirth"
+                                    required>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="account-form">
+
+                            <mat-form-field class="mx-4">
+                                <input matInput placeholder="Email" type="email" formControlName="email" required>
+                            </mat-form-field>
+                            <mat-form-field class="mx-4">
+                                <input matInput placeholder="Password" type="password" formControlName="password"
+                                    required>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayoutAlign="center">
+                            <button class="mx-4" mat-raised-button color="accent" matStepperPrevious>
+                                Back
+                            </button>
+                            <button class="mx-4" mat-raised-button color="accent" matStepperNext
+                                [disabled]="accountInfo.invalid">
+                                Done
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>

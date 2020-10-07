@@ -68,19 +68,21 @@ export class LoginComponent implements OnInit {
         this.loginService.login(this.loginForm.value)
             .then(async (res: any) => {
                 await localStorage.setItem('access_token', res.access_token)
-                return this.loginService.whoAmI()
+                return this.loginService.getProfile()
             })
-            .then((myProfile: any) => {
+            .then(async (myProfile: any) => {
                 profile = myProfile;
-                return this.loginService.getMyGym()
+                await localStorage.setItem("myProfile", JSON.stringify(Object.assign({}, profile)))
+                this.router.navigateByUrl('dashboards')
+                //return this.loginService.getMyGym()
             })
-            .then(async (myGym: any) => {
+            /* .then(async (myGym: any) => {
                 gym = myGym;
                 await localStorage.setItem("myProfile", JSON.stringify(Object.assign({}, profile)))
                 await localStorage.setItem("myGym", JSON.stringify(Object.assign({}, gym)))
 
                 this.router.navigateByUrl('dashboards')
-            })
+            }) */
             .catch(err => {
                 if (err.error && err.error.msg) {
                     this._snackBar.open("Username/Password incorrect", 'Ok', {

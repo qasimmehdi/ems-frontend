@@ -32,7 +32,7 @@ export class DashComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.getDashboardData();
+    // this.getDashboardData();
   }
 
   getDashboardData() {
