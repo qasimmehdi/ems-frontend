@@ -1,9 +1,10 @@
 import { Component, NgModule } from "@angular/core";
 import { InitialSetup } from "./initial-setup.component";
 import { RouterModule } from '@angular/router';
-import { LoginService } from "../login/login.service";
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatGridList, MatIconModule, MatInputModule, MatSnackBarModule, MatStepperModule } from "@angular/material";
+import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatFormFieldModule, MatGridList, MatIconModule, MatInputModule, MatProgressSpinnerModule, MatSnackBarModule, MatSpinner, MatStepperModule } from "@angular/material";
 import { FuseSharedModule } from "@fuse/shared.module";
+import { InitialSetupService } from "./initial-setup.service";
+import { FuseProgressBarModule } from "@fuse/components";
 
 const routes = [
     {
@@ -25,10 +26,11 @@ const routes = [
         MatInputModule,
         MatSnackBarModule,
         MatStepperModule,
-
-        FuseSharedModule
+        MatChipsModule,
+        FuseSharedModule,
+        MatProgressSpinnerModule
     ],
-    providers: [LoginService]
+    providers: [InitialSetupService]
 })
 export class InitialSetupModule {
 }

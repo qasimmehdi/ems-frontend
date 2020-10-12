@@ -1,6 +1,42 @@
 @import "src/@fuse/scss/fuse";
 
 initial-setup {
+    .no-pad{
+        padding: unset;
+    }
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+    /* Firefox */
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
+
+    .spinner-center{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .spinner-min-size{
+        min-width: 57vw;
+        min-height: 35vh;
+
+        @include media-breakpoint('sm') {
+            min-width: 80vw;
+            min-height: 45vh;
+        }
+
+        @include media-breakpoint('xs') {
+            min-width: 90vw;
+            min-height: 45vh;
+        }
+
+    }
 
     #initial-setup {
         width: 100%;
@@ -8,8 +44,9 @@ initial-setup {
         background-size: cover;
 
         #initial-setup-form-wrapper {
-            flex: 1 0 auto;
+            //flex: 1 0 auto;
             // padding: 32px;
+            max-width: 100%;
 
             @include media-breakpoint('xs') {
                 padding: 16px;
@@ -22,13 +59,14 @@ initial-setup {
                 @include mat-elevation(16);
 
                 @include media-breakpoint('xs') {
-                    padding: 24px;
+                    padding: 0px;
                     width: 100%;
                 }
 
-                .logo {
-                    width: 128px;
-                    margin: 32px auto;
+                .mat-standard-chip {
+                    @include media-breakpoint('xs') {
+                        height: unset;
+                    }
                 }
 
                 .title {
@@ -41,11 +79,28 @@ initial-setup {
                     font-size: 23px;
                 }
 
-                .account-form > *{
-                    width: 100% !important;
-                }
+                /* .mat-step-header .mat-step-icon {
+                    display: none !important;
+                } */
+
+
 
                 form {
+                    .small-input{
+                        @include media-breakpoint('sm') {
+                            width: 20%;
+                        }
+                        @include media-breakpoint('md') {
+                            width: 20%;
+                        }
+                        @include media-breakpoint('lg') {
+                            width: 20%;
+                        }
+                        @include media-breakpoint('xl') {
+                            width: 20%;
+                        }
+                    }
+
                     width: 100%;
                     text-align: left;
 
@@ -56,75 +111,9 @@ initial-setup {
                     mat-checkbox {
                         margin: 0;
                     }
-
-                    .remember-forgot-password {
-                        font-size: 13px;
-                        margin-top: 8px;
-
-                        .remember-me {
-                            margin-bottom: 16px
-                        }
-
-                        .forgot-password {
-                            font-size: 13px;
-                            font-weight: 600;
-                            margin-bottom: 16px
-                        }
-                    }
-
-                    .submit-button {
-                        width: 220px;
-                        margin: 16px auto;
-                        display: block;
-
-                        @include media-breakpoint('xs') {
-                            width: 90%;
-                        }
-                    }
                 }
 
-                .register {
-                    margin: 32px auto 24px auto;
-                    font-weight: 600;
 
-                    .text {
-                        margin-right: 8px;
-                    }
-                }
-
-                .separator {
-                    font-size: 15px;
-                    font-weight: 600;
-                    margin: 24px auto;
-                    position: relative;
-                    overflow: hidden;
-                    width: 100px;
-
-                    .text {
-                        display: inline-flex;
-                        position: relative;
-                        padding: 0 8px;
-                        z-index: 9999;
-
-                        &:before,
-                        &:after {
-                            content: '';
-                            display: block;
-                            width: 30px;
-                            position: absolute;
-                            top: 10px;
-                            border-top: 1px solid;
-                        }
-
-                        &:before {
-                            right: 100%;
-                        }
-
-                        &:after {
-                            left: 100%;
-                        }
-                    }
-                }
 
                 button {
 
@@ -134,10 +123,6 @@ initial-setup {
                         text-transform: none;
                         color: #FFFFFF;
                         font-size: 13px;
-                    }
-
-                    @include media-breakpoint('xs') {
-                        width: 80%;
                     }
 
                     &.google {
