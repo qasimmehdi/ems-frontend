@@ -60,7 +60,7 @@ export class TrainerListComponent implements OnInit {
 
     ngOnInit(): void {
         // Subscribe to update Items on changes
-        this. trainerService.onPageItemChanged
+        this.trainerService.onPageItemChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(gymPage => {
                 if (this. trainerService.pageItem && this. trainerService.pageItem.content.length == 0) {
@@ -91,7 +91,7 @@ export class TrainerListComponent implements OnInit {
     }
 
     changePage = (event): void => {
-        console.log("Chnage page API")
+        console.log("Change page API")
     };
 
     ngOnDestroy = (): void => {

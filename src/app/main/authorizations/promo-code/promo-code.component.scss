@@ -34,8 +34,10 @@ promo-code {
                     }
 
                     .logo {
-                        width: 128px;
                         margin: 32px auto;
+                        img{
+                            width: 80%;
+                        }
                     }
 
                     > .title {

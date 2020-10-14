@@ -46,6 +46,7 @@ initial-setup {
         #initial-setup-form-wrapper {
             //flex: 1 0 auto;
             // padding: 32px;
+            min-width: 70%;
             max-width: 100%;
 
             @include media-breakpoint('xs') {
@@ -58,9 +59,10 @@ initial-setup {
                 background-color: #FFFFFF;
                 @include mat-elevation(16);
 
+                width: 100%;
+
                 @include media-breakpoint('xs') {
                     padding: 0px;
-                    width: 100%;
                 }
 
                 .mat-standard-chip {
@@ -79,10 +81,21 @@ initial-setup {
                     font-size: 23px;
                 }
 
-                /* .mat-step-header .mat-step-icon {
-                    display: none !important;
-                } */
+                .mat-vertical-content {
+                    padding: 10px 24px 24px 24px;
+                }
 
+                .stepper-center {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    .mat-horizontal-content-container {
+                        overflow: hidden;
+                        padding: 24px;
+                        width: 100%;
+                    }
+                }
 
 
                 form {
@@ -111,6 +124,8 @@ initial-setup {
                     mat-checkbox {
                         margin: 0;
                     }
+
+
                 }
 
 

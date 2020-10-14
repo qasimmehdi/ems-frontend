@@ -170,7 +170,7 @@ export class InitialSetup implements OnInit, OnDestroy {
 
         const dateOfBirth = data.admin.dateOfBirth;
         data.admin.dateOfBirth = `${dateOfBirth.split('-')[1]}/${dateOfBirth.split('-')[2]}/${dateOfBirth.split('-')[0]}`
-        //console.log(data);
+        console.log(data);
 
         this.initialService.postInitialSetup(data)
             .then((resp) => {

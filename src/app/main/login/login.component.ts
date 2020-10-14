@@ -84,8 +84,8 @@ export class LoginComponent implements OnInit {
                 this.router.navigateByUrl('dashboards')
             }) */
             .catch(err => {
-                if (err.error && err.error.msg) {
-                    this._snackBar.open("Username/Password incorrect", 'Ok', {
+                if (err.error.status == "404" || err.error && err.error.msg) {
+                    this._snackBar.open("Username or Password incorrect", 'Ok', {
                         duration: 2000,
                     });
                 } else {

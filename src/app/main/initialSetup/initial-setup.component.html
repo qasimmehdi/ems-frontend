@@ -15,7 +15,7 @@
                 <div class="title">Complete Initial Setup</div>
 
                 <!-- for mobile display -->
-                <mat-vertical-stepper *ngIf="isSmallscreen">
+                <mat-vertical-stepper *ngIf="isSmallscreen" linear="true">
                     <mat-step [stepControl]="settingsFormGroup">
                         <form [formGroup]="settingsFormGroup">
                             <ng-template matStepLabel>Settings</ng-template>
@@ -51,7 +51,7 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [completed]="trainingTypes.length > 0">
+                    <mat-step *ngIf="false" [completed]="trainingTypes.length > 0">
                         <form>
                             <ng-template matStepLabel>Types of Training</ng-template>
                             <mat-form-field class="mx-8" appearance="outline">
@@ -78,7 +78,7 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [completed]="associationNames.length > 0">
+                    <mat-step *ngIf="false" [completed]="associationNames.length > 0">
                         <form [formGroup]="associationsFormGroup">
                             <ng-template matStepLabel>Training Associations</ng-template>
                             <mat-form-field class="mx-8" appearance="outline">
@@ -184,7 +184,7 @@
 <!-------------------------------------------------------------------------------------------------------------------------------->
 
                 <!-- for big screens -->
-                <mat-horizontal-stepper *ngIf="!isSmallscreen" linear="true" matStepperIcon="number">
+                <mat-horizontal-stepper *ngIf="!isSmallscreen" class="stepper-center" linear="true">
                     <mat-step [stepControl]="settingsFormGroup" >
                         <form [formGroup]="settingsFormGroup">
                             <ng-template matStepLabel>Settings</ng-template>
@@ -220,7 +220,7 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [completed]="trainingTypes.length > 0" >
+                    <mat-step *ngIf="false" [completed]="trainingTypes.length > 0" >
                         <form>
                             <ng-template matStepLabel>Types of Training</ng-template>
                             <mat-form-field class="mx-8" appearance="outline">
@@ -247,7 +247,7 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [completed]="associationNames.length > 0" >
+                    <mat-step *ngIf="false" [completed]="associationNames.length > 0" >
                         <form [formGroup]="associationsFormGroup">
                             <ng-template matStepLabel>Training Associations</ng-template>
                             <mat-form-field class="mx-8" appearance="outline">
