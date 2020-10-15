@@ -20,7 +20,6 @@ import { PromoCodeModule } from './main/authorizations/promo-code/promo-code.mod
 import { ResetPasswordModule } from './main/authorizations/reset-password/reset-password.module';
 
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './reducers/user.reducer';
 import { AuthGuard } from './main/auth-guard.service';
 import { AuthService } from './main/auth.service';
 import { GymsModule } from './main/trainer/trainer.module';
@@ -40,6 +39,7 @@ import 'firebase/firestore';
 import { ToastrModule } from 'ngx-toastr';
 import { AppAuthGuard } from './main/app.authguard';
 import { InitialSetupModule } from './main/initialSetup/initial-setup.module';
+import {userReducer} from './store/reducers/user.reducers';
 
 const appRoutes: Routes = [
     { path: '**', redirectTo: 'dashboard' }
@@ -99,7 +99,7 @@ const appRoutes: Routes = [
 
         // ngrx
         StoreModule.forRoot({
-            reducer
+            user: userReducer
         })
     ],
     providers: [

@@ -6,12 +6,13 @@ import { fuseAnimations } from '@fuse/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // ngrx
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import * as UserActions from '../../actions/user.actions';
+import { SET_USER, LOG_IN } from '../../store/actions/user.actions';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { AuthService } from '../auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'login',
@@ -23,6 +24,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     isLogginIn: boolean = false;
+    user$: Observable<object>;
 
     constructor(
         private _fuseConfigService: FuseConfigService,
@@ -33,6 +35,13 @@ export class LoginComponent implements OnInit {
         private _snackBar: MatSnackBar,
         private authService: AuthService
     ) {
+        this.store.dispatch({
+            type: LOG_IN,
+        });
+
+        this.user$ = store.pipe(select('user'));
+        this.user$.subscribe(resp => console.log(resp));
+
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
