@@ -1,5 +1,5 @@
 export const environment = {
-    apiUrl: 'https://dev.gymrabbit.io/api/appservice/v1',
+    apiUrl: 'https://dev.trainerhub.io/api/appservice/v1',
     apiaccountUrl: 'https://localhost:8084/api/accountservice/v1',
 
 

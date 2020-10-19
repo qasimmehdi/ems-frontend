@@ -13,7 +13,7 @@ export class LoginService {
 
   login(user): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.post(`${BASE_URL}/api/thauthservice/v1/admins/login`, user)
+      this.http.post(`${BASE_URL}/api/accountservice/v1/admins/login`, user)
         .subscribe((response: any) => {
           resolve(response);
         }, reject);
@@ -22,7 +22,7 @@ export class LoginService {
 
   getProfile(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(`${BASE_URL}/api/thauthservice/v1/admins/profile`)
+      this.http.get(`${BASE_URL}/api/accountservice/v1/admins/profile`)
         .subscribe((response: any) => {
           resolve(response);
         }, reject);

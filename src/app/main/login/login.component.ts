@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 // ngrx
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { SET_USER, LOG_IN } from '../../store/actions/user.actions';
+import { LOG_OUT, LOG_IN } from '../../store/actions/user.actions';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { AuthService } from '../auth.service';
@@ -37,6 +37,17 @@ export class LoginComponent implements OnInit {
     ) {
         this.store.dispatch({
             type: LOG_IN,
+            payload: {
+                name: "Qasim",
+                email: "qasim@q.com"
+            }
+        });
+
+        this.user$ = store.pipe(select('user'));
+        this.user$.subscribe(resp => console.log(resp));
+
+        this.store.dispatch({
+            type: LOG_OUT
         });
 
         this.user$ = store.pipe(select('user'));
@@ -69,6 +80,7 @@ export class LoginComponent implements OnInit {
         if (this.authService.isUserLoggedIn()) {
             this.router.navigateByUrl('dashboard')
         }
+        localStorage.removeItem('access_token');
     }
 
     login() {

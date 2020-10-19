@@ -67,10 +67,11 @@ export class InitialSetup implements OnInit, OnDestroy {
                         trainingTypes,
                         adminList,
                         trainingAssociations,
-                        systemSetup
+                        systemSetup,
+                        admin
                     } = response;
 
-                    //systemSetup ? this.router.navigateByUrl('login') : null;
+                    systemSetup === true ? this.router.navigateByUrl('login') : null;
 
                     this.initialResponse = response;
 
@@ -83,10 +84,10 @@ export class InitialSetup implements OnInit, OnDestroy {
                         this.associationNames.push({ name: `${item.name} - ${item.description}` });
                     });
                     this.accountInfo.setValue({
-                        name: adminList[0].name,
-                        email: adminList[0].email,
-                        password: adminList[0].password,
-                        dateOfBirth: `${adminList[0].dateOfBirth.split('/')[2]}-${adminList[0].dateOfBirth.split('/')[0]}-${adminList[0].dateOfBirth.split('/')[1]}`,
+                        name: admin.name,
+                        email: admin.email,
+                        password: admin.password,
+                        dateOfBirth: `${admin.dateOfBirth.split('/')[2]}-${admin.dateOfBirth.split('/')[0]}-${admin.dateOfBirth.split('/')[1]}`,
                         image: ''
                     });
                     this.associationsFormGroup.setValue({
@@ -101,7 +102,7 @@ export class InitialSetup implements OnInit, OnDestroy {
                 this._snackBar.open("Unable to load data", 'Ok', {
                     duration: 2000,
                 });
-                //console.log(err);
+                console.log(err);
             });
 
         this.watcher = media.subscribe((change: MediaChange) => {
@@ -160,8 +161,8 @@ export class InitialSetup implements OnInit, OnDestroy {
     submitInitialSetup() {
         let data = {
             settings: this.initialResponse.settings,
-            trainingTypes: this.trainingTypes,
-            trainingAssociations: this.trainingAssociations,
+            trainingTypes: this.initialResponse.trainingTypes,
+            trainingAssociations: this.initialResponse.trainingAssociations,
             admin: this.accountInfo.value,
         };
 

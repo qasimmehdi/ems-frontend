@@ -1,10 +1,7 @@
-<div id="initial-setup" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
-
+<div id="initial-setup" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
 
     <div id="initial-setup-form-wrapper" fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column">
-
         <div id="initial-setup-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
-
             <!-- Spinner min width handled by media queries -->
             <div *ngIf="isLoading" class="spinner-center spinner-min-size">
                 <mat-spinner color="accent" diameter="50"></mat-spinner>

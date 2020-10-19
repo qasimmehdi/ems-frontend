@@ -9,24 +9,24 @@ const mock = "https://f7b00f2f-f808-4813-ada2-7d4f9e4f8bac.mock.pstmn.io";
   providedIn: 'root'
 })
 
-export class InitialSetupService{
-    constructor(private http: HttpClient) { }
+export class InitialSetupService {
+  constructor(private http: HttpClient) { }
 
-    getInitialSetup() : Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.http.get(`${mock}/api/appservice/v1/initialSetup/getInitialSetup`)
-              .subscribe((response: any) => {
-                resolve(response);
-              }, reject);
-          });
-    }
+  getInitialSetup(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${BASE_URL}/api/appservice/v1/initialSetup/`)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
 
-    postInitialSetup(data:{}) : Promise<any> {
-      return new Promise((resolve, reject) => {
-        this.http.post(`${mock}/api/appservice/v1/initialSetup/`, data)
-          .subscribe((response: any) => {
-            resolve(response);
-          }, reject);
-      });
-    }
+  postInitialSetup(data: {}): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(`${BASE_URL}/api/appservice/v1/initialSetup/`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
 }

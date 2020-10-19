@@ -6,9 +6,9 @@ const firebaseConfig = {
 };
 
 export const environment = {
-    apiUrl: 'https://dev.gymrabbit.io/api/appservice/v1',
-    apiaccountUrl: 'https://dev.gymrabbit.io/api/accountservice/v1',
-    baseUrl: 'https://dev.gymrabbit.io',
+    apiUrl: 'https://dev.trainerhub.io/api/appservice/v1',
+    apiaccountUrl: 'https://dev.trainerhub.io/api/accountservice/v1',
+    baseUrl: 'https://dev.trainerhub.io',
 
     hmr: false,
     secure: false,
