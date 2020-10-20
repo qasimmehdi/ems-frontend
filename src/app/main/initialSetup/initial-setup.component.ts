@@ -58,6 +58,16 @@ export class InitialSetup implements OnInit, OnDestroy {
         private authService: AuthService,
         media: ObservableMedia
     ) {
+        this.initialService.getInitSetupFromDB()
+            .then(resp => {
+                if(resp.systemSetup === true){
+                    this._snackBar.open("System setup is already completed", 'Ok', {
+                        duration: 2000,
+                    });
+                    this.router.navigateByUrl('login');
+                }
+            })
+            .catch(err => console.log(err));
 
         this.initialService.getInitialSetup()
             .then(
@@ -67,11 +77,8 @@ export class InitialSetup implements OnInit, OnDestroy {
                         trainingTypes,
                         adminList,
                         trainingAssociations,
-                        systemSetup,
                         admin
                     } = response;
-
-                    systemSetup === true ? this.router.navigateByUrl('login') : null;
 
                     this.initialResponse = response;
 

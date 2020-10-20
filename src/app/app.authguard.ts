@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Role } from 'app/main/teams/role.enum';
 import { MatSnackBar } from '@angular/material';
+import { select, Store } from '@ngrx/store';
+import { AppState } from './app.state';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AppAuthGuard implements CanActivate {
@@ -10,9 +13,12 @@ export class AppAuthGuard implements CanActivate {
   constructor(
     private _router: Router,
     private authService: AuthService,
-    private matSnackBar: MatSnackBar
+    private matSnackBar: MatSnackBar,
+    private store: Store<AppState>,
   ) {
   }
+
+  user$: Observable<object>;
 
   async canActivate(
     next: ActivatedRouteSnapshot,
@@ -62,6 +68,9 @@ export class AppAuthGuard implements CanActivate {
     // PROTECTING ROUTES BASED ON THEIR ROLES
     let isAllowed = false;
     let profile = JSON.parse(localStorage.getItem('myProfile'));
+    this.user$ = this.store.pipe(select('user'));
+    let u = await this.user$.toPromise();
+    console.log(u);
     // let gym = JSON.parse(localStorage.getItem('myGym'));
 
     if (state.url === "/") {
@@ -76,7 +85,7 @@ export class AppAuthGuard implements CanActivate {
       if (profile.userRole.find(role => role.name == Role.GAADMIN)) {
         isAllowed = true;
 
-        // IF PROFILE IS NOT COMPLETED YET 
+        // IF PROFILE IS NOT COMPLETED YET
         // if (gym.stepsCompleted.split(",").length < 5 && state.url.includes("gym-")) {
         //   return true
         // }
@@ -86,7 +95,7 @@ export class AppAuthGuard implements CanActivate {
         }
       }
 
-      // IF ROLE IS FINANCE 
+      // IF ROLE IS FINANCE
       // else if (profile.userRole.find(role => role.name == Role.GAFINANCE) && (state.url === "/finances" || state.url.includes("reports") || state.url.includes("disbursement"))) {
       //   if (gym.isActive) {
       //     return true

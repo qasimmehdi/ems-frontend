@@ -28,13 +28,4 @@ export class LoginService {
         }, reject);
     });
   }
-
-  getMyGym(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.http.get(`${BASE_URL}/api/appservice/v1/gym/getMyGym`)
-        .subscribe((response: any) => {
-          resolve(response);
-        }, reject);
-    });
-  }
 }

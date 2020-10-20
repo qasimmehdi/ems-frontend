@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 
-const BASE_URL = environment.baseUrl;
+const BASE_URL_APP = environment.apiUrl;
 const mock = "https://f7b00f2f-f808-4813-ada2-7d4f9e4f8bac.mock.pstmn.io";
 
 @Injectable({
@@ -14,7 +14,7 @@ export class InitialSetupService {
 
   getInitialSetup(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(`${BASE_URL}/api/appservice/v1/initialSetup/`)
+      this.http.get(`${BASE_URL_APP}/initialSetup/`)
         .subscribe((response: any) => {
           resolve(response);
         }, reject);
@@ -23,7 +23,16 @@ export class InitialSetupService {
 
   postInitialSetup(data: {}): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.post(`${BASE_URL}/api/appservice/v1/initialSetup/`, data)
+      this.http.post(`${BASE_URL_APP}/initialSetup/`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
+
+  getInitSetupFromDB(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${BASE_URL_APP}/initialSetup/getInitialSetup`)
         .subscribe((response: any) => {
           resolve(response);
         }, reject);

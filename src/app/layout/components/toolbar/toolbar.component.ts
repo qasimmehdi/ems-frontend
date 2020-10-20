@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
@@ -9,6 +9,10 @@ import { navigation } from 'app/navigation/navigation';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
+import { select, Store } from '@ngrx/store';
+import { AppState } from 'app/app.state';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { LOG_OUT } from 'app/store/actions/user.actions';
 
 const moment = require('moment');
 const BASE_URL = environment.baseUrl;
@@ -33,13 +37,15 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     // Private
     private _unsubscribeAll: Subject<any>;
+    private user$: Observable<any>;
 
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
         private router: Router,
-        private http: HttpClient
+        private http: HttpClient,
+        private store: Store<AppState>,
     ) {
         // Set the defaults
         this.userStatusOptions = [
@@ -99,7 +105,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
                 this.rightNavbar = settings.layout.navbar.position === 'right';
                 this.hiddenNavbar = settings.layout.navbar.hidden === true;
             });
-
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, { 'id': this._translateService.currentLang });
     }
@@ -129,8 +134,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     logout() {
         localStorage.removeItem('access_token');
-        localStorage.removeItem('myProfile');
-        localStorage.removeItem('myGym');
+        this.store.dispatch({
+            type: LOG_OUT,
+            payload: {}
+        });
         this.router.navigateByUrl('login');
     }
 
@@ -139,9 +146,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     async getUser() {
-        setTimeout(async () => {
-            this.user = await JSON.parse(localStorage.getItem("myProfile"));
-        }, 500)
+        this.user$ = this.store.pipe(select('user'));
+        this.user$.subscribe(resp => {
+            this.user = resp.data.myProfile;
+            console.log(resp);
+        });
     }
 
     getNotifications() {

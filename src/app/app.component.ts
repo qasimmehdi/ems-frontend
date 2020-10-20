@@ -16,6 +16,10 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
 import { environment } from './../environments/environment';
+import { LoginService } from './main/login/login.service';
+import { Store } from '@ngrx/store';
+import { AppState } from './app.state';
+import { LOG_IN } from './store/actions/user.actions';
 
 @Component({
     selector: 'app',
@@ -42,7 +46,9 @@ export class AppComponent implements OnInit, OnDestroy {
         private _translateService: TranslateService,
         private _platform: Platform,
         private toastr: ToastrService,
-        private http: HttpClient
+        private http: HttpClient,
+        private store: Store<AppState>,
+        private loginService: LoginService,
     ) {
 
         console.log(environment.version);
@@ -71,13 +77,13 @@ export class AppComponent implements OnInit, OnDestroy {
         if (this._platform.ANDROID || this._platform.IOS) {
             this.document.body.classList.add('is-mobile');
         }
-
         // Set the private defaults
         this._unsubscribeAll = new Subject();
     }
 
     ngOnInit(): void {
         // Subscribe to config changes
+        console.log("refresh");
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((config) => {
@@ -104,6 +110,17 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.document.body.classList.add(this.fuseConfig.colorTheme);
             });
 
+        if(localStorage.getItem("access_token")){
+            this.loginService.getProfile().then((myProfile: any) => {
+                this.store.dispatch({
+                    type: LOG_IN,
+                    payload: {
+                        myProfile: myProfile
+                    }
+                });
+            })
+            .catch(err => console.log(err));
+        }
         // Subscribe Notifications from Firebase
         // this.notificationSubscriber()
     }

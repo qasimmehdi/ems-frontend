@@ -35,23 +35,9 @@ export class LoginComponent implements OnInit {
         private _snackBar: MatSnackBar,
         private authService: AuthService
     ) {
-        this.store.dispatch({
-            type: LOG_IN,
-            payload: {
-                name: "Qasim",
-                email: "qasim@q.com"
-            }
-        });
 
-        this.user$ = store.pipe(select('user'));
-        this.user$.subscribe(resp => console.log(resp));
 
-        this.store.dispatch({
-            type: LOG_OUT
-        });
 
-        this.user$ = store.pipe(select('user'));
-        this.user$.subscribe(resp => console.log(resp));
 
         // Configure the layout
         this._fuseConfigService.config = {
@@ -80,6 +66,7 @@ export class LoginComponent implements OnInit {
         if (this.authService.isUserLoggedIn()) {
             this.router.navigateByUrl('dashboard')
         }
+        //just for test
         localStorage.removeItem('access_token');
     }
 
@@ -88,13 +75,22 @@ export class LoginComponent implements OnInit {
         let gym = undefined;
         this.loginService.login(this.loginForm.value)
             .then(async (res: any) => {
-                await localStorage.setItem('access_token', res.access_token)
-                return this.loginService.getProfile()
+                await localStorage.setItem('access_token', res.access_token);
+                return this.loginService.getProfile();
             })
             .then(async (myProfile: any) => {
                 profile = myProfile;
-                await localStorage.setItem("myProfile", JSON.stringify(Object.assign({}, profile)))
-                this.router.navigateByUrl('dashboards')
+
+                this.store.dispatch({
+                    type: LOG_IN,
+                    payload: {
+                        myProfile: profile
+                    }
+                });
+                this.user$ = this.store.pipe(select('user'));
+                this.user$.subscribe(resp => console.log(resp));
+
+                this.router.navigateByUrl('dashboards');
                 //return this.loginService.getMyGym()
             })
             /* .then(async (myGym: any) => {
@@ -110,7 +106,7 @@ export class LoginComponent implements OnInit {
                         duration: 2000,
                     });
                 } else {
-                    console.log(err)
+                    console.log(err);
                 }
             })
     }

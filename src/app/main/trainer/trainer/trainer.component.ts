@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-gym',
@@ -16,6 +17,7 @@ import { fuseAnimations } from '@fuse/animations';
 
 export class TrainerComponent implements OnInit, OnDestroy {
 
+    moment = moment;
     gym: any;
     pageType: string;
     gymForm: FormGroup;
@@ -27,6 +29,7 @@ export class TrainerComponent implements OnInit, OnDestroy {
     public reenableButton = new EventEmitter<boolean>(false);
     toppings = new FormControl();
 
+    trainer: any;
     // Private
     private _unsubscribeAll: Subject<any>;
 
@@ -44,7 +47,8 @@ export class TrainerComponent implements OnInit, OnDestroy {
         // Subscribe to update product on changes
         this.trainerService.onItemChanged
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(gym => {
+            .subscribe(trainer => {
+                this.trainer = this.trainerService.pageItem;
             });
     }
 

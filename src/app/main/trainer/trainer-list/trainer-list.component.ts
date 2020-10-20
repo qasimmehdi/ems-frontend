@@ -24,7 +24,6 @@ export class TrainerListComponent implements OnInit {
     dialogRef: any;
     displayedColumns: string[] = [
         'name',
-        'phone',
         'email',
         'registeredAt',
         'active'
@@ -48,12 +47,12 @@ export class TrainerListComponent implements OnInit {
     @ViewChild('SearchInput') SearchInput: ElementRef;
 
     private _unsubscribeAll: Subject<any>;
-    trainer = [{
+    /* trainer = [{
         name: "qasim",
         emailAddress: "qasim_123@gmail.com",
         phone: "123456789011",
         createdAt: "10/12/1998"
-    }]
+    }] */
 
     constructor(
         private  trainerService: TrainerService,
@@ -69,11 +68,12 @@ export class TrainerListComponent implements OnInit {
         this.trainerService.onPageItemChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(gymPage => {
-                if (this. trainerService.pageItem && this. trainerService.pageItem.content.length == 0) {
+                console.log(gymPage);
+                if (this.trainerService.pageItem && this.trainerService.pageItem.content.length == 0) {
                     this.noUser = true;
                 }
                 // Assign the data to the data source for the table to render
-                this.dataSource = new MatTableDataSource(this.trainer);
+                this.dataSource = new MatTableDataSource(this.trainerService.pageItem.content);
                 this.totalLength = this. trainerService.pageItem.totalElements;
                 this.limit = this. trainerService.pageItem.size;
                 this.pageIndex = this. trainerService.pageItem.number;
@@ -97,7 +97,8 @@ export class TrainerListComponent implements OnInit {
     }
 
     changePage = (event): void => {
-        console.log("Change page API")
+        console.log(event.pageSize);
+        console.log("Change page API");
     };
 
     ngOnDestroy = (): void => {

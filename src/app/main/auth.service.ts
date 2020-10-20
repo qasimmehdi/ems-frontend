@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'app/app.state';
 import { Router } from '@angular/router';
 import { environment } from 'environments/environment';
+import { LOG_OUT } from 'app/store/actions/user.actions';
 
 const BASE_URL = environment.baseUrl;
 
@@ -47,6 +48,10 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('access_token');
+        this.store.dispatch({
+            type: LOG_OUT,
+            payload: {}
+        });
         this.router.navigateByUrl('login');
     }
 

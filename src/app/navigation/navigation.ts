@@ -32,26 +32,19 @@ export const navigation: FuseNavigation[] = [
                 url: '/users'
             },
             {
-                id: 'settings',
-                title: 'Settings',
-                type: 'item',
-                icon: 'settings',
-                url: '/settings'
-            },
-            {
-                id: 'teams',
-                title: 'Teams',
-                type: 'item',
-                url: '/teams',
-                icon: 'people'
-            },
-            {
                 id: 'reported',
                 title: 'Reported Users',
                 type: 'item',
                 url: '/reported',
                 icon: 'report'
             },
+            /* {
+                id: 'teams',
+                title: 'Teams',
+                type: 'item',
+                url: '/teams',
+                icon: 'people'
+            }, */
             {
                 id: 'feedback',
                 title: 'Feedback Management',
@@ -65,6 +58,13 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 url: '/schedule',
                 icon: 'calendar_today'
+            },
+            {
+                id: 'session',
+                title: 'Session Management',
+                type: 'item',
+                url: '/session',
+                icon: 'fitness_center'
             },
             {
                 id: 'notification',

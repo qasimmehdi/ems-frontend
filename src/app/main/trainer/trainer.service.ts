@@ -5,6 +5,7 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 import { environment } from 'environments/environment';
 
 const BASE_URL = environment.baseUrl;
+const BASE_URL_ACCOUNT = environment.apiaccountUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -39,10 +40,10 @@ export class TrainerService {
 
       Promise.all([
         this.getInit()
-      ]).then(
-        () => {
+      ])
+      .then(() => {
           resolve();
-        },
+      },
         reject
       );
     });
@@ -51,7 +52,7 @@ export class TrainerService {
   getInit() {
     return new Promise((resolve, reject) => {
       if (this.routeParams.id === undefined) {
-        this._httpClient.get(`${BASE_URL}/api/appservice/v1/gym/getGymsByGymRabbit?sort=created_at,desc`)
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers`)
           .subscribe((response: any) => {
             this.pageItem = response;
             this.onPageItemChanged.next(this.pageItem);
@@ -60,7 +61,7 @@ export class TrainerService {
             resolve(reject)
           });
       } else {
-        this._httpClient.get(`${BASE_URL}/api/appservice/v1/gym/getGymsByGymRabbit?sort=created_at,desc`)
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers/${this.routeParams.id}`)
           .subscribe((response: any) => {
             this.pageItem = response;
             this.onPageItemChanged.next(this.pageItem);
@@ -74,12 +75,12 @@ export class TrainerService {
 
   getPageItem(page: Number, size: Number, typeSwitch?) {
     return new Promise((resolve, reject) => {
-      this._httpClient.get(`${BASE_URL}/api/appservice/v1/gym/getGymsByGymRabbit?page=${page}&size=${size}`)
-          .subscribe((response: any) => {
-            this.pageItem = response;
-            this.onPageItemChanged.next(this.pageItem);
-            resolve(response);
-          }, reject);
+      this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers?page=${page}&size=${size}`)
+        .subscribe((response: any) => {
+          this.pageItem = response;
+          this.onPageItemChanged.next(this.pageItem);
+          resolve(response);
+        }, reject);
     });
   }
 }

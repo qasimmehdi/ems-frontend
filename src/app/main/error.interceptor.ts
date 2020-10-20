@@ -24,7 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     verticalPosition: 'bottom',
                     duration: 3000
                 });
-                //this.authService.logout();
+                this.authService.logout();
             } else if (err.status === 409 || err.status === 400 || err.status === 0) {
                 if(err && err.error && err.error.message) {
                     this._matSnackBar.open(err.error.message, 'OK', {
