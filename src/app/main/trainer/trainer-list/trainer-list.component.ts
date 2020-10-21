@@ -97,8 +97,8 @@ export class TrainerListComponent implements OnInit {
     }
 
     changePage = (event): void => {
-        console.log(event.pageSize);
-        console.log("Change page API");
+        console.log(event.pageSize, event.pageIndex);
+        this.trainerService.getPageItem(event.pageIndex, event.pageSize);
     };
 
     ngOnDestroy = (): void => {

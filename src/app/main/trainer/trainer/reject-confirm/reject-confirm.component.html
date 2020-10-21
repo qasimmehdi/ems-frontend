@@ -1,0 +1,10 @@
+<div class="my-reject-dialog" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+    <h2 mat-dialog-title style="align-self: center;">Are you sure?</h2>
+    <mat-form-field>
+        <input matInput [(ngModel)]="data.comment">
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-raised-button color="accent" [mat-dialog-close]>Cancel</button>
+        <button mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
+    </div>
+</div>

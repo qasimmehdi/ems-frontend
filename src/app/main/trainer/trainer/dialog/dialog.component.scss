@@ -1,0 +1,11 @@
+@import "src/@fuse/scss/fuse";
+
+.my-dialog {
+    width: 300px;
+    height: 150px;
+
+
+    @include media-breakpoint("xs") {
+        width: 200px;
+    }
+}

@@ -2,11 +2,12 @@ import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { TrainerService } from '../trainer.service';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 import * as moment from 'moment';
+import { VerificationDialog } from './dialog/dialog.component';
 
 @Component({
     selector: 'app-gym',
@@ -28,16 +29,21 @@ export class TrainerComponent implements OnInit, OnDestroy {
     stateSelected: any;
     public reenableButton = new EventEmitter<boolean>(false);
     toppings = new FormControl();
+    certifications = ["ACE", "ACE"];
 
     trainer: any;
     // Private
     private _unsubscribeAll: Subject<any>;
 
+    animal: string;
+    name: string;
+
     constructor(
         private trainerService: TrainerService,
         private _formBuilder: FormBuilder,
         private _matSnackBar: MatSnackBar,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        public dialog: MatDialog
     ) {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
@@ -63,6 +69,14 @@ export class TrainerComponent implements OnInit, OnDestroy {
         this._matSnackBar.open(message, 'OK', {
             verticalPosition: 'bottom',
             duration: 3000
+        });
+    }
+
+    openVerificationDialog(): void {
+        const dialogRef = this.dialog.open(VerificationDialog, {});
+
+        dialogRef.afterClosed().subscribe(() => {
+            console.log('The dialog was closed');
         });
     }
 }

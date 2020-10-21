@@ -7,11 +7,13 @@ import { FuseConfirmDialogModule, FuseWidgetModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { TrainerService } from './trainer.service';
 import { TrainerComponent } from './trainer/trainer.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatToolbarModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatToolbarModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
 import { AuthGuard } from '../auth-guard.service';
 import { InterceptorService } from '../interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { VerificationDialog } from './trainer/dialog/dialog.component';
+import { RejectConfirmDialog } from './trainer/reject-confirm/reject-confirm.component';
 
 const routes: Routes = [
     {
@@ -36,6 +38,8 @@ const routes: Routes = [
     declarations: [
         TrainerListComponent,
         TrainerComponent,
+        VerificationDialog,
+        RejectConfirmDialog
     ],
     imports: [
         CommonModule,
@@ -62,7 +66,8 @@ const routes: Routes = [
         MatToolbarModule,
         FuseConfirmDialogModule,
         FuseSharedModule,
-        FuseWidgetModule
+        FuseWidgetModule,
+        MatDialogModule
     ],
     providers: [
         {
@@ -78,6 +83,8 @@ const routes: Routes = [
     exports: [
     ],
     entryComponents: [
+        VerificationDialog,
+        RejectConfirmDialog
     ],
 })
 export class GymsModule {

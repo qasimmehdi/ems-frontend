@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('dashboard')
         }
         //just for test
-        localStorage.removeItem('access_token');
+        //localStorage.removeItem('access_token');
     }
 
     login() {

@@ -16,22 +16,71 @@
             </div>
         </div>
 
-        <div class="content-card">
-            <div class="content">
-                <div class="trainer-info">
-                    <h2>Trainer Name: {{trainer.name ? trainer.name : "John Doe" }}</h2>
-                    <h2>Email: {{trainer.email ? trainer.email : "john.doe@gmail.com" }}</h2>
-                    <h2>Registered at: {{trainer.createdAt ? moment(trainer.createdAt).format("DD/MM/YYYY") : "N/A" }}
-                    </h2>
-                    <h2>Address: {{trainer.address ? trainer.address : "N/A" }}</h2>
-                    <h2>Certification: N/A</h2>
-                    <h2>Certification code / ID / Serial #: {{trainer.code ? trainer.code : "T147491" }}</h2>
-                    <h2>Types of training:</h2>
+        <div class="content-card" fusePerfectScrollbar>
+            <div fxLayout="row" fxLayout.xs="column-reverse" fxLayoutAlign="space-between start">
+                <div class="trainer-info" fxLayout="column" fxLayoutAlign="start start">
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Trainer Name: </p>
+                        <p>{{trainer.name ? trainer.name : "John Doe" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Email: </p>
+                        <p>{{trainer.email ? trainer.email : "john.doe@gmail.com" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Registered at: </p>
+                        <p>{{trainer.createdAt ? moment(trainer.createdAt).format("DD/MM/YYYY") : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Address: </p>
+                        <p>{{trainer.address ? trainer.address : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold" style="align-self: center;">Certification: </p>
+                        <p *ngFor="let cert of trainer.certifications" class="circle" style="margin-left:10px;">{{cert}}</p>
+
+                    </div>
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Certification code / ID / Serial #: </p>
+                        <p>{{trainer.code ? trainer.code : "T147491" }}</p>
+                    </div>
+
+                    <p class="p-bold">Types of training:</p>
                     <ul>
-                        <li>
-                            <h2>Cardio</h2>
+                        <li *ngFor="let type of trainer.trainingTypes">
+                            <p>{{type}}</p>
                         </li>
                     </ul>
+                </div>
+                <div class="trainer-info mw" fxLayout="column" fxLayoutAlign="end start" fxLayoutAlign.xs="center center">
+                    <div class="profile-container">
+                        <mat-icon *ngIf="trainer.status.toLowerCase() === 'verified'" class="verified-icon"
+                            aria-label="verified icon">verified_user</mat-icon>
+                        <img class="profile-pic" src={{trainer.image}}
+                            onerror="this.src='assets/images/avatars/profile_placeholder_male.jpg';"
+                            alt="Trainer Profile">
+                    </div>
+                    <h2 *ngIf="trainer.status.toLowerCase() === 'verified'" class="status">Verified</h2>
+                    <h2 *ngIf="trainer.status.toLowerCase() === 'rejected'" class="status">Rejected</h2>
+
+                    <div *ngIf="!(trainer.status.toLowerCase() === 'rejected')" fxLayout="column"
+                        fxLayoutAlign="center stretch">
+                        <div class="awaiting">
+                            <p>Verification Status</p>
+                            <p>Awaiting Verification</p>
+                        </div>
+                        <button (click)="openVerificationDialog()" class="v-btn" mat-raised-button aria-label="Change status" color="accent">
+                            Change Status
+                        </button>
+                        <button *ngIf="false" class="v-btn" mat-raised-button aria-label="Online Verification" color="accent">
+                            Online Verification
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
