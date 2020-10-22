@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+        this.isLogginIn = true;
         let profile = undefined;
         let gym = undefined;
         this.loginService.login(this.loginForm.value)
@@ -108,6 +109,9 @@ export class LoginComponent implements OnInit {
                 } else {
                     console.log(err);
                 }
+            })
+            .finally(() => {
+                this.isLogginIn = false;
             })
     }
 
