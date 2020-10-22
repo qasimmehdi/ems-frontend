@@ -40,6 +40,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppAuthGuard } from './main/app.authguard';
 import { InitialSetupModule } from './main/initialSetup/initial-setup.module';
 import {userReducer} from './store/reducers/user.reducers';
+import { UsersModule } from './main/user/user.module';
+import { ReportedModule } from './main/reported/reported.module';
 
 const appRoutes: Routes = [
     { path: '**', redirectTo: 'dashboard' }
@@ -97,6 +99,11 @@ const appRoutes: Routes = [
         //Initial Setup
         InitialSetupModule,
 
+        //users
+        UsersModule,
+
+        //reported
+        ReportedModule,
         // ngrx
         StoreModule.forRoot({
             user: userReducer

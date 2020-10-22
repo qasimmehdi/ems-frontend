@@ -42,22 +42,30 @@
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold" style="align-self: center;">Certification: </p>
-                        <p *ngFor="let cert of trainer.certifications" class="circle" style="margin-left:10px;">{{cert}}</p>
+                        <p *ngFor="let cert of trainer.certifications" class="circle" style="margin-left:10px;">{{cert}}
+                        </p>
 
                     </div>
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Certification code / ID / Serial #: </p>
-                        <p>{{trainer.code ? trainer.code : "T147491" }}</p>
+                        <p>{{trainer.code ? trainer.code : "N/A" }}</p>
                     </div>
-
-                    <p class="p-bold">Types of training:</p>
-                    <ul>
-                        <li *ngFor="let type of trainer.trainingTypes">
-                            <p>{{type}}</p>
-                        </li>
-                    </ul>
+                    <div fxLayout="trainer.trainingTypes.length > 0 ? 'column' : 'row'" fxLayout.xs="column">
+                        <p class="p-bold">Types of training:</p>
+                        <p *ngIf="trainer.trainingTypes.length === 0">N/A</p>
+                        <ul *ngIf="trainer.trainingTypes.length > 0">
+                            <li *ngFor="let type of trainer.trainingTypes">
+                                <p>{{type}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="trainer.status.toLowerCase() === 'verified'" fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">No. of Active Clients #: </p>
+                        <p>{{trainer.client ? trainer.client : "6" }}</p>
+                    </div>
                 </div>
-                <div class="trainer-info mw" fxLayout="column" fxLayoutAlign="end start" fxLayoutAlign.xs="center center">
+                <div class="trainer-info mw" fxLayout="column" fxLayoutAlign="end start"
+                    fxLayoutAlign.xs="center center">
                     <div class="profile-container">
                         <mat-icon *ngIf="trainer.status.toLowerCase() === 'verified'" class="verified-icon"
                             aria-label="verified icon">verified_user</mat-icon>
@@ -74,10 +82,12 @@
                             <p>Verification Status</p>
                             <p>Awaiting Verification</p>
                         </div>
-                        <button (click)="openVerificationDialog()" class="v-btn" mat-raised-button aria-label="Change status" color="accent">
+                        <button (click)="openVerificationDialog()" class="v-btn" mat-raised-button
+                            aria-label="Change status" color="accent">
                             Change Status
                         </button>
-                        <button *ngIf="false" class="v-btn" mat-raised-button aria-label="Online Verification" color="accent">
+                        <button *ngIf="false" class="v-btn" mat-raised-button aria-label="Online Verification"
+                            color="accent">
                             Online Verification
                         </button>
                     </div>

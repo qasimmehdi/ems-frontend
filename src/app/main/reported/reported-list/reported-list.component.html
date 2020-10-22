@@ -1,0 +1,123 @@
+<div id="reported" class="page-layout carded fullwidth inner-scroll">
+    <div class="top-bg accent"></div>
+    <div class="center">
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center">
+            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Reported Users
+                </span>
+            </div>
+
+            <div class="filters" fxLayout="row">
+                <div class="search-wrapper mx-32 mx-md-0">
+                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon style="color: gray;">search</mat-icon>
+                        <input #SearchInput placeholder="Search">
+                        <mat-spinner *ngIf="showSearchLoader" diameter="20"></mat-spinner>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="stretch">
+                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                    <span>Reported</span>
+                </button>
+
+                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
+                    <span>Blocked</span>
+                </button>
+
+                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                    <span>Suspended</span>
+                </button>
+                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
+                    <span>All</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <mat-table *ngIf="!noUser" class="reported-table" #table [dataSource]="dataSource"
+                [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <p class="text-truncate">{{trainer.name ? trainer.name : '---'}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <p class="text-truncate">
+                            {{trainer.type ? trainer.type : '---'}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="comment">
+                    <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <p class="text-truncate">
+                            {{trainer.comment ? trainer.comment : '---'}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <p class="text-truncate">
+                            {{trainer.status ? trainer.status : '---'}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="profile" >
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <!-- fxHide fxShow.gt-xs -->
+                        <button mat-raised-button aria-label="More" color="accent">
+                            Profile
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="btns" >
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let trainer" class="action-column">
+                        <button mat-raised-button aria-label="More" color="accent"
+                             >
+                            Block
+                        </button>
+                        <button mat-raised-button aria-label="More" color="accent"
+                             >
+                            Suspend
+                        </button>
+                        <button *ngIf="false" mat-raised-button aria-label="More" color="accent"
+                             >
+                            Un-block
+                        </button>
+                        <button *ngIf="false" mat-raised-button aria-label="More" color="accent"
+                             >
+                            Activate
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let trainer; columns: displayedColumns;" class="product" matRipple>
+                </mat-row>
+            </mat-table>
+
+            <div class="no-user-found" *ngIf="noUser">
+                <h4>No Record Found</h4>
+            </div>
+
+            <mat-paginator *ngIf="!noUser" #paginator [length]="totalLength" [pageSize]="limit"
+                [pageSizeOptions]="pageLimit" (page)="changePage($event)">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

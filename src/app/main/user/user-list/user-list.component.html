@@ -1,0 +1,88 @@
+<div id="user" class="page-layout carded fullwidth inner-scroll">
+    <div class="top-bg accent"></div>
+    <div class="center">
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center">
+            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    User Management
+                </span>
+            </div>
+
+            <div class="filters" fxLayout="row">
+                <div class="search-wrapper mx-32 mx-md-0">
+                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon style="color: gray;">search</mat-icon>
+                        <input #SearchInput placeholder="Search">
+                        <mat-spinner *ngIf="showSearchLoader" diameter="20"></mat-spinner>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <mat-table *ngIf="!noUser" class="user-table" #table [dataSource]="dataSource"
+                [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef>User Name</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.name ? user.name : '---'}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef>User ID</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.id ? user.id : '---'}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="phone">
+                    <mat-header-cell *matHeaderCellDef>Phone #</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.phone ? user.phone : '---'}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate" [matTooltip]="user.email ? user.email : '---'">
+                            {{user.email ? user.email : '---'}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="registeredAt">
+                    <mat-header-cell *matHeaderCellDef >Registered At</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">
+                            {{user.createdAt ? moment(user.createdAt).format("DD/MM/YYYY") : '---'}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="active">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let user"> <!-- fxHide fxShow.gt-xs -->
+                        <button mat-raised-button aria-label="More" color="accent" style="margin: 0 5px; margin-left: auto;" [routerLink]="'/users/' + user.id">
+                            More
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let user; columns: displayedColumns;" class="product" matRipple>
+                </mat-row>
+            </mat-table>
+
+            <div class="no-user-found" *ngIf="noUser">
+                <h4>No Record Found</h4>
+            </div>
+
+            <mat-paginator *ngIf="!noUser" #paginator [length]="totalLength" [pageSize]="limit"
+                [pageSizeOptions]="pageLimit" (page)="changePage($event)">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

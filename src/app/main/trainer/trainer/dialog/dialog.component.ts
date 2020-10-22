@@ -19,8 +19,8 @@ export class VerificationDialog {
 
     onReject(): void {
         console.log("application rejected");
-        this.dialogRef.close();
         this.openDialog();
+        this.dialogRef.close();
     }
 
     onVerify(): void {
@@ -31,11 +31,6 @@ export class VerificationDialog {
     openDialog(): void {
         const dialogRef = this.dialog.open(RejectConfirmDialog, {
             data: { comment: this.comment }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            console.log(result);
         });
     }
 

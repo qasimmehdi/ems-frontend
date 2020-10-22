@@ -17,7 +17,8 @@ export class RejectConfirmDialog{
         @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
     onSubmit(): void {
-        console.log("submit");
+        //api call
+        console.log(this.data.comment);
         this.dialogRef.close();
     }
 

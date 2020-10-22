@@ -1,0 +1,107 @@
+@import "src/@fuse/scss/fuse";
+
+reported-list {
+  #reported {
+    .top-bg {
+      @include media-breakpoint("lt-md") {
+        height: 256px;
+      }
+    }
+
+    > .center {
+      > .header {
+        .filters {
+          max-height: 50px;
+          .search-wrapper {
+            width: 100%;
+            max-width: 480px;
+            border-radius: 28px;
+            background-color: white;
+            overflow: hidden;
+            @include mat-elevation(1);
+
+            @include media-breakpoint("xs") {
+              width: 100%;
+            }
+
+            .search {
+              width: 100%;
+              height: 48px;
+              line-height: 48px;
+              padding: 0 18px;
+
+              input {
+                width: 100%;
+                height: 48px;
+                min-height: 48px;
+                max-height: 48px;
+                padding: 0 16px;
+                border: none;
+                outline: none;
+              }
+            }
+          }
+
+          .mat-form-field {
+            max-width: 120px;
+            margin-left: 15px;
+          }
+
+          .type-selection-dropdown {
+            border: 1px solid;
+            border-radius: 50px;
+            padding: 0 20px;
+            min-width: 160px;
+          }
+        }
+
+        @include media-breakpoint("lt-md") {
+          padding: 8px 0;
+          height: 192px !important;
+          min-height: 192px !important;
+          max-height: 192px !important;
+        }
+      }
+    }
+  }
+
+  .reported-table {
+    flex: 1 1 auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    .mat-header-row {
+      min-height: 64px;
+    }
+
+    .gym {
+      position: relative;
+      cursor: pointer;
+      height: 84px;
+    }
+
+    .mat-cell {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .mat-column-active {
+      max-width: 100px;
+    }
+  }
+}
+
+.no-user-found {
+  height: 100vh;
+  padding: 35px;
+  text-align: center;
+}
+
+.action-column{
+  button{
+    min-width: auto;
+    margin-left: 5px;
+  }
+}

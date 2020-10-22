@@ -1,0 +1,67 @@
+<div id="user" class="page-layout carded fullwidth inner-scroll">
+    <div class="top-bg accent"></div>
+    <div class="center">
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/users'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2">
+                        user Profile
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card" fusePerfectScrollbar>
+            <div fxLayout="row" fxLayout.xs="column-reverse" fxLayoutAlign="space-between start">
+                <div class="user-info" fxLayout="column" fxLayoutAlign="start start">
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">User Name: </p>
+                        <p>{{user.name ? user.name : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Email: </p>
+                        <p>{{user.email ? user.email : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Phone: </p>
+                        <p>{{user.email ? user.email : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Registered at: </p>
+                        <p>{{user.createdAt ? moment(user.createdAt).format("DD/MM/YYYY") : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">DOB: </p>
+                        <p>{{user.createdAt ? moment(user.createdAt).format("DD/MM/YYYY") : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Gender: </p>
+                        <p>{{user.gender ? user.gender : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Address: </p>
+                        <p>{{user.address ? user.address : "N/A" }}</p>
+                    </div>
+                </div>
+                <div class="user-info mw" fxLayout="column" fxLayoutAlign="end start" fxLayoutAlign.xs="center center">
+                    <div class="profile-container">
+                        <img class="profile-pic" src={{user.image}}
+                            onerror="this.src='assets/images/avatars/profile_placeholder_male.jpg';" alt="user Profile">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
