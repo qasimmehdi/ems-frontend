@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { VerificationDialog } from './trainer/dialog/dialog.component';
 import { RejectConfirmDialog } from './trainer/reject-confirm/reject-confirm.component';
+import { MatCardModule } from '@angular/material/card';
 
 const routes: Routes = [
     {
@@ -62,6 +63,7 @@ const routes: Routes = [
         material.MatDialogModule,
         material.MatSlideToggleModule,
         material.MatTooltipModule,
+        MatCardModule,
         MatProgressSpinnerModule,
         MatToolbarModule,
         FuseConfirmDialogModule,

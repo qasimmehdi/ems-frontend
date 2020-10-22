@@ -60,8 +60,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this._formBuilder.group({
-            email: ['', [Validators.email, Validators.required]],
-            password: ['', [Validators.required]]
+            email: ['admin@trainerhub.com', [Validators.email, Validators.required]],
+            password: ['$Test123', [Validators.required]]
         });
         if (this.authService.isUserLoggedIn()) {
             this.router.navigateByUrl('dashboard')

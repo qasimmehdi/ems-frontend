@@ -2,34 +2,30 @@
 
 #gym {
   .header {
-    .gym-image {
-      overflow: hidden;
-      width: 56px;
-      min-width: 56px;
-      max-width: 56px;
-      height: 56px;
-      min-height: 56px;
-      max-height: 56px;
-      border-radius: 4px;
-
-      img {
-        height: 100%;
-        width: auto;
-        max-width: none;
-      }
-    }
-
     .subtitle {
       margin: 6px 0 0 0;
     }
   }
 
   .content {
+    padding: 10px;
     .mat-tab-group,
     .mat-tab-body-wrapper,
     .tab-content {
       flex: 1 1 auto;
       max-width: 100%;
+    }
+
+    .header-info {
+      display: flex;
+    }
+
+    .content-info {
+      padding: 0 18px;
+    }
+
+    .tp-card {
+      max-width: none !important;
     }
 
     .mat-tab-body-content {
@@ -40,19 +36,13 @@
       height: 64px;
     }
 
-    .gym-image {
-      overflow: hidden;
-      width: 128px;
-      height: 128px;
-      margin-right: 16px;
-      margin-bottom: 16px;
-      border-radius: 4px;
+    .tp-card {
+      max-width: 400px;
+    }
 
-      img {
-        height: 100%;
-        width: auto;
-        max-width: none;
-      }
+    .tp-header-image {
+      background-image: url("https://www.tutorialspoint.com/materialize/src/html5-mini-logo.jpg");
+      background-size: cover;
     }
 
     // Temporary prefix alignment fix

@@ -7,8 +7,8 @@ import { environment } from 'environments/environment';
 import { FuseUtils } from '@fuse/utils';
 import { Injectable } from '@angular/core';
 
-const API_URL = environment.apiUrl;
-const API_URL_ACCOUNT = environment.apiaccountUrl;
+// const API_URL = environment.apiUrl;
+// const API_URL_ACCOUNT = environment.apiaccountUrl;
 const BASE_URL = environment.baseUrl;
 
 @Injectable()
@@ -100,76 +100,76 @@ export class AuthorizationService {
     });
   }
 
-  getItem(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if (this.routeParams.id === 'new') {
-        this.onItemChanged.next(false);
-        resolve(false);
-      }
-      else {
-        this._httpClient.get(API_URL + '/' + this.entityNode + '/' + this.routeParams.id)
-          .subscribe((response: any) => {
-            this.item = response;
-            this.onItemChanged.next(this.item);
-            resolve(response);
-          }, reject);
-      }
-    });
-  }
+  // getItem(): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     if (this.routeParams.id === 'new') {
+  //       this.onItemChanged.next(false);
+  //       resolve(false);
+  //     }
+  //     else {
+  //       this._httpClient.get(API_URL + '/' + this.entityNode + '/' + this.routeParams.id)
+  //         .subscribe((response: any) => {
+  //           this.item = response;
+  //           this.onItemChanged.next(this.item);
+  //           resolve(response);
+  //         }, reject);
+  //     }
+  //   });
+  // }
 
-  saveItem(item): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.put(API_URL + '/' + this.entityNode, item)
-        .subscribe((response: any) => {
-          resolve(response);
-        }, reject);
-    });
-  }
+  // saveItem(item): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     this._httpClient.put(API_URL + '/' + this.entityNode, item)
+  //       .subscribe((response: any) => {
+  //         resolve(response);
+  //       }, reject);
+  //   });
+  // }
 
-  sendItem(item): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.post(API_URL_ACCOUNT + '/' + this.entityNode, item)
-        .subscribe((response: any) => {
-          resolve(response);
-        }, reject);
-    });
-  }
+  // sendItem(item): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     this._httpClient.post(API_URL_ACCOUNT + '/' + this.entityNode, item)
+  //       .subscribe((response: any) => {
+  //         resolve(response);
+  //       }, reject);
+  //   });
+  // }
 
-  addListItem(Listitem): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.post(API_URL + '/' + this.entityNode + '/saveall', Listitem)
-        .subscribe((response: any) => {
-          resolve(response);
-        }, reject);
-    });
-  }
+  // addListItem(Listitem): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     this._httpClient.post(API_URL + '/' + this.entityNode + '/saveall', Listitem)
+  //       .subscribe((response: any) => {
+  //         resolve(response);
+  //       }, reject);
+  //   });
+  // }
 
-  getItems(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.get(API_URL + '/' + this.entityNode)
-        .subscribe((response: any) => {
-          this.items = response;
-          this.onItemsChanged.next(this.items);
-          resolve(response);
-        }, reject);
-    });
-  }
+  // getItems(): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     this._httpClient.get(API_URL + '/' + this.entityNode)
+  //       .subscribe((response: any) => {
+  //         this.items = response;
+  //         this.onItemsChanged.next(this.items);
+  //         resolve(response);
+  //       }, reject);
+  //   });
+  // }
 
-  getPageItem(page: number, size: number): Promise<any> {
-    // ?page=0&size=20
-    return new Promise((resolve, reject) => {
-      this._httpClient.get(API_URL + '/' + this.entityNode + '?page=' + page + '&size=' + size)
-        .subscribe((response: any) => {
-          this.pageItem = new AuthorizationPage(response);
-          this.onPageItemChanged.next(this.pageItem);
-          resolve(response);
-        }, reject);
-    });
-  }
+  // getPageItem(page: number, size: number): Promise<any> {
+  //   // ?page=0&size=20
+  //   return new Promise((resolve, reject) => {
+  //     this._httpClient.get(API_URL + '/' + this.entityNode + '?page=' + page + '&size=' + size)
+  //       .subscribe((response: any) => {
+  //         this.pageItem = new AuthorizationPage(response);
+  //         this.onPageItemChanged.next(this.pageItem);
+  //         resolve(response);
+  //       }, reject);
+  //   });
+  // }
 
-  deleteItemById(itemId: number): any {
-    return this._httpClient.delete(API_URL + '/' + this.entityNode + '/' + itemId);
-  }
+  // deleteItemById(itemId: number): any {
+  //   return this._httpClient.delete(API_URL + '/' + this.entityNode + '/' + itemId);
+  // }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

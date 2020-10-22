@@ -1,0 +1,30 @@
+{
+  "projects": {
+    "default": "dev-trainerhub",
+    "dev": "dev-trainerhub",
+    "qa": "qa-getupnow"
+  },
+  "targets": {
+    "dev-trainerhub": {
+      "hosting": {
+        "admin": [
+          "trainerhub-admin-1"
+        ]
+      }
+    },
+    "qa-trainerhub": {
+      "hosting": {
+        "admin": [
+          "qa-trainerhub-admin"
+        ]
+      }
+    },
+    "dev-trainerhub-292022": {
+      "hosting": {
+        "admin": [
+          "trainerhub-admin-1"
+        ]
+      }
+    }
+  }
+}

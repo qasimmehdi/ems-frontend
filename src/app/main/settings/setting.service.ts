@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { SettingPage } from './settingpage.model';
 import { environment } from 'environments/environment';
 
-const API_URL = environment.apiUrl;
-const ACCOUNT_URL = environment.apiaccountUrl;
+// const API_URL = environment.apiUrl;
+// const ACCOUNT_URL = environment.apiaccountUrl;
 const BASE_URL = environment.baseUrl;
 
 @Injectable({
@@ -51,7 +51,7 @@ export class SettingService {
 
   }
 
-  getInit(): Promise<any> {
+  getInit() {
     return new Promise((resolve, reject) => {
       // console.log(this.route);
       if (this.routeParams.id === undefined) {
@@ -89,17 +89,17 @@ export class SettingService {
         this.onItemChanged.next(false);
         resolve(false);
       }
-      else if (this.routeParams.id === 'default') {
-        this._httpClient.get(API_URL + '/' + this.entityNode + '/type/' + this.routeParams.id)
-          .subscribe((response: any) => {
-            this.items = response;
-            this.onItemsChanged.next(this.items);
-            resolve(response);
-          }, reject);
+      // else if (this.routeParams.id === 'default') {
+      //   this._httpClient.get(API_URL + '/' + this.entityNode + '/type/' + this.routeParams.id)
+      //     .subscribe((response: any) => {
+      //       this.items = response;
+      //       this.onItemsChanged.next(this.items);
+      //       resolve(response);
+      //     }, reject);
 
-        this.onItemChanged.next(false);
-        resolve(false);
-      }
+      //   this.onItemChanged.next(false);
+      //   resolve(false);
+      // }
       else if (this.routeParams.id === 'about') {
         this._httpClient.get(`${BASE_URL}/api/appservice/v1/app-settings/key/aboutContent`)
           .subscribe((response: any) => {
@@ -125,119 +125,117 @@ export class SettingService {
         this.onItemsChanged.next(false);
         resolve(false);
       }
-      else {
-        this._httpClient.get(API_URL + '/' + this.entityNode + '/' + this.routeParams.id)
-          .subscribe((response: any) => {
-            this.item = response;
-            console.log(response)
-            this.onItemChanged.next(this.item);
-            resolve(response);
-          }, reject);
-      }
+      // else {
+      //   this._httpClient.get(API_URL + '/' + this.entityNode + '/' + this.routeParams.id)
+      //     .subscribe((response: any) => {
+      //       this.item = response;
+      //       console.log(response)
+      //       this.onItemChanged.next(this.item);
+      //       resolve(response);
+      //     }, reject);
+      // }
     });
   }
 
-  getItem(): Promise<any> {
+  getItem() {
     return new Promise((resolve, reject) => {
       if (this.routeParams.id === 'new') {
         this.onItemChanged.next(false);
         resolve(false);
       }
-      else {
-        this._httpClient.get(API_URL + '/' + this.entityNode + '/' + this.routeParams.id)
-          .subscribe((response: any) => {
-            this.item = response;
-            this.onItemChanged.next(this.item);
-            resolve(response);
-          }, reject);
-      }
+      // else {
+      //   this._httpClient.get(API_URL + '/' + this.entityNode + '/' + this.routeParams.id)
+      //     .subscribe((response: any) => {
+      //       this.item = response;
+      //       this.onItemChanged.next(this.item);
+      //       resolve(response);
+      //     }, reject);
+      // }
     });
   }
 
-  isAccountVerified(): Promise<any> {
+  isAccountVerified() {
     return new Promise((resolve, reject) => {
-      this._httpClient.get(`${ACCOUNT_URL}/auth/whoami`)
-        .subscribe((response: any) => {
-          if (response.authId) {
-            this._httpClient.get(`${BASE_URL}/api/financeservice/v1/bank/verify/${response.authId}`)
-              .subscribe((res: any) => {
-                resolve(res);
-              })
-          }
-        }, reject);
+      //   this._httpClient.get(`${ACCOUNT_URL}/auth/whoami`)
+      //     .subscribe((response: any) => {
+      //       if (response.authId) {
+      //         this._httpClient.get(`${BASE_URL}/api/financeservice/v1/bank/verify/${response.authId}`)
+      //           .subscribe((res: any) => {
+      //             resolve(res);
+      //           })
+      //       }
+      //     }, reject);
     });
   }
 
-  saveItem(item): Promise<any> {
+  saveItem(item) {
     return new Promise((resolve, reject) => {
-      this._httpClient.put(API_URL + '/' + this.entityNode + '/saveAllByType', item)
-        .subscribe((response: any) => {
-          resolve(response);
-        }, reject);
+      //     this._httpClient.put(API_URL + '/' + this.entityNode + '/saveAllByType', item)
+      //       .subscribe((response: any) => {
+      //         resolve(response);
+      //       }, reject);
     });
   }
 
-  addItem(item): Promise<any> {
+  addItem(item) {
     return new Promise((resolve, reject) => {
-      this._httpClient.post(API_URL + '/' + this.entityNode + '/saveAllByType', item)
-        .subscribe((response: any) => {
-          resolve(response);
-        }, reject);
+      //     this._httpClient.post(API_URL + '/' + this.entityNode + '/saveAllByType', item)
+      //       .subscribe((response: any) => {
+      //         resolve(response);
+      //       }, reject);
     });
   }
 
   addAccountInfo(accountdata) {
-    return new Promise((resolve, reject) => {
-      // this._httpClient.post(API_URL + '/' + this.entityNode + '/saveAllByType', accountdata)
-      //   .subscribe((response: any) => {
-      //     resolve(response);
-      //   }, reject);
-      this._httpClient.post(`${BASE_URL}/api/financeservice/v1/bank`, accountdata)
-        .subscribe((res: any) => {
-          resolve(res)
-        }, reject)
-    });
+    //   return new Promise((resolve, reject) => {
+    //     // this._httpClient.post(API_URL + '/' + this.entityNode + '/saveAllByType', accountdata)
+    //     //   .subscribe((response: any) => {
+    //     //     resolve(response);
+    //     //   }, reject);
+    //     this._httpClient.post(`${BASE_URL}/api/financeservice/v1/bank`, accountdata)
+    //       .subscribe((res: any) => {
+    //         resolve(res)
+    //       }, reject)
+    //   });
   }
 
-
-  addListItem(Listitem): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.post(API_URL + '/' + this.entityNode + '/saveall', Listitem)
-        .subscribe((response: any) => {
-          resolve(response);
-        }, reject);
-    });
+  addListItem(Listitem) {
+    //   return new Promise((resolve, reject) => {
+    //     this._httpClient.post(API_URL + '/' + this.entityNode + '/saveall', Listitem)
+    //       .subscribe((response: any) => {
+    //         resolve(response);
+    //       }, reject);
+    //   });
   }
 
-  getItems(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.get(API_URL + '/' + this.entityNode)
-        .subscribe((response: any) => {
-          this.items = response;
-          this.onItemsChanged.next(this.items);
-          resolve(response);
-        }, reject);
-    });
+  getItems() {
+    //   return new Promise((resolve, reject) => {
+    //     this._httpClient.get(API_URL + '/' + this.entityNode)
+    //       .subscribe((response: any) => {
+    //         this.items = response;
+    //         this.onItemsChanged.next(this.items);
+    //         resolve(response);
+    //       }, reject);
+    //   });
   }
 
-  getPageItem(page: number, size: number): Promise<any> {
-    // ?page=0&size=20
-    return new Promise((resolve, reject) => {
-      this._httpClient.get(API_URL + '/' + this.entityNode + '?page=' + page + '&size=' + size)
-        .subscribe((response: any) => {
-          this.pageItem = new SettingPage(response);
-          this.onPageItemChanged.next(this.pageItem);
-          resolve(response);
-        }, reject);
-    });
+  getPageItem(page: number, size: number) {
+    //   // ?page=0&size=20
+    //   return new Promise((resolve, reject) => {
+    //     this._httpClient.get(API_URL + '/' + this.entityNode + '?page=' + page + '&size=' + size)
+    //       .subscribe((response: any) => {
+    //         this.pageItem = new SettingPage(response);
+    //         this.onPageItemChanged.next(this.pageItem);
+    //         resolve(response);
+    //       }, reject);
+    //   });
   }
 
   deleteItemById(itemId: number): any {
-    return this._httpClient.delete(API_URL + '/' + this.entityNode + '/' + itemId);
-
+    //   return this._httpClient.delete(API_URL + '/' + this.entityNode + '/' + itemId);
   }
 
-  updateSettingsContent(content): Promise<any> {
+  updateSettingsContent(content) {
     return new Promise((resolve, reject) => {
       if (this.routeParams.id === 'about') {
         this._httpClient.put(`${BASE_URL}/api/appservice/v1/app-settings/updateSetting`, content)
