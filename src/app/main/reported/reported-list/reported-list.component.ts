@@ -28,7 +28,9 @@ export class ReportedListComponent implements OnInit {
         'comment',
         'status',
         'profile',
-        'btns',
+        /* 'block',
+        'suspend', */
+
     ];
     filter = 'my_gyms';
     dataSource: MatTableDataSource<any>;
@@ -82,6 +84,7 @@ export class ReportedListComponent implements OnInit {
                 this.dataSource.sort = this.sort;
             });
         this.subscribeSearch();
+        //this.displayedColumns.push('unblock', 'activate');
     }
 
     subscribeSearch() {

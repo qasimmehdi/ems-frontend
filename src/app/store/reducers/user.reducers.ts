@@ -7,7 +7,7 @@ const initialState = {
     data: {}
 };
 
-export const userReducer = (state = initialState, action: ActionWithPayload) => {
+export function userReducer (state = initialState, action: ActionWithPayload) {
     switch (action.type) {
         case userActions.LOG_IN:
             return {

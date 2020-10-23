@@ -73,37 +73,54 @@
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="profile" >
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let trainer">
+                <ng-container matColumnDef="profile">
+                    <mat-header-cell *matHeaderCellDef class="action-head"></mat-header-cell>
+                    <mat-cell *matCellDef="let trainer" class="action-column">
                         <!-- fxHide fxShow.gt-xs -->
-                        <button mat-raised-button aria-label="More" color="accent">
+                        <button mat-raised-button aria-label="Profile" color="accent">
                             Profile
+                        </button>
+                        <button mat-raised-button aria-label="Block" color="accent">
+                            Block
                         </button>
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="btns" >
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <!-- <ng-container matColumnDef="block" >
+                    <mat-header-cell *matHeaderCellDef class="action-head"></mat-header-cell>
                     <mat-cell *matCellDef="let trainer" class="action-column">
-                        <button mat-raised-button aria-label="More" color="accent"
-                             >
+                        <button mat-raised-button aria-label="Block" color="accent">
                             Block
-                        </button>
-                        <button mat-raised-button aria-label="More" color="accent"
-                             >
-                            Suspend
-                        </button>
-                        <button *ngIf="false" mat-raised-button aria-label="More" color="accent"
-                             >
-                            Un-block
-                        </button>
-                        <button *ngIf="false" mat-raised-button aria-label="More" color="accent"
-                             >
-                            Activate
                         </button>
                     </mat-cell>
                 </ng-container>
+
+                <ng-container matColumnDef="suspend" >
+                    <mat-header-cell *matHeaderCellDef class="action-head"></mat-header-cell>
+                    <mat-cell *matCellDef="let trainer" class="action-column">
+                        <button mat-raised-button aria-label="Suspend" color="accent">
+                            Suspend
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="unblock">
+                    <mat-header-cell *matHeaderCellDef class="action-head"></mat-header-cell>
+                    <mat-cell *matCellDef="let trainer" class="action-column">
+                        <button mat-raised-button aria-label="unblock" color="accent">
+                            Un-block
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="activate">
+                    <mat-header-cell *matHeaderCellDef class="action-head"></mat-header-cell>
+                    <mat-cell *matCellDef="let trainer" class="action-column">
+                        <button mat-raised-button aria-label="Activate" color="accent">
+                            Activate
+                        </button>
+                    </mat-cell>
+                </ng-container> -->
 
                 <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
 

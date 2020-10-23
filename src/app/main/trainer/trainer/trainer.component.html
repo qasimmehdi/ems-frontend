@@ -50,12 +50,12 @@
                         <p class="p-bold">Certification code / ID / Serial #: </p>
                         <p>{{trainer.code ? trainer.code : "N/A" }}</p>
                     </div>
-                    <div fxLayout="trainer.trainingTypes.length > 0 ? 'column' : 'row'" fxLayout.xs="column">
+                    <div [fxLayout]="trainer.trainingTypes.length > 0 ? 'column' : 'row'" fxLayout.xs="column">
                         <p class="p-bold">Types of training:</p>
                         <p *ngIf="trainer.trainingTypes.length === 0">N/A</p>
                         <ul *ngIf="trainer.trainingTypes.length > 0">
                             <li *ngFor="let type of trainer.trainingTypes">
-                                <p>{{type}}</p>
+                                <p>{{type.name}}</p>
                             </li>
                         </ul>
                     </div>
