@@ -1,0 +1,67 @@
+<div id="trainer-cal" class="page-layout carded fullwidth inner-scroll">
+    <div class="top-bg accent"></div>
+    <div class="center">
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center">
+            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Calendar
+                </span>
+            </div>
+
+            <!-- <div class="filters" fxLayout="row">
+                <div class="search-wrapper mx-32 mx-md-0">
+                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon style="color: gray;">search</mat-icon>
+                        <input #SearchInput placeholder="Search">
+                        <mat-spinner *ngIf="isSearching" diameter="20"></mat-spinner>
+                    </div>
+                </div>
+            </div> -->
+
+            <form class="search-form">
+                <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="search-icon">search</mat-icon>
+                    <mat-form-field floatPlaceholder="never" appearance="none" class="mat-search" variant="outlined">
+                        <input #SearchInput type="text" placeholder="Search" aria-label="search" matInput
+                            [formControl]="trainerName" [matAutocomplete]="auto"
+                            style="color: black; padding-bottom: 10px;">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event.option.value)">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{option}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+            </form>
+
+            <div fxLayout="column" fxLayout.lt-md="row">
+                <span class="logo-text h2 packs" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Packs
+                </span>
+                <div fxLayout="row">
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                        <span>1 day</span>
+                    </button>
+
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
+                        <span>2 days</span>
+                    </button>
+
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                        <span>5 days</span>
+                    </button>
+
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
+                        <span>10 days</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+
+
+        </div>
+    </div>
+</div>

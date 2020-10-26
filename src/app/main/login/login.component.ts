@@ -107,6 +107,9 @@ export class LoginComponent implements OnInit {
                         duration: 2000,
                     });
                 } else {
+                    this._snackBar.open("Username or Password incorrect", 'Ok', {
+                        duration: 2000,
+                    });
                     console.log(err);
                 }
             })

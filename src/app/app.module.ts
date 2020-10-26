@@ -42,6 +42,7 @@ import { InitialSetupModule } from './main/initialSetup/initial-setup.module';
 import {userReducer} from './store/reducers/user.reducers';
 import { UsersModule } from './main/user/user.module';
 import { ReportedModule } from './main/reported/reported.module';
+import { TrainerCalendarModule } from './main/trainer-calendar/trainer-calendar.module';
 
 const appRoutes: Routes = [
     { path: '**', redirectTo: 'dashboard' }
@@ -104,6 +105,8 @@ const appRoutes: Routes = [
 
         //reported
         ReportedModule,
+
+        TrainerCalendarModule,
         // ngrx
         StoreModule.forRoot({
             user: userReducer
