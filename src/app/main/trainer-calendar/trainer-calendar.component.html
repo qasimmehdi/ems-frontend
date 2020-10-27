@@ -25,7 +25,7 @@
                     <mat-form-field floatPlaceholder="never" appearance="none" class="mat-search" variant="outlined">
                         <input #SearchInput type="text" placeholder="Search" aria-label="search" matInput
                             [formControl]="trainerName" [matAutocomplete]="auto"
-                            style="color: black; padding-bottom: 10px;">
+                            style="color: black; padding-top: 8px;">
                         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event.option.value)">
                             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                 {{option}}
@@ -35,33 +35,32 @@
                 </div>
             </form>
 
-            <div fxLayout="column" fxLayout.lt-md="row">
+            <div fxLayout="row" fxLayout.lt-md="row">
                 <span class="logo-text h2 packs" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Packs
                 </span>
                 <div fxLayout="row">
-                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 pack-btn">
                         <span>1 day</span>
                     </button>
 
-                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4 pack-btn">
                         <span>2 days</span>
                     </button>
 
-                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 pack-btn">
                         <span>5 days</span>
                     </button>
 
-                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4 pack-btn">
                         <span>10 days</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="content-card">
-
-
+        <div class="content-card" fusePerfectScrollbar [fusePerfectScrollbarOptions]="{'suppressScrollX': true}">
+            <mwl-demo-component>Loading...</mwl-demo-component>
         </div>
     </div>
 </div>

@@ -12,6 +12,7 @@ import { AuthService } from '../auth.service';
 import { MatCardModule } from '@angular/material/card';
 import { TrainerCalendarComponent } from './trainer-calendar.component';
 import { TrainerCalendarService } from './trainer-calendar.service';
+import { DemoModule } from '../calendar/calendar.module';
 
 const routes: Routes = [
     {
@@ -55,7 +56,8 @@ const routes: Routes = [
         FuseConfirmDialogModule,
         FuseSharedModule,
         FuseWidgetModule,
-        MatDialogModule
+        MatDialogModule,
+        DemoModule
     ],
     providers: [
         {

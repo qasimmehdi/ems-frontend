@@ -1,0 +1,11 @@
+@import "src/@fuse/scss/fuse";
+
+.my-pad {
+    padding-top: 10px;
+}
+
+#calendar-header {
+    .btn {
+        font-size: inherit;
+    }
+}

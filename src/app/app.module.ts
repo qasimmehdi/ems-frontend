@@ -39,10 +39,12 @@ import 'firebase/firestore';
 import { ToastrModule } from 'ngx-toastr';
 import { AppAuthGuard } from './main/app.authguard';
 import { InitialSetupModule } from './main/initialSetup/initial-setup.module';
-import {userReducer} from './store/reducers/user.reducers';
+import { userReducer } from './store/reducers/user.reducers';
 import { UsersModule } from './main/user/user.module';
 import { ReportedModule } from './main/reported/reported.module';
 import { TrainerCalendarModule } from './main/trainer-calendar/trainer-calendar.module';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const appRoutes: Routes = [
     { path: '**', redirectTo: 'dashboard' }
@@ -107,6 +109,12 @@ const appRoutes: Routes = [
         ReportedModule,
 
         TrainerCalendarModule,
+
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        }),
+
         // ngrx
         StoreModule.forRoot({
             user: userReducer

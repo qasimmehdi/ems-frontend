@@ -35,7 +35,8 @@ export const navigation: FuseNavigation[] = [
                 id: 'reported',
                 title: 'Reported Users',
                 type: 'item',
-                url: '/reported',
+                url: '/dashboard',
+                //url: '/reported',
                 icon: 'report'
             },
             /* {
