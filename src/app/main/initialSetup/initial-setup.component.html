@@ -169,7 +169,7 @@
                                     Back
                                 </button>
                                 <button class="mx-8" mat-raised-button color="primary" matStepperNext
-                                    [disabled]="accountInfo.invalid || settingsFormGroup.invalid || associationNames.length === 0 || trainingTypes.length === 0"
+                                    [disabled]="accountInfo.invalid || settingsFormGroup.invalid || associationNames.length === 0 || trainingTypes.length === 0 || isPosting"
                                     (click)="submitInitialSetup()">
                                     Done
                                 </button>

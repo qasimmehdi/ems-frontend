@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.checkInitSetup();
         this.loginForm = this._formBuilder.group({
             email: ['admin@trainerhub.com', [Validators.email, Validators.required]],
             password: ['$Test123', [Validators.required]]
@@ -116,6 +117,19 @@ export class LoginComponent implements OnInit {
             .finally(() => {
                 this.isLogginIn = false;
             })
+    }
+
+    checkInitSetup(): void {
+        this.loginService.getInitSetupFromDB()
+            .then(resp => {
+                if (resp.systemSetup === false) {
+                    this._snackBar.open("Please complete initial setup", 'Ok', {
+                        duration: 2000,
+                    });
+                    this.router.navigateByUrl('initial-setup');
+                }
+            })
+            .catch(err => console.log(err));
     }
 
 }

@@ -8,6 +8,13 @@ trainer-list {
       }
     }
 
+    .selected{
+      border: 2px solid black;
+    }
+    .not-selected{
+      border: 2px solid white;
+    }
+
     > .center {
       > .header {
         .filters {

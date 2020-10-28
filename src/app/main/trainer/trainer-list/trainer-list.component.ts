@@ -42,6 +42,9 @@ export class TrainerListComponent implements OnInit {
     sortSwitch: number = 0;
     unassignedGymOwner: boolean = false;
 
+    selectedFilter: "verified" | "unverified" | "rejected" | "" = "";
+
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild('SearchInput') SearchInput: ElementRef;
@@ -67,8 +70,8 @@ export class TrainerListComponent implements OnInit {
         // Subscribe to update Items on changes
         this.trainerService.onPageItemChanged
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(gymPage => {
-                console.log(gymPage);
+            .subscribe(() => {
+                this.noUser = false;
                 if (this.trainerService.pageItem && this.trainerService.pageItem.content.length == 0) {
                     this.noUser = true;
                 }
@@ -98,7 +101,7 @@ export class TrainerListComponent implements OnInit {
 
     changePage = (event): void => {
         console.log(event.pageSize, event.pageIndex);
-        this.trainerService.getPageItem(event.pageIndex, event.pageSize);
+        this.trainerService.getPageItem(event.pageIndex, event.pageSize, "");
     };
 
     ngOnDestroy = (): void => {
@@ -113,5 +116,11 @@ export class TrainerListComponent implements OnInit {
         this.limit = source.size;
         this.pageIndex = source.number;
         this.dataSource.sort = this.sort;
+    }
+
+    filterClick(buttonName: "verified" | "unverified" | "rejected"): void{
+        this.selectedFilter = this.selectedFilter === buttonName ? "" : buttonName;
+        //console.log(this.pageIndex, this.limit);
+        this.trainerService.getPageItem(0, this.limit, this.selectedFilter);
     }
 }

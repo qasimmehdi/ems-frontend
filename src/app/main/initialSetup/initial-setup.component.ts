@@ -48,6 +48,9 @@ export class InitialSetup implements OnInit, OnDestroy {
     trainingAssociations = [];
     initialResponse: any;
 
+    //to disable done button
+    isPosting: boolean = false;
+
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
@@ -166,6 +169,7 @@ export class InitialSetup implements OnInit, OnDestroy {
     }
 
     submitInitialSetup() {
+        this.isPosting = true;
         let data = {
             settings: this.initialResponse.settings,
             trainingTypes: this.initialResponse.trainingTypes,
@@ -193,7 +197,10 @@ export class InitialSetup implements OnInit, OnDestroy {
                     duration: 2000,
                 });
                 console.log(err);
-            });
+            })
+            .finally(() => {
+                this.isPosting = false;
+            })
     }
 
 

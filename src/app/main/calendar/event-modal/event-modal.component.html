@@ -1,0 +1,17 @@
+<button mat-icon-button class="close-btn" [autofocus]="false" (click)="onNoClick()">
+    <mat-icon>cancel</mat-icon>
+</button>
+<div class="event-modal" fxLayout="column" fxLayoutAlign="center none">
+    <h1 style="text-align: center;">Training Detail</h1>
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-flat-button [disableRipple]="true" class="status-btn-schedule">Scheduled</button>
+    </div>
+    <p>Trainer s Choice / User s Choice</p>
+    <p>Time: 10:00 am</p>
+    <p>Date: 5/20/2020</p>
+    <p>Single session</p>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <p>Dan Clark</p>
+        <button mat-raised-button color="accent">View Profile</button>
+    </div>
+</div>

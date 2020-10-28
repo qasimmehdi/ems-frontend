@@ -41,11 +41,11 @@ export class TrainerService {
       Promise.all([
         this.getInit()
       ])
-      .then(() => {
+        .then(() => {
           resolve();
-      },
-        reject
-      );
+        },
+          reject
+        );
     });
   }
 
@@ -73,14 +73,25 @@ export class TrainerService {
     });
   }
 
-  getPageItem(page: Number, size: Number, typeSwitch?) {
+  getPageItem(page: Number, size: Number, status: "verified" | "unverified" | "rejected" | "") {
     return new Promise((resolve, reject) => {
-      this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers?page=${page}&size=${size}`)
-        .subscribe((response: any) => {
-          this.pageItem = response;
-          this.onPageItemChanged.next(this.pageItem);
-          resolve(response);
-        }, reject);
+      if (status != "") {
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers/get-by-status/${status}?page=${page}&size=${size}`)
+          .subscribe((response: any) => {
+            this.pageItem = response;
+            this.onPageItemChanged.next(this.pageItem);
+            resolve(response);
+          }, reject);
+      }
+      else {
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers?page=${page}&size=${size}`)
+          .subscribe((response: any) => {
+            this.pageItem = response;
+            this.onPageItemChanged.next(this.pageItem);
+            resolve(response);
+          }, reject);
+      }
     });
+
   }
 }

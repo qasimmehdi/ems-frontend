@@ -9,6 +9,7 @@ import * as material from '@angular/material';
 import { FuseConfirmDialogModule, FuseWidgetModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatDialogModule } from '@angular/material';
+import { EventModal } from './event-modal/event-modal.component';
 
 @NgModule({
     imports: [
@@ -41,8 +42,13 @@ import { MatDialogModule } from '@angular/material';
             useFactory: adapterFactory,
         }),
         DemoUtilsModule,
+
     ],
-    declarations: [DemoComponent],
+    declarations: [
+        DemoComponent,
+        EventModal
+    ],
     exports: [DemoComponent],
+    entryComponents: [EventModal]
 })
 export class DemoModule { }

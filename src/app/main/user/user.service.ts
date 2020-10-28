@@ -52,7 +52,7 @@ export class UserService {
   getInit() {
     return new Promise((resolve, reject) => {
       if (this.routeParams.id === undefined) {
-        this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers`)
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/clients`)
           .subscribe((response: any) => {
             this.pageItem = response;
             this.onPageItemChanged.next(this.pageItem);
@@ -61,7 +61,7 @@ export class UserService {
             resolve(reject)
           });
       } else {
-        this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers/${this.routeParams.id}`)
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/clients/${this.routeParams.id}`)
           .subscribe((response: any) => {
             this.pageItem = response;
             this.onPageItemChanged.next(this.pageItem);
@@ -75,7 +75,7 @@ export class UserService {
 
   getPageItem(page: Number, size: Number, typeSwitch?) {
     return new Promise((resolve, reject) => {
-      this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers?page=${page}&size=${size}`)
+      this._httpClient.get(`${BASE_URL_ACCOUNT}/clients?page=${page}&size=${size}`)
         .subscribe((response: any) => {
           this.pageItem = response;
           this.onPageItemChanged.next(this.pageItem);

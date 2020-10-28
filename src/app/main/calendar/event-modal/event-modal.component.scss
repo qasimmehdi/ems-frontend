@@ -1,0 +1,23 @@
+@import "src/@fuse/scss/fuse";
+
+.event-modal{
+    p{
+        font-size: 16px;
+    }
+    .status-btn-schedule{
+        background-color: rgba(0, 0, 0, 0.12);
+    }
+    .status-btn-inprogress{
+        background-color: #F7CA18;
+    }
+    .status-btn-completed{
+        background-color: #24C768;
+    }
+}
+
+.close-btn{
+    background-color: transparent;
+    mat-icon{
+        color: #969191;
+    }
+}

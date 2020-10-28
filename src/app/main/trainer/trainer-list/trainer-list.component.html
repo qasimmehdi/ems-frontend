@@ -19,16 +19,31 @@
                 </div>
             </div>
 
-            <div fxLayout="row">
-                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+            <div fxLayout="row" >
+                <button
+                 mat-raised-button
+                 class="add-product-button fuse-white mt-24 mt-md-0"
+                 [ngClass]="selectedFilter === 'verified' ? 'selected' : 'not-selected'"
+                 (click)="filterClick('verified')"
+                >
                     <span>Verified</span>
                 </button>
 
-                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
+                <button
+                 mat-raised-button
+                 class="add-product-button fuse-white mt-24 mt-md-0 mx-4"
+                 [ngClass]="selectedFilter === 'unverified' ? 'selected' : 'not-selected'"
+                 (click)="filterClick('unverified')"
+                >
                     <span>Unverified</span>
                 </button>
 
-                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                <button
+                 mat-raised-button
+                 class="add-product-button fuse-white mt-24 mt-md-0"
+                 [ngClass]="selectedFilter === 'rejected' ? 'selected' : 'not-selected'"
+                 (click)="filterClick('rejected')"
+                >
                     <span>Rejected</span>
                 </button>
             </div>

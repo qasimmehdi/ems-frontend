@@ -12,9 +12,12 @@ import {
     startOfDay,
     endOfDay,
     format,
+    addHours
 } from 'date-fns';
 import { Observable } from 'rxjs';
 import { colors } from './utils/colors';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EventModal } from './event-modal/event-modal.component';
 
 interface Film {
     id: number;
@@ -52,7 +55,9 @@ export class DemoComponent implements OnInit {
 
     activeDayIsOpen: boolean = false;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+        public dialog: MatDialog
+    ) { }
 
     ngOnInit(): void {
         this.fetchEvents();
@@ -90,8 +95,8 @@ export class DemoComponent implements OnInit {
                     return results.map((film: Film) => {
                         return {
                             title: film.title,
-                            start: new Date(
-                                film.release_date + getTimezoneOffsetString(this.viewDate)
+                            start: (
+                                addHours(film.release_date + getTimezoneOffsetString(this.viewDate), 6)
                             ),
                             color: colors.yellow,
                             allDay: false,
@@ -104,30 +109,34 @@ export class DemoComponent implements OnInit {
             );
     }
 
-    dayClicked({
-        date,
-        events,
-    }: {
-        date: Date;
-        events: CalendarEvent<{ film: Film }>[];
-    }): void {
+    dayClicked({date,events,} : {date: Date; events: CalendarEvent<{ film: Film }>[];}): void {
         if (isSameMonth(date, this.viewDate)) {
             if (
                 (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
                 events.length === 0
             ) {
-                this.activeDayIsOpen = false;
+                //this.activeDayIsOpen = false;
             } else {
-                this.activeDayIsOpen = true;
+                //this.activeDayIsOpen = true;
                 this.viewDate = date;
+                this.view = CalendarView.Day;
             }
         }
     }
 
     eventClicked(event: CalendarEvent<{ film: Film }>): void {
-        window.open(
+        this.openEventModal();
+        /* window.open(
             `https://www.themoviedb.org/movie/${event.meta.film.id}`,
             '_blank'
-        );
+        ); */
     }
+
+    openEventModal(): void {
+        const dialogRef = this.dialog.open(EventModal, {
+            width: '420px'
+            //data: { name: this.name, animal: this.animal }
+        });
+    }
+
 }
