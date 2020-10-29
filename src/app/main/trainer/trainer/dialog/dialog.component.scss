@@ -2,10 +2,17 @@
 
 .my-dialog {
     width: 300px;
-    height: 150px;
-
 
     @include media-breakpoint("xs") {
         width: 200px;
+    }
+}
+
+.close-btn{
+    position: absolute;
+    margin-right: -20px;
+    margin-top: -20px;
+    mat-icon{
+        color: #969191;
     }
 }

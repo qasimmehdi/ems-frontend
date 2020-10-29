@@ -30,8 +30,13 @@ export class VerificationDialog {
 
     openDialog(): void {
         const dialogRef = this.dialog.open(RejectConfirmDialog, {
+            autoFocus: false,
             data: { comment: this.comment }
         });
+    }
+
+    onNoClick(): void {
+        this.dialogRef.close();
     }
 
 }

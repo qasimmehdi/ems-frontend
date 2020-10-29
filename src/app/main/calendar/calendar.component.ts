@@ -134,9 +134,14 @@ export class DemoComponent implements OnInit {
 
     openEventModal(): void {
         const dialogRef = this.dialog.open(EventModal, {
-            width: '420px'
+            width: '420px',
+            autoFocus: false
             //data: { name: this.name, animal: this.animal }
         });
+    }
+
+    goBack():void{
+        this.view = CalendarView.Month;
     }
 
 }

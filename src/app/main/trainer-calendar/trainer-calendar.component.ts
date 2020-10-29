@@ -17,9 +17,9 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     trainerName = new FormControl();
     options: string[] = [];
     filteredOptions: Observable<string[]>;
+    selectedFilter: "1" | "2" | "5" | "10" | "" = "";
     @ViewChild('SearchInput') SearchInput: ElementRef;
     private _unsubscribeAll: Subject<any>;
-
 
     constructor(
         private trainerService: TrainerService,
@@ -64,5 +64,11 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
                         map(value => this._filter(value))
                     );
             });
+    }
+
+    filterClick(buttonName: "1" | "2" | "5" | "10"): void{
+        this.selectedFilter = this.selectedFilter === buttonName ? "" : buttonName;
+        //console.log(this.pageIndex, this.limit);
+        //this.trainerService.getPageItem(0, this.limit, this.selectedFilter);
     }
 }

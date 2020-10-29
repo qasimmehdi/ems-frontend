@@ -22,4 +22,8 @@ export class RejectConfirmDialog{
         this.dialogRef.close();
     }
 
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
 }

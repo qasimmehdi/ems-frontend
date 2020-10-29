@@ -1,6 +1,13 @@
-<button mat-icon-button class="close-btn" [autofocus]="false" (click)="onNoClick()">
-    <mat-icon>cancel</mat-icon>
-</button>
+<div fxLayout="row" fxLayoutAlign="end start">
+    <button
+     mat-icon-button
+     class="close-btn"
+     [disableRipple]="true"
+     [autofocus]="false"
+     (click)="onNoClick()">
+        <mat-icon>cancel</mat-icon>
+    </button>
+</div>
 <div class="event-modal" fxLayout="column" fxLayoutAlign="center none">
     <h1 style="text-align: center;">Training Detail</h1>
     <div fxLayout="row" fxLayoutAlign="end center">

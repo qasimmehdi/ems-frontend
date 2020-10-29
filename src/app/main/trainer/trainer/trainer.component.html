@@ -42,13 +42,14 @@
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold" style="align-self: center;">Certification: </p>
-                        <p *ngFor="let cert of trainer.certifications" class="circle" style="margin-left:10px;">{{cert}}
+                        <p *ngFor="let cert of trainer.certifications" class="circle" style="margin-left:10px;">
+                            {{cert.trainingAssociation.name}}
                         </p>
 
                     </div>
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Certification code / ID / Serial #: </p>
-                        <p>{{trainer.code ? trainer.code : "N/A" }}</p>
+                        <p>{{trainer.certifications[0].certificateNumber ? trainer.certifications[0].certificateNumber : "N/A" }}</p>
                     </div>
                     <div [fxLayout]="trainer.trainingTypes.length > 0 ? 'column' : 'row'" fxLayout.xs="column">
                         <p class="p-bold">Types of training:</p>

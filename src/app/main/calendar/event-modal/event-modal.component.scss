@@ -6,17 +6,22 @@
     }
     .status-btn-schedule{
         background-color: rgba(0, 0, 0, 0.12);
+        cursor: default;
     }
     .status-btn-inprogress{
+        cursor: default;
         background-color: #F7CA18;
     }
     .status-btn-completed{
+        cursor: default;
         background-color: #24C768;
     }
 }
 
 .close-btn{
-    background-color: transparent;
+    position: absolute;
+    margin-right: -20px;
+    margin-top: -20px;
     mat-icon{
         color: #969191;
     }

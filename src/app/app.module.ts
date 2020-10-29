@@ -106,7 +106,7 @@ const appRoutes: Routes = [
         UsersModule,
 
         //reported
-        ReportedModule,
+        //ReportedModule,
 
         TrainerCalendarModule,
 

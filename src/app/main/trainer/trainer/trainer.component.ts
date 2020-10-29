@@ -73,7 +73,9 @@ export class TrainerComponent implements OnInit, OnDestroy {
     }
 
     openVerificationDialog(): void {
-        const dialogRef = this.dialog.open(VerificationDialog, {});
+        const dialogRef = this.dialog.open(VerificationDialog, {
+            autoFocus: false,
+        });
 
         dialogRef.afterClosed().subscribe(() => {
             console.log('The dialog was closed');

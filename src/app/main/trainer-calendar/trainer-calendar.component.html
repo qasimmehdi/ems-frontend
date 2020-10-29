@@ -40,19 +40,39 @@
                     Packs
                 </span>
                 <div fxLayout="row">
-                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 pack-btn">
+                    <button
+                     mat-raised-button
+                     class="add-product-button fuse-white mt-24 mt-md-0 pack-btn"
+                     [ngClass]="selectedFilter === '1' ? 'selected' : 'not-selected'"
+                     (click)="filterClick('1')"
+                    >
                         <span>1 day</span>
                     </button>
 
-                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4 pack-btn">
+                    <button
+                     mat-raised-button
+                     class="add-product-button fuse-white mt-24 mt-md-0 mx-4 pack-btn"
+                     [ngClass]="selectedFilter === '2' ? 'selected' : 'not-selected'"
+                     (click)="filterClick('2')"
+                    >
                         <span>2 days</span>
                     </button>
 
-                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 pack-btn">
+                    <button
+                     mat-raised-button
+                     class="add-product-button fuse-white mt-24 mt-md-0 pack-btn"
+                     [ngClass]="selectedFilter === '5' ? 'selected' : 'not-selected'"
+                     (click)="filterClick('5')"
+                    >
                         <span>5 days</span>
                     </button>
 
-                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4 pack-btn">
+                    <button
+                     mat-raised-button
+                     class="add-product-button fuse-white mt-24 mt-md-0 mx-4 pack-btn"
+                     [ngClass]="selectedFilter === '10' ? 'selected' : 'not-selected'"
+                     (click)="filterClick('10')"
+                    >
                         <span>10 days</span>
                     </button>
                 </div>
