@@ -50,10 +50,10 @@
         </div>
 
         <div class="content-card">
-            <mat-table *ngIf="!noUser" class="trainer-table" #table [dataSource]="dataSource"
+            <mat-table class="trainer-table" #table matSort [dataSource]="dataSource"
                 [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
                 <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef>Trainer Name</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Trainer Name</mat-header-cell>
                     <mat-cell *matCellDef="let trainer">
                         <p class="text-truncate">{{trainer.name ? trainer.name : '---'}}</p>
                     </mat-cell>
@@ -68,7 +68,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="registeredAt">
-                    <mat-header-cell *matHeaderCellDef >Registered At</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Registered At</mat-header-cell>
                     <mat-cell *matCellDef="let trainer">
                         <p class="text-truncate">
                             {{trainer.createdAt ? moment(trainer.createdAt).format("DD/MM/YYYY") : '---'}}

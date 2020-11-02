@@ -78,7 +78,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Finance',
                 type: 'item',
                 url: '/finance',
-                icon: 'people'
+                icon: 'payments'
             },
             {
                 id: 'setting',

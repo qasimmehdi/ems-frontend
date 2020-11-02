@@ -1,0 +1,16 @@
+.image-modal-body {
+    background-color: black;
+
+    .close-btn {
+        position: absolute;
+        margin-right: -20px;
+        margin-top: -20px;
+
+        mat-icon {
+            color: #969191;
+        }
+    }
+    .image{
+        margin: -20px;
+    }
+}

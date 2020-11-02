@@ -21,17 +21,17 @@
         </div>
 
         <div class="content-card">
-            <mat-table *ngIf="!noUser" class="user-table" #table [dataSource]="dataSource"
+            <mat-table class="user-table" matSort #table [dataSource]="dataSource"
                 [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
                 <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef>User Name</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>User Name</mat-header-cell>
                     <mat-cell *matCellDef="let user">
                         <p class="text-truncate">{{user.name ? user.name : '---'}}</p>
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef>User ID</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>User ID</mat-header-cell>
                     <mat-cell *matCellDef="let user">
                         <p class="text-truncate">{{user.id ? user.id : '---'}}</p>
                     </mat-cell>
@@ -53,7 +53,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="registeredAt">
-                    <mat-header-cell *matHeaderCellDef >Registered At</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Registered At</mat-header-cell>
                     <mat-cell *matCellDef="let user">
                         <p class="text-truncate">
                             {{user.createdAt ? moment(user.createdAt).format("DD/MM/YYYY") : '---'}}

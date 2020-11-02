@@ -12,6 +12,7 @@ import { AuthGuard } from '../auth-guard.service';
 import { InterceptorService } from '../interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { ImageModalModule } from '../shared/image-modal/image-modal.module';
 
 const routes: Routes = [
     {
@@ -63,7 +64,8 @@ const routes: Routes = [
         FuseConfirmDialogModule,
         FuseSharedModule,
         FuseWidgetModule,
-        MatDialogModule
+        MatDialogModule,
+        ImageModalModule
     ],
     providers: [
         {

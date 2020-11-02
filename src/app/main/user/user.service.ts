@@ -41,11 +41,11 @@ export class UserService {
       Promise.all([
         this.getInit()
       ])
-      .then(() => {
+        .then(() => {
           resolve();
-      },
-        reject
-      );
+        },
+          reject
+        );
     });
   }
 
@@ -73,14 +73,24 @@ export class UserService {
     });
   }
 
-  getPageItem(page: Number, size: Number, typeSwitch?) {
+  getPageItem(page: Number, size: Number, keyword?: string) {
     return new Promise((resolve, reject) => {
-      this._httpClient.get(`${BASE_URL_ACCOUNT}/clients?page=${page}&size=${size}`)
-        .subscribe((response: any) => {
-          this.pageItem = response;
-          this.onPageItemChanged.next(this.pageItem);
-          resolve(response);
-        }, reject);
+      if (keyword) {
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/clients?page=${page}&size=${size}`)
+          .subscribe((response: any) => {
+            this.pageItem = response;
+            this.onPageItemChanged.next(this.pageItem);
+            resolve(response);
+          }, reject);
+      }
+      else {
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/clients?page=${page}&size=${size}`)
+          .subscribe((response: any) => {
+            this.pageItem = response;
+            this.onPageItemChanged.next(this.pageItem);
+            resolve(response);
+          }, reject);
+      }
     });
   }
 }

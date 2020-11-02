@@ -57,7 +57,7 @@ export class UserListComponent implements OnInit {
     }] */
 
     constructor(
-        private  userService: UserService,
+        private userService: UserService,
         public _matDialog: MatDialog,
         private _matSnackBar: MatSnackBar,
         public authService: AuthService
@@ -69,18 +69,24 @@ export class UserListComponent implements OnInit {
         // Subscribe to update Items on changes
         this.userService.onPageItemChanged
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(gymPage => {
-                console.log(gymPage);
+            .subscribe(() => {
+                this.noUser = false;
                 if (this.userService.pageItem && this.userService.pageItem.content.length == 0) {
                     this.noUser = true;
                 }
                 // Assign the data to the data source for the table to render
                 this.dataSource = new MatTableDataSource(this.userService.pageItem.content);
-                this.totalLength = this. userService.pageItem.totalElements;
-                this.limit = this. userService.pageItem.size;
-                this.pageIndex = this. userService.pageItem.number;
+                this.totalLength = this.userService.pageItem.totalElements;
+                this.limit = this.userService.pageItem.size;
+                this.pageIndex = this.userService.pageItem.number;
                 this.dataSource.sort = this.sort;
             });
+        this.dataSource.sortingDataAccessor = (item, property) => {
+            switch (property) {
+                case 'registeredAt': return new Date(item.createdAt);
+                default: return item[property];
+            }
+        };
         this.subscribeSearch();
     }
 
@@ -94,7 +100,9 @@ export class UserListComponent implements OnInit {
                 distinctUntilChanged()
             )
             .subscribe((text: string) => {
-                console.log("Text Changing...", text)
+                console.log("Text Changing...", text);
+                this.userService.getPageItem(0, this.limit, text);
+
             });
     }
 

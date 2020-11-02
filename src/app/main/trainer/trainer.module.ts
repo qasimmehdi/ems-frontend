@@ -15,6 +15,7 @@ import { AuthService } from '../auth.service';
 import { VerificationDialog } from './trainer/dialog/dialog.component';
 import { RejectConfirmDialog } from './trainer/reject-confirm/reject-confirm.component';
 import { MatCardModule } from '@angular/material/card';
+import { ImageModalModule } from '../shared/image-modal/image-modal.module';
 
 const routes: Routes = [
     {
@@ -69,7 +70,8 @@ const routes: Routes = [
         FuseConfirmDialogModule,
         FuseSharedModule,
         FuseWidgetModule,
-        MatDialogModule
+        MatDialogModule,
+        ImageModalModule
     ],
     providers: [
         {

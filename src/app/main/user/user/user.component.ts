@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 import * as moment from 'moment';
+import { ImageModal } from 'app/main/shared/image-modal/image-modal.component';
 
 @Component({
     selector: 'app-gym',
@@ -68,6 +69,14 @@ export class UserComponent implements OnInit, OnDestroy {
         this._matSnackBar.open(message, 'OK', {
             verticalPosition: 'bottom',
             duration: 3000
+        });
+    }
+
+    openImageModal(e): void {
+        console.log( e.srcElement.currentSrc );
+        const dialogRef = this.dialog.open(ImageModal, {
+            autoFocus: false,
+            data: { src: e.srcElement.currentSrc },
         });
     }
 

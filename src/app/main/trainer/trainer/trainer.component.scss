@@ -1,127 +1,141 @@
 @import "src/@fuse/scss/fuse";
 
 #gym {
-  .header {
-    .subtitle {
-      margin: 6px 0 0 0;
-    }
-  }
-
-  .content {
-    padding: 10px;
-    .mat-tab-group,
-    .mat-tab-body-wrapper,
-    .tab-content {
-      flex: 1 1 auto;
-      max-width: 100%;
+    .header {
+        .subtitle {
+            margin: 6px 0 0 0;
+        }
     }
 
-    .header-info {
-      display: flex;
-    }
+    .content {
+        padding: 10px;
 
-    .content-info {
-      padding: 0 18px;
-    }
+        .mat-tab-group,
+        .mat-tab-body-wrapper,
+        .tab-content {
+            flex: 1 1 auto;
+            max-width: 100%;
+        }
 
-    .tp-card {
-      max-width: none !important;
-    }
+        .header-info {
+            display: flex;
+        }
 
-    .mat-tab-body-content {
-      display: flex;
-    }
+        .content-info {
+            padding: 0 18px;
+        }
 
-    .mat-tab-label {
-      height: 64px;
-    }
+        .tp-card {
+            max-width: none !important;
+        }
 
-    .tp-card {
-      max-width: 400px;
-    }
+        .mat-tab-body-content {
+            display: flex;
+        }
 
-    .tp-header-image {
-      background-image: url("https://www.tutorialspoint.com/materialize/src/html5-mini-logo.jpg");
-      background-size: cover;
-    }
+        .mat-tab-label {
+            height: 64px;
+        }
 
-    // Temporary prefix alignment fix
-    .mat-form-field-appearance-outline .mat-form-field-prefix,
-    .mat-form-field-appearance-outline .mat-form-field-suffix {
-      top: 0;
+        .tp-card {
+            max-width: 400px;
+        }
+
+        .tp-header-image {
+            background-image: url("https://www.tutorialspoint.com/materialize/src/html5-mini-logo.jpg");
+            background-size: cover;
+        }
+
+        // Temporary prefix alignment fix
+        .mat-form-field-appearance-outline .mat-form-field-prefix,
+        .mat-form-field-appearance-outline .mat-form-field-suffix {
+            top: 0;
+        }
     }
-  }
 }
 
 .mat-select-placeholder {
-  color: black !important;
+    color: black !important;
 }
 
-.trainer-info{
-  padding: 20px;
-  @include media-breakpoint("xs") {
-    padding: 10px;
-  }
+.trainer-info {
+    padding: 20px;
 
-  .p-bold {
-    font-weight: bold;
-  }
+    @include media-breakpoint("xs") {
+        padding: 10px;
+    }
 
-  p {
-    font-size: 16px;
-    margin-block-end: unset;
-    margin-left: 5px;
-  }
+    .p-bold {
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 16px;
+        margin-block-end: unset;
+        margin-left: 5px;
+    }
 }
 
-.v-btn{
-  display: block;
-  margin: 5px;
+.v-btn {
+    display: block;
+    margin: 5px;
 }
 
-.profile-pic{
-  max-width: 180px;
-  height: auto;
+.profile-pic {
+    max-width: 180px;
+    max-height: 168px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
 }
 
-.status{
-  align-self: center;
+.status {
+    align-self: center;
 }
 
 .profile-container {
-  position: relative;
-  display: inline;
+    position: relative;
+    display: inline;
+    width: 180px;
+    height: 168px;
+    background-color: black;
+    -webkit-box-shadow: 3px 3px 3px 3px #ccc;
+    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 3px 3px 3px 3px #ccc;
+    /* Firefox 3.5 - 3.6 */
+    box-shadow: 3px 3px 3px 3px #ccc;
 }
 
-.verified-icon{
-  color: #75C739;
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
+.verified-icon {
+    color: #75C739;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
 
-.awaiting :first-child{
-  font-weight: bold;
-  font-size: 16px;
+.awaiting :first-child {
+    font-weight: bold;
+    font-size: 16px;
 }
 
-.awaiting{
-  text-align: center;
-  padding-bottom: 20px;
+.awaiting {
+    text-align: center;
+    padding-bottom: 20px;
 }
 
-.circle{
-  width:50px;
-  height:50px;
-  border-radius:250px;
-  font-size:14px;
-  line-height:50px;
-  text-align:center;
-  border: 1px solid;
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 250px;
+    font-size: 14px;
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid;
 }
 
-.mw{
-  @include media-breakpoint("xs") {
-    width: 100%;
-  }
+.mw {
+    @include media-breakpoint("xs") {
+        width: 100%;
+    }
 }

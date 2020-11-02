@@ -170,23 +170,23 @@ export class InitialSetup implements OnInit, OnDestroy {
 
     submitInitialSetup() {
         this.isPosting = true;
-        let data = {
+        this.initialResponse = {
+            ...this.initialResponse,
             settings: this.initialResponse.settings,
             trainingTypes: this.initialResponse.trainingTypes,
             trainingAssociations: this.initialResponse.trainingAssociations,
             admin: this.accountInfo.value,
         };
+        console.log(this.initialResponse);
+        this.initialResponse.settings[0].appValue = this.settingsFormGroup.controls.email.value;
+        this.initialResponse.settings[1].appValue = this.settingsFormGroup.controls.phone.value;
 
-        data.settings[0].appValue = this.settingsFormGroup.controls.email.value;
-        data.settings[1].appValue = this.settingsFormGroup.controls.phone.value;
+        const dateOfBirth = this.initialResponse.admin.dateOfBirth;
+        this.initialResponse.admin.dateOfBirth = `${dateOfBirth.split('-')[1]}/${dateOfBirth.split('-')[2]}/${dateOfBirth.split('-')[0]}`
+        console.log(this.initialResponse);
 
-        const dateOfBirth = data.admin.dateOfBirth;
-        data.admin.dateOfBirth = `${dateOfBirth.split('-')[1]}/${dateOfBirth.split('-')[2]}/${dateOfBirth.split('-')[0]}`
-        console.log(data);
-
-        this.initialService.postInitialSetup(data)
+        this.initialService.postInitialSetup(this.initialResponse)
             .then((resp) => {
-                //console.log(resp);
                 this._snackBar.open("Initial setup completed successfully", 'Ok', {
                     duration: 2000,
                 });

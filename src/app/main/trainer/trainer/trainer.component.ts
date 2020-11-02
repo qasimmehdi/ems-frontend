@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 import * as moment from 'moment';
 import { VerificationDialog } from './dialog/dialog.component';
+import { ImageModal } from 'app/main/shared/image-modal/image-modal.component';
 
 @Component({
     selector: 'app-gym',
@@ -81,6 +82,14 @@ export class TrainerComponent implements OnInit, OnDestroy {
             console.log('The dialog was closed');
         });
     }
+
+    openImageModal(e): void {
+        console.log( e.srcElement.currentSrc );
+        const dialogRef = this.dialog.open(ImageModal, {
+            autoFocus: false,
+            data: { src: e.srcElement.currentSrc },
+        });
+    }
 }
 
 export const nameValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -96,3 +105,4 @@ export const nameValidator: ValidatorFn = (control: AbstractControl): Validation
 
     return { 'blankName': true };
 };
+

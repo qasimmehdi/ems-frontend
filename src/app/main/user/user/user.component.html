@@ -57,7 +57,7 @@
                 </div>
                 <div class="user-info mw" fxLayout="column" fxLayoutAlign="end start" fxLayoutAlign.xs="center center">
                     <div class="profile-container">
-                        <img class="profile-pic" src={{user.image}}
+                        <img class="profile-pic" src={{user.image}} (click)="openImageModal($event)"
                             onerror="this.src='assets/images/avatars/profile_placeholder_male.jpg';" alt="user Profile">
                     </div>
                 </div>

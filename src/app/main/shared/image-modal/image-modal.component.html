@@ -1,0 +1,10 @@
+<div class="image-modal-body">
+    <div fxLayout="row" fxLayoutAlign="end start">
+        <button mat-icon-button class="close-btn" [disableRipple]="true" [autofocus]="false" (click)="onNoClick()">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </div>
+    <div class="image" fxLayout="row" fxLayoutAlign="center center">
+        <img src={{data.src}} />
+    </div>
+</div>

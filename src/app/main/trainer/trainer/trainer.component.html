@@ -22,63 +22,63 @@
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Trainer Name: </p>
-                        <p>{{trainer.name ? trainer.name : "John Doe" }}</p>
+                        <p>{{trainer?.name ? trainer?.name : "John Doe" }}</p>
                     </div>
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Email: </p>
-                        <p>{{trainer.email ? trainer.email : "john.doe@gmail.com" }}</p>
+                        <p>{{trainer?.email ? trainer?.email : "john.doe@gmail.com" }}</p>
                     </div>
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Registered at: </p>
-                        <p>{{trainer.createdAt ? moment(trainer.createdAt).format("DD/MM/YYYY") : "N/A" }}</p>
+                        <p>{{trainer?.createdAt ? moment(trainer?.createdAt).format("DD/MM/YYYY") : "N/A" }}</p>
                     </div>
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Address: </p>
-                        <p>{{trainer.address ? trainer.address : "N/A" }}</p>
+                        <p>{{trainer?.address ? trainer?.address : "N/A" }}</p>
                     </div>
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold" style="align-self: center;">Certification: </p>
-                        <p *ngFor="let cert of trainer.certifications" class="circle" style="margin-left:10px;">
-                            {{cert.trainingAssociation.name}}
+                        <p *ngFor="let cert of trainer?.certifications" class="circle" style="margin-left:10px;">
+                            {{cert?.trainingAssociation?.name}}
                         </p>
 
                     </div>
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Certification code / ID / Serial #: </p>
-                        <p>{{trainer.certifications[0].certificateNumber ? trainer.certifications[0].certificateNumber : "N/A" }}</p>
+                        <p>{{trainer?.certifications[0]?.certificateNumber ? trainer?.certifications[0]?.certificateNumber : "N/A" }}</p>
                     </div>
-                    <div [fxLayout]="trainer.trainingTypes.length > 0 ? 'column' : 'row'" fxLayout.xs="column">
+                    <div [fxLayout]="trainer?.trainingTypes?.length > 0 ? 'column' : 'row'" fxLayout.xs="column">
                         <p class="p-bold">Types of training:</p>
-                        <p *ngIf="trainer.trainingTypes.length === 0">N/A</p>
-                        <ul *ngIf="trainer.trainingTypes.length > 0">
-                            <li *ngFor="let type of trainer.trainingTypes">
-                                <p>{{type.name}}</p>
+                        <p *ngIf="trainer?.trainingTypes?.length === 0">N/A</p>
+                        <ul *ngIf="trainer?.trainingTypes?.length > 0">
+                            <li *ngFor="let type of trainer?.trainingTypes">
+                                <p>{{type?.name}}</p>
                             </li>
                         </ul>
                     </div>
                     <div *ngIf="trainer.status.toLowerCase() === 'verified'" fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">No. of Active Clients #: </p>
-                        <p>{{trainer.client ? trainer.client : "6" }}</p>
+                        <p>{{trainer?.client ? trainer?.client : "6" }}</p>
                     </div>
                 </div>
                 <div class="trainer-info mw" fxLayout="column" fxLayoutAlign="end start"
                     fxLayoutAlign.xs="center center">
                     <div class="profile-container">
-                        <mat-icon *ngIf="trainer.status.toLowerCase() === 'verified'" class="verified-icon"
+                        <mat-icon *ngIf="trainer?.status?.toLowerCase() === 'verified'" class="verified-icon"
                             aria-label="verified icon">verified_user</mat-icon>
-                        <img class="profile-pic" src={{trainer.image}}
+                        <img class="profile-pic" src={{trainer?.image}}
                             onerror="this.src='assets/images/avatars/profile_placeholder_male.jpg';"
-                            alt="Trainer Profile">
+                            alt="Trainer Profile" (click)="openImageModal($event)">
                     </div>
                     <h2 *ngIf="trainer.status.toLowerCase() === 'verified'" class="status">Verified</h2>
                     <h2 *ngIf="trainer.status.toLowerCase() === 'rejected'" class="status">Rejected</h2>
 
                     <div *ngIf="!(trainer.status.toLowerCase() === 'rejected')" fxLayout="column"
-                        fxLayoutAlign="center stretch">
+                        fxLayoutAlign="center stretch" style="align-self: center;">
                         <div class="awaiting">
                             <p>Verification Status</p>
                             <p>Awaiting Verification</p>

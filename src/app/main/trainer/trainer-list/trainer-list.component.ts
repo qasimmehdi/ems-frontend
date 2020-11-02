@@ -50,15 +50,9 @@ export class TrainerListComponent implements OnInit {
     @ViewChild('SearchInput') SearchInput: ElementRef;
 
     private _unsubscribeAll: Subject<any>;
-    /* trainer = [{
-        name: "qasim",
-        emailAddress: "qasim_123@gmail.com",
-        phone: "123456789011",
-        createdAt: "10/12/1998"
-    }] */
 
     constructor(
-        private  trainerService: TrainerService,
+        private trainerService: TrainerService,
         public _matDialog: MatDialog,
         private _matSnackBar: MatSnackBar,
         public authService: AuthService
@@ -77,11 +71,17 @@ export class TrainerListComponent implements OnInit {
                 }
                 // Assign the data to the data source for the table to render
                 this.dataSource = new MatTableDataSource(this.trainerService.pageItem.content);
-                this.totalLength = this. trainerService.pageItem.totalElements;
-                this.limit = this. trainerService.pageItem.size;
-                this.pageIndex = this. trainerService.pageItem.number;
+                this.totalLength = this.trainerService.pageItem.totalElements;
+                this.limit = this.trainerService.pageItem.size;
+                this.pageIndex = this.trainerService.pageItem.number;
                 this.dataSource.sort = this.sort;
             });
+        this.dataSource.sortingDataAccessor = (item, property) => {
+            switch (property) {
+                case 'registeredAt': return new Date(item.createdAt);
+                default: return item[property];
+            }
+        };
         this.subscribeSearch();
     }
 
@@ -95,7 +95,8 @@ export class TrainerListComponent implements OnInit {
                 distinctUntilChanged()
             )
             .subscribe((text: string) => {
-                console.log("Text Changing...", text)
+                console.log("Text Changing...", text);
+                this.trainerService.getPageItem(0, this.limit, this.selectedFilter, text);
             });
     }
 
@@ -118,7 +119,7 @@ export class TrainerListComponent implements OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    filterClick(buttonName: "verified" | "unverified" | "rejected"): void{
+    filterClick(buttonName: "verified" | "unverified" | "rejected"): void {
         this.selectedFilter = this.selectedFilter === buttonName ? "" : buttonName;
         //console.log(this.pageIndex, this.limit);
         this.trainerService.getPageItem(0, this.limit, this.selectedFilter);
