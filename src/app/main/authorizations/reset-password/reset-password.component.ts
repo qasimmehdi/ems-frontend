@@ -25,6 +25,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     authid: string;
     pageType: String;
     pageMessage: String;
+    UserType: "trainers" | "clients";
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -39,6 +40,14 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
     ) {
         this.authid = this._route.snapshot.paramMap.get('id');
+        const paramUserType = this._route.snapshot.paramMap.get('usertype');
+        console.log(paramUserType);
+        if(paramUserType === 'THTUSER'){
+            this.UserType = 'trainers';
+        }
+        else if(paramUserType === 'THCUSER'){
+            this.UserType = 'clients';
+        }
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
@@ -103,7 +112,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     resetPassword(): void {
         const data = this.resetPasswordForm.getRawValue();
         data.authId = this.authid;
-        this._authService.resetPassword(data)
+        this._authService.resetPassword(data, this.UserType)
             .then((res: any) => {
                 // Show the success messages
                 if (res.status) {

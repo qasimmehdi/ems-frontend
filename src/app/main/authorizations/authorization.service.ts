@@ -56,9 +56,9 @@ export class AuthorizationService {
     });
   }
 
-  resetPassword(data): Promise<any> {
+  resetPassword(data, user: "trainers" | "clients"): Promise<any> {
     return new Promise((resolve, reject) => {
-      this._httpClient.post(`${BASE_URL}/api/accountservice/v1/auth/resetPassword`, data)
+      this._httpClient.post(`${BASE_URL}/api/accountservice/v1/${user}/resetPassword`, data)
         .subscribe((response: any) => {
           resolve(response);
         }, reject);

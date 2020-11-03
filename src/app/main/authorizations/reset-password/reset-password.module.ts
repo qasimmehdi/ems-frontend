@@ -8,7 +8,7 @@ import { AppAuthGuard } from 'app/app.authguard';
 
 const routes = [
     {
-        path: 'reset-password/:id',
+        path: 'reset-password/:usertype/:id',
         component: ResetPasswordComponent,
         // canActivate: [AppAuthGuard]
     }
