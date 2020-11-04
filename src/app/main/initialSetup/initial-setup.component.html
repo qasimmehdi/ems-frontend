@@ -160,7 +160,8 @@
                                         Password is required
                                     </mat-error>
                                     <mat-error *ngIf="accountInfo.get('password').hasError('pattern')">
-                                        Password must be atleast 8 characters
+                                        Must include minimum 8 characters, one uppercase character, one lowercase
+                                        character, one number and one special character
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -178,11 +179,11 @@
                     </mat-step>
                 </mat-vertical-stepper>
 
-<!-------------------------------------------------------------------------------------------------------------------------------->
+                <!-------------------------------------------------------------------------------------------------------------------------------->
 
                 <!-- for big screens -->
                 <mat-horizontal-stepper *ngIf="!isSmallscreen" class="stepper-center" linear="true">
-                    <mat-step [stepControl]="settingsFormGroup" >
+                    <mat-step [stepControl]="settingsFormGroup">
                         <form [formGroup]="settingsFormGroup">
                             <ng-template matStepLabel>Settings</ng-template>
                             <div fxLayout.xs="column" fxLayout="row" fxLayoutAlign="space-evenly center"
@@ -217,7 +218,7 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step *ngIf="false" [completed]="trainingTypes.length > 0" >
+                    <mat-step *ngIf="false" [completed]="trainingTypes.length > 0">
                         <form>
                             <ng-template matStepLabel>Types of Training</ng-template>
                             <mat-form-field class="mx-8" appearance="outline">
@@ -244,7 +245,7 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step *ngIf="false" [completed]="associationNames.length > 0" >
+                    <mat-step *ngIf="false" [completed]="associationNames.length > 0">
                         <form [formGroup]="associationsFormGroup">
                             <ng-template matStepLabel>Training Associations</ng-template>
                             <mat-form-field class="mx-8" appearance="outline">
@@ -288,7 +289,7 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [stepControl]="accountInfo" [completed]="accountInfo.valid" >
+                    <mat-step [stepControl]="accountInfo" [completed]="accountInfo.valid">
                         <form [formGroup]="accountInfo">
                             <ng-template matStepLabel>Account Details</ng-template>
                             <div fxLayout.xs="column" fxLayout="row" fxLayoutAlign="space-evenly center"
@@ -329,7 +330,8 @@
                                         Password is required
                                     </mat-error>
                                     <mat-error *ngIf="accountInfo.get('password').hasError('pattern')">
-                                        Password must be atleast 8 characters
+                                        Must include minimum 8 characters, one uppercase character, one lowercase
+                                        character, one number and one special character
                                     </mat-error>
                                 </mat-form-field>
                             </div>

@@ -23,7 +23,7 @@
                     </mat-error>
                     <mat-error
                         *ngIf="!loginForm.get('email').hasError('required') &&
-                                loginForm.get('email').hasError('email')">
+                                loginForm.get('email').hasError('pattern')">
                         Please enter a valid email address
                     </mat-error>
                 </mat-form-field>
@@ -32,7 +32,7 @@
                     <mat-label>Password</mat-label>
                     <input matInput type="password" formControlName="password">
                     <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
-                    <mat-error>
+                    <mat-error *ngIf="loginForm.get('password').hasError('required')">
                         Password is required
                     </mat-error>
                 </mat-form-field>
@@ -47,7 +47,7 @@
                 </div> -->
 
                 <button mat-raised-button color="primary" class="submit-button" aria-label="LOG IN"
-                        [disabled]="loginForm.invalid || isLogginIn || isLogginIn">
+                        [disabled]="loginForm.invalid || isLogginIn">
                     LOGIN
                 </button>
 

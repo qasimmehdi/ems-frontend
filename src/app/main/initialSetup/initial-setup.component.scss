@@ -1,28 +1,41 @@
 @import "src/@fuse/scss/fuse";
 
 initial-setup {
-    .no-pad{
+    mat-form-field .mat-form-field {
+        &-underline {
+            position: relative;
+            bottom: auto;
+        }
+
+        &-subscript-wrapper {
+            position: static;
+        }
+    }
+
+    .no-pad {
         padding: unset;
     }
+
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-    }
-    /* Firefox */
-    input[type=number] {
-    -moz-appearance: textfield;
+        -webkit-appearance: none;
+        margin: 0;
     }
 
-    .spinner-center{
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .spinner-center {
         align-items: center;
         justify-content: center;
         display: flex;
         flex-direction: row;
     }
 
-    .spinner-min-size{
+    .spinner-min-size {
         min-width: 57vw;
         min-height: 35vh;
 
@@ -90,6 +103,7 @@ initial-setup {
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+
                     .mat-horizontal-content-container {
                         overflow: hidden;
                         padding: 24px;
@@ -99,16 +113,19 @@ initial-setup {
 
 
                 form {
-                    .small-input{
+                    .small-input {
                         @include media-breakpoint('sm') {
                             width: 20%;
                         }
+
                         @include media-breakpoint('md') {
                             width: 20%;
                         }
+
                         @include media-breakpoint('lg') {
                             width: 20%;
                         }
+
                         @include media-breakpoint('xl') {
                             width: 20%;
                         }

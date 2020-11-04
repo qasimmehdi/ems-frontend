@@ -11,6 +11,7 @@ import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { InitialSetupService } from './initial-setup.service';
+import { regexes } from '../shared/regexes';
 
 export interface ChipsArray {
     name: string;
@@ -160,8 +161,8 @@ export class InitialSetup implements OnInit, OnDestroy {
         });
         this.accountInfo = this._formBuilder.group({
             name: ['', [Validators.required]],
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.pattern(".{8,}")]],
+            email: ['', [Validators.required, Validators.pattern(regexes.email)]],
+            password: ['', [Validators.required, Validators.pattern(regexes.password)]],
             dateOfBirth: ['', [Validators.required]],
             image: ['']
         });

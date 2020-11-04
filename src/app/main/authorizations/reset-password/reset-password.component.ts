@@ -7,6 +7,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { MatSnackBar } from '@angular/material';
 import { AuthorizationService } from '../authorization.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { regexes } from 'app/main/shared/regexes';
 
 @Component({
     selector: 'reset-password',
@@ -26,6 +27,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     pageType: String;
     pageMessage: String;
     UserType: "trainers" | "clients";
+    isInProgress: boolean = false;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -42,10 +44,10 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         this.authid = this._route.snapshot.paramMap.get('id');
         const paramUserType = this._route.snapshot.paramMap.get('usertype');
         console.log(paramUserType);
-        if(paramUserType === 'THTUSER'){
+        if (paramUserType === 'THTUSER') {
             this.UserType = 'trainers';
         }
-        else if(paramUserType === 'THCUSER'){
+        else if (paramUserType === 'THCUSER') {
             this.UserType = 'clients';
         }
         // Configure the layout
@@ -90,7 +92,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
         this.resetPasswordForm = this._formBuilder.group({
             authId: [''],
-            password: ['', Validators.minLength(8)],
+            password: ['', Validators.pattern(regexes.password)],
             confirmPassword: ['', [Validators.required, confirmPasswordValidator]]
         });
 
@@ -110,16 +112,17 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
 
     resetPassword(): void {
+        this.isInProgress = true;
         const data = this.resetPasswordForm.getRawValue();
         data.authId = this.authid;
         this._authService.resetPassword(data, this.UserType)
             .then((res: any) => {
                 // Show the success messages
+                console.log(res.status);
                 if (res.status) {
                     this._matSnackBar.open('Reset Password Successfully!', 'OK', {
                         duration: 3000
                     });
-                    this.router.navigateByUrl('/login')
                 } else {
                     this._matSnackBar.open(res.message, 'OK', {
                         duration: 3000
@@ -131,6 +134,11 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
                 this._matSnackBar.open('Unable to reset password!', 'OK', {
                     duration: 3000
                 });
+            })
+            .finally(() => {
+                this.resetPasswordForm.get('password').reset();
+                this.resetPasswordForm.get('confirmPassword').reset();
+                this.isInProgress = false;
             })
     }
 }

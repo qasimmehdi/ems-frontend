@@ -41,6 +41,7 @@ export class TrainerListComponent implements OnInit {
     isSorted: boolean = false;
     sortSwitch: number = 0;
     unassignedGymOwner: boolean = false;
+    searchKeyword: string = '';
 
     selectedFilter: "verified" | "unverified" | "rejected" | "" = "";
 
@@ -96,6 +97,7 @@ export class TrainerListComponent implements OnInit {
             )
             .subscribe((text: string) => {
                 console.log("Text Changing...", text);
+                this.searchKeyword = text;
                 this.trainerService.getPageItem(0, this.limit, this.selectedFilter, text);
             });
     }
@@ -122,6 +124,6 @@ export class TrainerListComponent implements OnInit {
     filterClick(buttonName: "verified" | "unverified" | "rejected"): void {
         this.selectedFilter = this.selectedFilter === buttonName ? "" : buttonName;
         //console.log(this.pageIndex, this.limit);
-        this.trainerService.getPageItem(0, this.limit, this.selectedFilter);
+        this.trainerService.getPageItem(0, this.limit, this.selectedFilter, this.searchKeyword.length > 0 ? this.searchKeyword : null);
     }
 }

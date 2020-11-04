@@ -78,11 +78,11 @@ const appRoutes: Routes = [
         TeamsModule,
         UsersModule,
         //ReportedModule,
-        TrainerCalendarModule,
+        /* TrainerCalendarModule,
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory,
-        }),
+        }), */
         // Toastr Notifications
         ToastrModule.forRoot(),
         InitialSetupModule,

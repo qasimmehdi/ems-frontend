@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
+import { regexes } from '../shared/regexes';
 
 @Component({
     selector: 'login',
@@ -61,7 +62,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.checkInitSetup();
         this.loginForm = this._formBuilder.group({
-            email: ['', [Validators.email, Validators.required]],
+            email: ['', [Validators.required, Validators.pattern(regexes.email)]],
             password: ['', [Validators.required]]
         });
         if (this.authService.isUserLoggedIn()) {
