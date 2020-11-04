@@ -65,19 +65,27 @@ const appRoutes: Routes = [
 
         // Material moment date module
         MatMomentDateModule,
+
+        //page modules
         LoginModule,
         DashboardModule,
         GymsModule,
         TeamsModule,
         SettingsModule,
         AuthorizationsModule,
-        PromoCodeModule,
         ResetPasswordModule,
         ForgetPasswordModule,
         TeamsModule,
-
+        UsersModule,
+        //ReportedModule,
+        TrainerCalendarModule,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        }),
         // Toastr Notifications
         ToastrModule.forRoot(),
+        InitialSetupModule,
 
         //Firebase
         FirebaseModule,
@@ -99,23 +107,7 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
 
-        //Initial Setup
-        InitialSetupModule,
-
-        //users
-        UsersModule,
-
-        //reported
-        //ReportedModule,
-
-        TrainerCalendarModule,
-
-        CalendarModule.forRoot({
-            provide: DateAdapter,
-            useFactory: adapterFactory,
-        }),
-
-        // ngrx
+        // ngrx Redux
         StoreModule.forRoot({
             user: userReducer
         })
