@@ -36,10 +36,6 @@ export class LoginComponent implements OnInit {
         private _snackBar: MatSnackBar,
         private authService: AuthService
     ) {
-
-
-
-
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {

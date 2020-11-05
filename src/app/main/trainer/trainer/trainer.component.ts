@@ -76,15 +76,21 @@ export class TrainerComponent implements OnInit, OnDestroy {
     openVerificationDialog(): void {
         const dialogRef = this.dialog.open(VerificationDialog, {
             autoFocus: false,
+            data: { user: this.trainer }
         });
 
-        dialogRef.afterClosed().subscribe(() => {
-            console.log('The dialog was closed');
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if(result && result.user){
+                console.log("setting trainer");
+                this.trainer = result.user;
+            }
+
         });
     }
 
     openImageModal(e): void {
-        console.log( e.srcElement.currentSrc );
+        console.log(e.srcElement.currentSrc);
         const dialogRef = this.dialog.open(ImageModal, {
             autoFocus: false,
             data: { src: e.srcElement.currentSrc },
@@ -105,4 +111,10 @@ export const nameValidator: ValidatorFn = (control: AbstractControl): Validation
 
     return { 'blankName': true };
 };
+
+export const trainerObjectModifier = (data: any, status: "VERIFIED" | "UNVERIFIED" | "REJECTED"): any => {
+    const modifiedData: any = { ...data };
+    modifiedData.status = status;
+    return modifiedData;
+}
 

@@ -107,4 +107,13 @@ export class TrainerService {
     });
 
   }
+
+  putChangeStatus(data: any) {
+    return new Promise((resolve, reject) => {
+      this._httpClient.put(`${BASE_URL_ACCOUNT}/trainers/update`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
 }

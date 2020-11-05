@@ -67,7 +67,7 @@ export class TrainerListComponent implements OnInit {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
                 this.noUser = false;
-                if (this.trainerService.pageItem && this.trainerService.pageItem.content.length == 0) {
+                if (this.trainerService.pageItem && this.trainerService.pageItem.content && this.trainerService.pageItem.content.length === 0) {
                     this.noUser = true;
                 }
                 // Assign the data to the data source for the table to render

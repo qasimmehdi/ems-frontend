@@ -2,7 +2,10 @@
   "projects": {
     "default": "dev-trainerhub",
     "dev": "dev-trainerhub-292022",
-    "qa": "qa-trainerhub",
+    "qa": "qa-getupnow",
+    "dev-trainerhub": "dev-trainerhub-292022",
+    "qa-trainerhub": "qa-trainerhub",
+    "staging": "dev-trainerhub-292022"
   },
   "targets": {
     "dev-trainerhub": {
