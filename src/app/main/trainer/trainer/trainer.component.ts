@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { TrainerService } from '../trainer.service';
@@ -9,12 +9,14 @@ import { fuseAnimations } from '@fuse/animations';
 import * as moment from 'moment';
 import { VerificationDialog } from './dialog/dialog.component';
 import { ImageModal } from 'app/main/shared/image-modal/image-modal.component';
+import { regexes } from 'app/main/shared/regexes';
 
 @Component({
     selector: 'app-gym',
     templateUrl: './trainer.component.html',
     styleUrls: ['./trainer.component.scss'],
-    animations: fuseAnimations
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations,
 })
 
 export class TrainerComponent implements OnInit, OnDestroy {
@@ -30,7 +32,7 @@ export class TrainerComponent implements OnInit, OnDestroy {
     stateSelected: any;
     public reenableButton = new EventEmitter<boolean>(false);
     toppings = new FormControl();
-    certifications = ["ACE", "ACE"];
+    profilePic: string;
 
     trainer: any;
     // Private
@@ -54,8 +56,9 @@ export class TrainerComponent implements OnInit, OnDestroy {
         // Subscribe to update product on changes
         this.trainerService.onItemChanged
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(trainer => {
+            .subscribe(() => {
                 this.trainer = this.trainerService.pageItem;
+                this.profilePic = regexes.url.test(this.trainer.image) ? this.trainer.image : 'assets/images/avatars/profile_placeholder_male.jpg';
             });
     }
 
@@ -81,7 +84,7 @@ export class TrainerComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed().subscribe((result) => {
             console.log(result);
-            if(result && result.user){
+            if (result && result.user) {
                 console.log("setting trainer");
                 this.trainer = result.user;
             }

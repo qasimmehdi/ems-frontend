@@ -1,16 +1,6 @@
 @import "src/@fuse/scss/fuse";
 
 initial-setup {
-    mat-form-field .mat-form-field {
-        &-underline {
-            position: relative;
-            bottom: auto;
-        }
-
-        &-subscript-wrapper {
-            position: static;
-        }
-    }
 
     .no-pad {
         padding: unset;

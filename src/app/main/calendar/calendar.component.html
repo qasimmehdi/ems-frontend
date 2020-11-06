@@ -1,12 +1,13 @@
-<button mat-icon-button class="back-btn" [disabled]="view === 'month'" (click)="goBack()">
-  <mat-icon>arrow_back</mat-icon>
-</button>
-<mwl-demo-utils-calendar-header
-  [(view)]="view"
-  [(viewDate)]="viewDate"
-  (viewDateChange)="fetchEvents()"
-  (viewChange)="fetchEvents()"
->
+<div fxLayout="row" fxLayoutAlign="space-between none">
+  <button mat-icon-button class="back-btn" [disabled]="view === 'month'" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button mat-icon-button class="fullscreen-btn" (click)="onResizeClick()">
+    <mat-icon>{{screenResizeIcon}}</mat-icon>
+  </button>
+</div>
+<mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" (viewDateChange)="fetchEvents()"
+  (viewChange)="fetchEvents()">
 </mwl-demo-utils-calendar-header>
 
 <ng-template #loading>
@@ -18,32 +19,15 @@
 
 <div *ngIf="events$ | async; else loading; let events">
   <div [ngSwitch]="view">
-    <mwl-calendar-month-view
-      *ngSwitchCase="'month'"
-      [viewDate]="viewDate"
-      [events]="events"
-      [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="eventClicked($event.event)"
-    >
+    <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+      [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="eventClicked($event.event)">
     </mwl-calendar-month-view>
-    <mwl-calendar-week-view
-      *ngSwitchCase="'week'"
-      [viewDate]="viewDate"
-      [events]="events"
-      (eventClicked)="eventClicked($event.event)"
-      [dayStartHour]="5"
-      [dayEndHour]="12"
-    >
+    <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"
+      (eventClicked)="eventClicked($event.event)" [dayStartHour]="5" [dayEndHour]="12">
     </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="'day'"
-      [viewDate]="viewDate"
-      [events]="events"
-      (eventClicked)="eventClicked($event.event)"
-      [dayStartHour]="5"
-      [dayEndHour]="12"
-    >
+    <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events"
+      (eventClicked)="eventClicked($event.event)" [dayStartHour]="5" [dayEndHour]="12">
     </mwl-calendar-day-view>
   </div>
 </div>

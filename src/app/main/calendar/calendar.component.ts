@@ -18,6 +18,7 @@ import { Observable } from 'rxjs';
 import { colors } from './utils/colors';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventModal } from './event-modal/event-modal.component';
+import { Output, EventEmitter } from '@angular/core';
 
 interface Film {
     id: number;
@@ -54,6 +55,8 @@ export class DemoComponent implements OnInit {
     events$: Observable<CalendarEvent<{ film: Film }>[]>;
 
     activeDayIsOpen: boolean = false;
+    screenResizeIcon: string = 'fullscreen';
+    @Output() newItemEvent = new EventEmitter<boolean>();
 
     constructor(private http: HttpClient,
         public dialog: MatDialog
@@ -109,7 +112,7 @@ export class DemoComponent implements OnInit {
             );
     }
 
-    dayClicked({date,events,} : {date: Date; events: CalendarEvent<{ film: Film }>[];}): void {
+    dayClicked({ date, events, }: { date: Date; events: CalendarEvent<{ film: Film }>[]; }): void {
         if (isSameMonth(date, this.viewDate)) {
             if (
                 (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -140,8 +143,19 @@ export class DemoComponent implements OnInit {
         });
     }
 
-    goBack():void{
+    goBack(): void {
         this.view = CalendarView.Month;
+    }
+
+    onResizeClick(): void {
+        if(this.screenResizeIcon === 'fullscreen'){
+            this.screenResizeIcon = 'fullscreen_exit';
+            this.newItemEvent.emit(true);
+        }
+        else{
+            this.screenResizeIcon = 'fullscreen';
+            this.newItemEvent.emit(false);
+        }
     }
 
 }

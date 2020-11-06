@@ -7,7 +7,7 @@ import { FuseConfirmDialogModule, FuseWidgetModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { TrainerService } from './trainer.service';
 import { TrainerComponent } from './trainer/trainer.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatToolbarModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatToolbarModule, MatProgressSpinnerModule, MatDialogModule, MAT_HAMMER_OPTIONS } from '@angular/material';
 import { AuthGuard } from '../auth-guard.service';
 import { InterceptorService } from '../interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -82,7 +82,15 @@ const routes: Routes = [
         AuthGuard,
         AuthService,
         { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: [] }
+        { provide: MAT_DIALOG_DATA, useValue: [] },
+        {
+            provide: MAT_HAMMER_OPTIONS,
+            useValue: {
+              cssProps: {
+                userSelect: true
+              }
+            },
+          },
     ],
     exports: [
     ],

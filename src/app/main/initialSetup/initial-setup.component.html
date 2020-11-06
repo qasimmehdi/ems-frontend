@@ -159,13 +159,12 @@
                                     <mat-error *ngIf="accountInfo.get('password').hasError('required')">
                                         Password is required
                                     </mat-error>
-                                    <mat-error *ngIf="accountInfo.get('password').hasError('pattern')">
-                                        Must include minimum 8 characters, one uppercase character, one lowercase
-                                        character, one number and one special character
+                                    <mat-error *ngIf="accountInfo.get('password').hasError('minlength')">
+                                        Password must be atleast 8 characters
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <div fxLayoutAlign="end">
+                            <div fxLayoutAlign="end" style="padding-top: 20px;">
                                 <button class="mx-8" mat-raised-button color="primary" matStepperPrevious>
                                     Back
                                 </button>
@@ -329,13 +328,12 @@
                                     <mat-error *ngIf="accountInfo.get('password').hasError('required')">
                                         Password is required
                                     </mat-error>
-                                    <mat-error *ngIf="accountInfo.get('password').hasError('pattern')">
-                                        Must include minimum 8 characters, one uppercase character, one lowercase
-                                        character, one number and one special character
+                                    <mat-error *ngIf="accountInfo.get('password').hasError('minlength')">
+                                        Password must be atleast 8 characters
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <div fxLayoutAlign="end">
+                            <div fxLayoutAlign="end" style="padding-top: 20px;">
                                 <button class="mx-8" mat-raised-button color="primary" matStepperPrevious>
                                     Back
                                 </button>

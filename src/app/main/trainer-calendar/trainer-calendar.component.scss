@@ -1,6 +1,12 @@
 @import "src/@fuse/scss/fuse";
 
 #trainer-cal {
+    .hide-tab{
+        display: none;
+    }
+    .show-tab{
+        display: flex;
+    }
     .top-bg {
         @include media-breakpoint("lt-md") {
             height: 256px;

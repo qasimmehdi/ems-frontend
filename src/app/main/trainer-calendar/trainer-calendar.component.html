@@ -1,7 +1,7 @@
 <div id="trainer-cal" class="page-layout carded fullwidth inner-scroll">
     <div class="top-bg accent"></div>
     <div class="center">
-        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+        <div *ngIf="!calendarExpanded" class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
             fxLayoutAlign.gt-sm="space-between center">
             <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
@@ -80,7 +80,7 @@
         </div>
 
         <div class="content-card" fusePerfectScrollbar [fusePerfectScrollbarOptions]="{'suppressScrollX': true}">
-            <mwl-demo-component>Loading...</mwl-demo-component>
+            <mwl-demo-component (newItemEvent)="resizeScreen($event)">Loading...</mwl-demo-component>
         </div>
     </div>
 </div>

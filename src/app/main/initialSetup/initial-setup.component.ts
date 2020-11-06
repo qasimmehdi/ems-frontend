@@ -68,7 +68,7 @@ export class InitialSetup implements OnInit, OnDestroy {
                     this._snackBar.open("System setup is already completed", 'Ok', {
                         duration: 2000,
                     });
-                    this.router.navigateByUrl('login');
+                    //this.router.navigateByUrl('login');
                 }
             })
             .catch(err => console.log(err));
@@ -162,7 +162,7 @@ export class InitialSetup implements OnInit, OnDestroy {
         this.accountInfo = this._formBuilder.group({
             name: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.pattern(regexes.email)]],
-            password: ['', [Validators.required, Validators.pattern(regexes.password)]],
+            password: ['', [Validators.required, Validators.minLength(8)]],
             dateOfBirth: ['', [Validators.required]],
             image: ['']
         });
@@ -187,7 +187,7 @@ export class InitialSetup implements OnInit, OnDestroy {
         console.log(this.initialResponse);
 
         this.initialService.postInitialSetup(this.initialResponse)
-            .then((resp) => {
+            .then(() => {
                 this._snackBar.open("Initial setup completed successfully", 'Ok', {
                     duration: 2000,
                 });

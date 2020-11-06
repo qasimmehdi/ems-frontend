@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { fromEvent, Observable, Subject } from 'rxjs';
@@ -9,7 +9,8 @@ import { TrainerService } from '../trainer/trainer.service';
     selector: 'trainer-calendar',
     templateUrl: './trainer-calendar.component.html',
     styleUrls: ['./trainer-calendar.component.scss'],
-    animations: fuseAnimations
+    animations: fuseAnimations,
+    encapsulation: ViewEncapsulation.None,
 })
 
 export class TrainerCalendarComponent implements OnInit, OnDestroy {
@@ -20,6 +21,7 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     selectedFilter: "1" | "2" | "5" | "10" | "" = "";
     @ViewChild('SearchInput') SearchInput: ElementRef;
     private _unsubscribeAll: Subject<any>;
+    calendarExpanded: boolean = false;
 
     constructor(
         private trainerService: TrainerService,
@@ -48,7 +50,8 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     }
 
     subscribeSearch() {
-        fromEvent(this.SearchInput.nativeElement, 'keyup')
+        try {
+            fromEvent(this.SearchInput.nativeElement, 'keyup')
             .pipe(
                 map((event: any) => {
                     return event.target.value.toLowerCase();
@@ -64,11 +67,17 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
                         map(value => this._filter(value))
                     );
             });
+        }catch{}
+
     }
 
     filterClick(buttonName: "1" | "2" | "5" | "10"): void{
         this.selectedFilter = this.selectedFilter === buttonName ? "" : buttonName;
         //console.log(this.pageIndex, this.limit);
         //this.trainerService.getPageItem(0, this.limit, this.selectedFilter);
+    }
+
+    resizeScreen(event: boolean):void{
+        this.calendarExpanded = event;
     }
 }
