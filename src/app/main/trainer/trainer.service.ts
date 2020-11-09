@@ -52,7 +52,7 @@ export class TrainerService {
   getInit() {
     return new Promise((resolve, reject) => {
       if (this.routeParams.id === undefined) {
-        this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers`)
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers/`)
           .subscribe((response: any) => {
             this.pageItem = response;
             this.onPageItemChanged.next(this.pageItem);

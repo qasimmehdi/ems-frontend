@@ -1,108 +1,119 @@
 @import "src/@fuse/scss/fuse";
 
+.selected-tl {
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.not-selected-tl {
+    border: 2px solid white;
+}
+
+.min-cell {
+    max-width: fit-content;
+}
+
 trainer-list {
-  #trainer {
-    .top-bg {
-      @include media-breakpoint("lt-md") {
-        height: 256px;
-      }
-    }
-
-    .selected{
-      border: 2px solid black;
-    }
-    .not-selected{
-      border: 2px solid white;
-    }
-
-    > .center {
-      > .header {
-        .filters {
-          max-height: 50px;
-          .search-wrapper {
-            width: 100%;
-            max-width: 480px;
-            border-radius: 28px;
-            background-color: white;
-            overflow: hidden;
-            @include mat-elevation(1);
-
-            @include media-breakpoint("xs") {
-              width: 100%;
+    #trainer {
+        .top-bg {
+            @include media-breakpoint("lt-md") {
+                height: 256px;
             }
 
-            .search {
-              width: 100%;
-              height: 48px;
-              line-height: 48px;
-              padding: 0 18px;
-
-              input {
-                width: 100%;
-                height: 48px;
-                min-height: 48px;
-                max-height: 48px;
-                padding: 0 16px;
-                border: none;
-                outline: none;
-              }
+            .avatar {
+                vertical-align: middle;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
             }
-          }
-
-          .mat-form-field {
-            max-width: 120px;
-            margin-left: 15px;
-          }
-
-          .type-selection-dropdown {
-            border: 1px solid;
-            border-radius: 50px;
-            padding: 0 20px;
-            min-width: 160px;
-          }
         }
 
-        @include media-breakpoint("lt-md") {
-          padding: 8px 0;
-          height: 192px !important;
-          min-height: 192px !important;
-          max-height: 192px !important;
+
+        >.center {
+            >.header {
+                .filters {
+                    max-height: 50px;
+
+                    .search-wrapper {
+                        width: 100%;
+                        max-width: 480px;
+                        border-radius: 28px;
+                        background-color: white;
+                        overflow: hidden;
+                        @include mat-elevation(1);
+
+                        @include media-breakpoint("xs") {
+                            width: 100%;
+                        }
+
+                        .search {
+                            width: 100%;
+                            height: 48px;
+                            line-height: 48px;
+                            padding: 0 18px;
+
+                            input {
+                                width: 100%;
+                                height: 48px;
+                                min-height: 48px;
+                                max-height: 48px;
+                                padding: 0 16px;
+                                border: none;
+                                outline: none;
+                            }
+                        }
+                    }
+
+                    .mat-form-field {
+                        max-width: 120px;
+                        margin-left: 15px;
+                    }
+
+                    .type-selection-dropdown {
+                        border: 1px solid;
+                        border-radius: 50px;
+                        padding: 0 20px;
+                        min-width: 160px;
+                    }
+                }
+
+                @include media-breakpoint("lt-md") {
+                    padding: 8px 0;
+                    height: 192px !important;
+                    min-height: 192px !important;
+                    max-height: 192px !important;
+                }
+            }
         }
-      }
-    }
-  }
-
-  .trainer-table {
-    flex: 1 1 auto;
-    height: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-
-    .mat-header-row {
-      min-height: 64px;
     }
 
-    .gym {
-      position: relative;
-      cursor: pointer;
-      height: 84px;
-    }
+    .trainer-table {
+        flex: 1 1 auto;
+        height: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
 
-    .mat-cell {
-      min-width: 0;
-      display: flex;
-      align-items: center;
-    }
+        .mat-header-row {
+            min-height: 64px;
+        }
 
-    .mat-column-active {
-      max-width: 100px;
+        .gym {
+            position: relative;
+            cursor: pointer;
+            height: 84px;
+        }
+
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
     }
-  }
 }
 
 .no-user-found {
-  height: 100vh;
-  padding: 35px;
-  text-align: center;
+    height: 100vh;
+    padding: 35px;
+    text-align: center;
 }

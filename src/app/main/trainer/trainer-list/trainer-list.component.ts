@@ -6,6 +6,7 @@ import { TrainerService } from '../trainer.service';
 import { takeUntil, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { AuthService } from 'app/main/auth.service';
+import { regexes } from 'app/main/shared/regexes';
 
 export interface gymsSort {
     name: string;
@@ -23,6 +24,7 @@ export class TrainerListComponent implements OnInit {
 
     dialogRef: any;
     displayedColumns: string[] = [
+        'profileImage',
         'name',
         'email',
         'registeredAt',
@@ -42,6 +44,7 @@ export class TrainerListComponent implements OnInit {
     sortSwitch: number = 0;
     unassignedGymOwner: boolean = false;
     searchKeyword: string = '';
+    regexesCopy = regexes;
 
     selectedFilter: "verified" | "unverified" | "rejected" | "" = "";
 

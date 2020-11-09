@@ -6,6 +6,7 @@ import { UserService } from '../user.service';
 import { takeUntil, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { AuthService } from 'app/main/auth.service';
+import { regexes } from 'app/main/shared/regexes';
 
 export interface gymsSort {
     name: string;
@@ -23,9 +24,8 @@ export class UserListComponent implements OnInit {
 
     dialogRef: any;
     displayedColumns: string[] = [
+        'profileImage',
         'name',
-        'id',
-        'phone',
         'email',
         'registeredAt',
         'active'
@@ -43,6 +43,7 @@ export class UserListComponent implements OnInit {
     isSorted: boolean = false;
     sortSwitch: number = 0;
     unassignedGymOwner: boolean = false;
+    regexesCopy = regexes;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -71,7 +72,7 @@ export class UserListComponent implements OnInit {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
                 this.noUser = false;
-                if (this.userService.pageItem && this.userService.pageItem.content.length == 0) {
+                if (this.userService.pageItem && this.userService.pageItem.content && this.userService.pageItem.content.length === 0) {
                     this.noUser = true;
                 }
                 // Assign the data to the data source for the table to render

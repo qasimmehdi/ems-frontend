@@ -21,26 +21,21 @@
         </div>
 
         <div class="content-card">
-            <mat-table class="user-table" matSort #table [dataSource]="dataSource"
-                [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+            <mat-table class="user-table" matSort #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
+                fusePerfectScrollbar>
+
+                <ng-container matColumnDef="profileImage">
+                    <mat-header-cell style="max-width: 88px;" *matHeaderCellDef></mat-header-cell>
+                    <mat-cell class="avatar-cell" *matCellDef="let user">
+                        <img [src]="regexesCopy.url.test(user.image) ? user.image : 'assets/images/avatars/profile_placeholder_male.jpg'"
+                            alt="Avatar" class="avatar" style="margin-right: 24px;">
+                    </mat-cell>
+                </ng-container>
+
                 <ng-container matColumnDef="name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>User Name</mat-header-cell>
                     <mat-cell *matCellDef="let user">
                         <p class="text-truncate">{{user.name ? user.name : '---'}}</p>
-                    </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>User ID</mat-header-cell>
-                    <mat-cell *matCellDef="let user">
-                        <p class="text-truncate">{{user.id ? user.id : '---'}}</p>
-                    </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="phone">
-                    <mat-header-cell *matHeaderCellDef>Phone #</mat-header-cell>
-                    <mat-cell *matCellDef="let user">
-                        <p class="text-truncate">{{user.phone ? user.phone : '---'}}</p>
                     </mat-cell>
                 </ng-container>
 
@@ -63,9 +58,11 @@
 
                 <ng-container matColumnDef="active">
                     <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let user"> <!-- fxHide fxShow.gt-xs -->
-                        <button mat-raised-button aria-label="More" color="accent" style="margin: 0 5px; margin-left: auto;" [routerLink]="'/users/' + user.id">
-                            More
+                    <mat-cell *matCellDef="let user">
+                        <!-- fxHide fxShow.gt-xs -->
+                        <button mat-raised-button aria-label="More" color="accent"
+                            style="margin: 0 5px; margin-left: auto;" [routerLink]="'/users/' + user.id">
+                            View Profile
                         </button>
                     </mat-cell>
                 </ng-container>

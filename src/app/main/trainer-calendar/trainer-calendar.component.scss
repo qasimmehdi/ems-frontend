@@ -1,5 +1,14 @@
 @import "src/@fuse/scss/fuse";
 
+.selected-tc {
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.not-selected-tc {
+    border: 2px solid white;
+}
+
 #trainer-cal {
     .hide-tab{
         display: none;
@@ -17,13 +26,7 @@
         min-width: 85px;
     }
 
-    .selected {
-        border: 2px solid black;
-    }
 
-    .not-selected {
-        border: 2px solid white;
-    }
 
     >.center {
         >.header {

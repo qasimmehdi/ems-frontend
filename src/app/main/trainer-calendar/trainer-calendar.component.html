@@ -1,8 +1,8 @@
 <div id="trainer-cal" class="page-layout carded fullwidth inner-scroll">
     <div class="top-bg accent"></div>
     <div class="center">
-        <div *ngIf="!calendarExpanded" class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
-            fxLayoutAlign.gt-sm="space-between center">
+        <div *ngIf="!calendarExpanded" class="header accent" fxLayout="column" fxLayoutAlign="center center"
+            fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
             <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Calendar
@@ -18,64 +18,50 @@
                     </div>
                 </div>
             </div> -->
+            <div fxLayout="row">
+                <form class="search-form">
+                    <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="search-icon">search</mat-icon>
+                        <mat-form-field floatPlaceholder="never" appearance="none" class="mat-search"
+                            variant="outlined">
+                            <input #SearchInput type="text" placeholder="Search" aria-label="search" matInput
+                                [formControl]="trainerName" [matAutocomplete]="auto" style="color: black;">
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event.option.value)">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </form>
 
-            <form class="search-form">
-                <div fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon class="search-icon">search</mat-icon>
-                    <mat-form-field floatPlaceholder="never" appearance="none" class="mat-search" variant="outlined">
-                        <input #SearchInput type="text" placeholder="Search" aria-label="search" matInput
-                            [formControl]="trainerName" [matAutocomplete]="auto"
-                            style="color: black; padding-top: 8px;">
-                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event.option.value)">
-                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                {{option}}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
-                </div>
-            </form>
 
-            <div fxLayout="row" fxLayout.lt-md="row">
-                <span class="logo-text h2 packs" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Packs
-                </span>
-                <div fxLayout="row">
-                    <button
-                     mat-raised-button
-                     class="add-product-button fuse-white mt-24 mt-md-0 pack-btn"
-                     [ngClass]="selectedFilter === '1' ? 'selected' : 'not-selected'"
-                     (click)="filterClick('1')"
-                    >
-                        <span>1 day</span>
+
+                <button mat-icon-button [matMenuTriggerFor]="packFilter" aria-label="Filter by packs">
+                    <mat-icon>filter_list</mat-icon>
+                </button>
+                <mat-menu #packFilter="matMenu">
+                    <button mat-menu-item [matMenuTriggerFor]="vertebrates">Packs</button>
+                </mat-menu>
+
+                <mat-menu #vertebrates="matMenu">
+                    <button mat-menu-item [ngClass]="selectedFilter === '1' ? 'selected-tc' : 'not-selected-tc'"
+                        (click)="filterClick('1')">
+                        1 day
                     </button>
-
-                    <button
-                     mat-raised-button
-                     class="add-product-button fuse-white mt-24 mt-md-0 mx-4 pack-btn"
-                     [ngClass]="selectedFilter === '2' ? 'selected' : 'not-selected'"
-                     (click)="filterClick('2')"
-                    >
-                        <span>2 days</span>
+                    <button mat-menu-item [ngClass]="selectedFilter === '2' ? 'selected-tc' : 'not-selected-tc'"
+                        (click)="filterClick('2')">
+                        2 days
                     </button>
-
-                    <button
-                     mat-raised-button
-                     class="add-product-button fuse-white mt-24 mt-md-0 pack-btn"
-                     [ngClass]="selectedFilter === '5' ? 'selected' : 'not-selected'"
-                     (click)="filterClick('5')"
-                    >
-                        <span>5 days</span>
+                    <button mat-menu-item [ngClass]="selectedFilter === '5' ? 'selected-tc' : 'not-selected-tc'"
+                        (click)="filterClick('5')">
+                        5 days
                     </button>
-
-                    <button
-                     mat-raised-button
-                     class="add-product-button fuse-white mt-24 mt-md-0 mx-4 pack-btn"
-                     [ngClass]="selectedFilter === '10' ? 'selected' : 'not-selected'"
-                     (click)="filterClick('10')"
-                    >
-                        <span>10 days</span>
+                    <button mat-menu-item [ngClass]="selectedFilter === '10' ? 'selected-tc' : 'not-selected-tc'"
+                        (click)="filterClick('10')">
+                        10 days
                     </button>
-                </div>
+                </mat-menu>
             </div>
         </div>
 
