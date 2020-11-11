@@ -28,7 +28,8 @@
                     <mat-header-cell style="max-width: 88px;" *matHeaderCellDef></mat-header-cell>
                     <mat-cell class="avatar-cell" *matCellDef="let user">
                         <img [src]="regexesCopy.url.test(user.image) ? user.image : 'assets/images/avatars/profile_placeholder_male.jpg'"
-                            alt="Avatar" class="avatar" style="margin-right: 24px;">
+                            alt="Avatar" class="avatar" style="margin-right: 24px;"
+                            onerror="this.src='assets/images/avatars/profile_placeholder_male.jpg';">
                     </mat-cell>
                 </ng-container>
 

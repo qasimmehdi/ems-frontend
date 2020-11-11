@@ -39,13 +39,14 @@
         </div>
 
         <div class="content-card">
-            <mat-table class="trainer-table" #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
+            <mat-table [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
                 fusePerfectScrollbar>
                 <ng-container matColumnDef="profileImage">
                     <mat-header-cell style="max-width: 88px;" *matHeaderCellDef></mat-header-cell>
                     <mat-cell class="min-cell" *matCellDef="let trainer">
                         <img [src]="regexesCopy.url.test(trainer.image) ? trainer.image : 'assets/images/avatars/profile_placeholder_male.jpg'"
-                            alt="Avatar" class="avatar" style="margin-right: 24px;">
+                            alt="Avatar" class="avatar" style="margin-right: 24px;"
+                            onerror="this.src='assets/images/avatars/profile_placeholder_male.jpg';">
                     </mat-cell>
                 </ng-container>
 

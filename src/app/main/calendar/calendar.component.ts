@@ -55,8 +55,7 @@ export class DemoComponent implements OnInit {
     events$: Observable<CalendarEvent<{ film: Film }>[]>;
 
     activeDayIsOpen: boolean = false;
-    screenResizeIcon: string = 'fullscreen';
-    @Output() newItemEvent = new EventEmitter<boolean>();
+    @Output() screenResizeEvent2 = new EventEmitter<boolean>();
 
     constructor(private http: HttpClient,
         public dialog: MatDialog
@@ -147,15 +146,8 @@ export class DemoComponent implements OnInit {
         this.view = CalendarView.Month;
     }
 
-    onResizeClick(): void {
-        if(this.screenResizeIcon === 'fullscreen'){
-            this.screenResizeIcon = 'fullscreen_exit';
-            this.newItemEvent.emit(true);
-        }
-        else{
-            this.screenResizeIcon = 'fullscreen';
-            this.newItemEvent.emit(false);
-        }
+    onResizeClick2(event: boolean): void {
+        this.screenResizeEvent2.emit(event);
     }
 
 }

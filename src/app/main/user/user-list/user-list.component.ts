@@ -95,6 +95,7 @@ export class UserListComponent implements OnInit {
         fromEvent(this.SearchInput.nativeElement, 'keyup')
             .pipe(
                 map((event: any) => {
+                    this.showSearchLoader = true;
                     return event.target.value.toLowerCase();
                 }),
                 debounceTime(1000),
@@ -103,7 +104,7 @@ export class UserListComponent implements OnInit {
             .subscribe((text: string) => {
                 console.log("Text Changing...", text);
                 this.userService.getPageItem(0, this.limit, text);
-
+                this.showSearchLoader = false;
             });
     }
 

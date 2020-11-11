@@ -1,12 +1,7 @@
-<div fxLayout="row" fxLayoutAlign="space-between none">
-  <button mat-icon-button class="back-btn" [disabled]="view === 'month'" (click)="goBack()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <button mat-icon-button class="fullscreen-btn" (click)="onResizeClick()">
-    <mat-icon>{{screenResizeIcon}}</mat-icon>
-  </button>
+<div fxLayout="row" fxLayoutAlign="end none">
+
 </div>
-<mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" (viewDateChange)="fetchEvents()"
+<mwl-demo-utils-calendar-header (screenResizeEvent)="onResizeClick2($event)" [(view)]="view" [(viewDate)]="viewDate" (viewDateChange)="fetchEvents()"
   (viewChange)="fetchEvents()">
 </mwl-demo-utils-calendar-header>
 

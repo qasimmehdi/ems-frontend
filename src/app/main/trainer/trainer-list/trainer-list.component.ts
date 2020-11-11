@@ -94,6 +94,7 @@ export class TrainerListComponent implements OnInit {
         fromEvent(this.SearchInput.nativeElement, 'keyup')
             .pipe(
                 map((event: any) => {
+                    this.showSearchLoader = true;
                     return event.target.value.toLowerCase();
                 }),
                 debounceTime(1000),
@@ -103,6 +104,7 @@ export class TrainerListComponent implements OnInit {
                 console.log("Text Changing...", text);
                 this.searchKeyword = text;
                 this.trainerService.getPageItem(0, this.limit, this.selectedFilter, text);
+                this.showSearchLoader = false;
             });
     }
 
