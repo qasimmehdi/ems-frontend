@@ -1,23 +1,15 @@
 <div id="trainer-cal" class="page-layout carded fullwidth inner-scroll">
     <div class="top-bg accent"></div>
     <div class="center">
-        <div *ngIf="!calendarExpanded" class="header accent" fxLayout="column" fxLayoutAlign="center center"
-            fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
+        <div class="header accent" [ngStyle]="calendarExpanded ? {'display': 'none'} : {'display': 'flex'}"
+            fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center">
             <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Calendar
                 </span>
             </div>
 
-            <!-- <div class="filters" fxLayout="row">
-                <div class="search-wrapper mx-32 mx-md-0">
-                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                        <mat-icon style="color: gray;">search</mat-icon>
-                        <input #SearchInput placeholder="Search">
-                        <mat-spinner *ngIf="isSearching" diameter="20"></mat-spinner>
-                    </div>
-                </div>
-            </div> -->
             <div fxLayout="row">
                 <form class="search-form">
                     <div fxFlex fxLayout="row" fxLayoutAlign="start center">
@@ -25,11 +17,20 @@
                         <mat-form-field floatPlaceholder="never" appearance="none" class="mat-search"
                             variant="outlined">
                             <input #SearchInput type="text" placeholder="Search" aria-label="search" matInput
-                                [formControl]="trainerName" [matAutocomplete]="auto" style="color: black;">
-                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event.option.value)">
-                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                    {{option}}
-                                </mat-option>
+                                [matAutocomplete]="auto" style="color: black;">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <ng-template [ngIf]="(filteredOptions | async)?.length > 0">
+                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name"
+                                        (onSelectionChange)="trainerSelected(option.id)">
+                                        {{option.name}}
+                                    </mat-option>
+                                </ng-template>
+                                <ng-template [ngIf]="noTrainersFound">
+                                    <mat-option>
+                                        No trainers found
+                                    </mat-option>
+                                </ng-template>
+
                             </mat-autocomplete>
                         </mat-form-field>
                     </div>

@@ -77,12 +77,22 @@ export class TrainerService {
   getPageItem(page: Number, size: Number, status: "verified" | "unverified" | "rejected" | "", keyword?: string) {
     return new Promise((resolve, reject) => {
       if (keyword) {
-        this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers/get-by-status?status=${status}&keyword=${keyword}&page=${page}&size=${size}`)
-          .subscribe((response: any) => {
-            this.pageItem = response;
-            this.onPageItemChanged.next(this.pageItem);
-            resolve(response);
-          }, reject);
+        if (status === "") {
+          this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers/get-by-status?keyword=${keyword}&page=${page}&size=${size}`)
+            .subscribe((response: any) => {
+              this.pageItem = response;
+              this.onPageItemChanged.next(this.pageItem);
+              resolve(response);
+            }, reject);
+        }
+        else {
+          this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers/get-by-status?status=${status}&keyword=${keyword}&page=${page}&size=${size}`)
+            .subscribe((response: any) => {
+              this.pageItem = response;
+              this.onPageItemChanged.next(this.pageItem);
+              resolve(response);
+            }, reject);
+        }
       }
       else {
         if (status != "") {
@@ -96,7 +106,7 @@ export class TrainerService {
         }
 
         else {
-          this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers?page=${page}&size=${size}`)
+          this._httpClient.get(`${BASE_URL_ACCOUNT}/trainers/?page=${page}&size=${size}`)
             .subscribe((response: any) => {
               this.pageItem = response;
               this.onPageItemChanged.next(this.pageItem);

@@ -1,9 +1,9 @@
 <div id="user" class="page-layout carded fullwidth inner-scroll">
     <div class="top-bg accent"></div>
     <div class="center">
-        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
-            fxLayoutAlign.gt-sm="space-between center">
-            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+            <div class="logo mb-xs-24" fxLayout="row" fxLayoutAlign="start center">
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     User Management
                 </span>
@@ -57,8 +57,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="active">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let user">
+                    <mat-header-cell style="max-width: 140px;" *matHeaderCellDef></mat-header-cell>
+                    <mat-cell class="min-cell" *matCellDef="let user">
                         <!-- fxHide fxShow.gt-xs -->
                         <button mat-raised-button aria-label="More" color="accent"
                             style="margin: 0 5px; margin-left: auto;" [routerLink]="'/users/' + user.id">

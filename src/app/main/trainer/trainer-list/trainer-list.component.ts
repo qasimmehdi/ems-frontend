@@ -28,6 +28,7 @@ export class TrainerListComponent implements OnInit {
         'name',
         'email',
         'registeredAt',
+        'status',
         'active'
     ];
     filter = 'my_gyms';

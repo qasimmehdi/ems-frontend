@@ -76,7 +76,8 @@ const routes: Routes = [
         AuthGuard,
         AuthService,
         { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: [] }
+        { provide: MAT_DIALOG_DATA, useValue: [] },
+        TrainerCalendarService
     ],
     exports: [
     ],

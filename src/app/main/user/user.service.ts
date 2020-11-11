@@ -76,7 +76,7 @@ export class UserService {
   getPageItem(page: Number, size: Number, keyword?: string) {
     return new Promise((resolve, reject) => {
       if (keyword) {
-        this._httpClient.get(`${BASE_URL_ACCOUNT}/clients?page=${page}&size=${size}`)
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/clients/findByName?keyword=${keyword}&page=${page}&size=${size}`)
           .subscribe((response: any) => {
             this.pageItem = response;
             this.onPageItemChanged.next(this.pageItem);
@@ -84,7 +84,7 @@ export class UserService {
           }, reject);
       }
       else {
-        this._httpClient.get(`${BASE_URL_ACCOUNT}/clients?page=${page}&size=${size}`)
+        this._httpClient.get(`${BASE_URL_ACCOUNT}/clients/?page=${page}&size=${size}`)
           .subscribe((response: any) => {
             this.pageItem = response;
             this.onPageItemChanged.next(this.pageItem);

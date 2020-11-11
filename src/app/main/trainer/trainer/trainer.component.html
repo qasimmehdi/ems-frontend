@@ -10,7 +10,7 @@
                 <div fxLayout="column" fxLayoutAlign="start start"
                     [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     <div class="h2">
-                        Trainer Profile
+                        {{trainer?.name ? trainer?.name : "N/A" }}
                     </div>
                 </div>
             </div>
@@ -19,11 +19,6 @@
         <div class="content-card" fusePerfectScrollbar>
             <div fxLayout="row" fxLayout.xs="column-reverse" fxLayoutAlign="space-between start">
                 <div class="trainer-info" fxLayout="column" fxLayoutAlign="start start">
-
-                    <div fxLayout="row" fxLayout.xs="column">
-                        <p class="p-bold">Trainer Name: </p>
-                        <p>{{trainer?.name ? trainer?.name : "N/A" }}</p>
-                    </div>
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Email: </p>
@@ -35,12 +30,18 @@
                         <p>{{trainer?.createdAt ? moment(trainer?.createdAt).format("DD/MM/YYYY") : "N/A" }}</p>
                     </div>
 
-                    <div [fxLayout]="(trainer?.certifications?.length > 0 && trainer?.certifications?.length !== undefined) ? 'column' : 'row' " fxLayout.xs="column">
+                    <div [fxLayout]="(trainer?.certifications?.length > 0 && trainer?.certifications?.length !== undefined) ? 'column' : 'row' "
+                        fxLayout.xs="column">
                         <p class="p-bold">Certifications: </p>
-                        <p *ngIf="trainer?.certifications?.length === 0 || trainer?.certifications?.length === undefined">N/A</p>
-                        <ul *ngIf="trainer?.certifications?.length > 0 || trainer?.certifications?.length !== undefined">
+                        <p
+                            *ngIf="trainer?.certifications?.length === 0 || trainer?.certifications?.length === undefined">
+                            N/A</p>
+                        <ul
+                            *ngIf="trainer?.certifications?.length > 0 || trainer?.certifications?.length !== undefined">
                             <li *ngFor="let cert of trainer?.certifications">
-                                <p [matTooltip]="cert?.trainingAssociation?.description ? cert?.trainingAssociation?.description : ''">{{cert?.trainingAssociation?.name}} - {{cert?.certificateNumber}}</p>
+                                <p
+                                    [matTooltip]="cert?.trainingAssociation?.description ? cert?.trainingAssociation?.description : ''">
+                                    {{cert?.trainingAssociation?.name}} - {{cert?.certificateNumber}}</p>
                             </li>
                         </ul>
                     </div>
@@ -70,10 +71,11 @@
                     </div>
                     <h2 *ngIf="trainer.status.toLowerCase() === 'verified'" class="status">Verified</h2>
                     <h2 *ngIf="trainer.status.toLowerCase() === 'rejected'" class="status">Rejected</h2>
+                    <h2 *ngIf="trainer.status.toLowerCase() === 'unverified'" class="status">Unverified</h2>
 
                     <div *ngIf="trainer.status.toLowerCase() === 'rejected' || trainer.status.toLowerCase() === 'unverified'"
                         fxLayout="column" fxLayoutAlign="center stretch" style="align-self: center;">
-                        <div class="awaiting">
+                        <div *ngIf="trainer.status.toLowerCase() !== 'rejected'" class="awaiting">
                             <p>Verification Status</p>
                             <p>Awaiting Verification</p>
                         </div>

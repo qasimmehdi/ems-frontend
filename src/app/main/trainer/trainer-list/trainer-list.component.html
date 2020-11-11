@@ -1,9 +1,9 @@
 <div id="trainer" class="page-layout carded fullwidth inner-scroll">
     <div class="top-bg accent"></div>
     <div class="center">
-        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
-            fxLayoutAlign.gt-sm="space-between center">
-            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+            <div class="logo mb-xs-24" fxLayout="row" fxLayoutAlign="start center">
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Trainer Management
                 </span>
@@ -73,6 +73,15 @@
                     </mat-cell>
                 </ng-container>
 
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer">
+                        <p class="text-truncate">
+                            {{trainer.status ? trainer.status : '---'}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
                 <ng-container matColumnDef="active">
                     <mat-header-cell style="max-width: 64px;" *matHeaderCellDef></mat-header-cell>
                     <mat-cell class="min-cell" *matCellDef="let trainer">
@@ -86,7 +95,7 @@
                             </button>
                             <button mat-menu-item [routerLink]="'/calendar/' + trainer.id">
                                 <mat-icon>date_range</mat-icon>
-                                <span>Calendar</span>
+                                <span>Schedule</span>
                             </button>
                         </mat-menu>
                     </mat-cell>

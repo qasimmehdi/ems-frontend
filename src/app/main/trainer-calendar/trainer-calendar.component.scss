@@ -10,7 +10,7 @@
 }
 
 #trainer-cal {
-    .hide-tab{
+    .hide-search{
         display: none;
     }
     .show-tab{
@@ -26,7 +26,9 @@
         min-width: 85px;
     }
 
-
+    .mat-form-field-infix {
+        padding-top: 3px;
+    }
 
     >.center {
         >.header {

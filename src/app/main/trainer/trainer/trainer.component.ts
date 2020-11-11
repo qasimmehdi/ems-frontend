@@ -115,9 +115,12 @@ export const nameValidator: ValidatorFn = (control: AbstractControl): Validation
     return { 'blankName': true };
 };
 
-export const trainerObjectModifier = (data: any, status: "VERIFIED" | "UNVERIFIED" | "REJECTED"): any => {
-    const modifiedData: any = { ...data };
-    modifiedData.status = status;
+export const trainerObjectModifier = (data: any, status: "VERIFIED" | "UNVERIFIED" | "REJECTED", comment?: string): any => {
+    const modifiedData: any = {
+        statusTo: data.authId,
+        status,
+        comment
+    };
     return modifiedData;
 }
 

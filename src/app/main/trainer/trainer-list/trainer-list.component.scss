@@ -15,10 +15,15 @@
 
 trainer-list {
     #trainer {
-        .top-bg {
-            @include media-breakpoint("lt-md") {
-                height: 256px;
+        .mb-xs-24{
+            @include media-breakpoint("xs") {
+                padding-bottom: 24px;
             }
+        }
+        .top-bg {
+            /* @include media-breakpoint("lt-md") {
+                height: 256px;
+            } */
 
             .avatar {
                 vertical-align: middle;
@@ -77,7 +82,7 @@ trainer-list {
                     }
                 }
 
-                @include media-breakpoint("lt-md") {
+                @include media-breakpoint("xs") {
                     padding: 8px 0;
                     height: 192px !important;
                     min-height: 192px !important;

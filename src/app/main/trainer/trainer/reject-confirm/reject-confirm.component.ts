@@ -10,19 +10,19 @@ import { trainerObjectModifier } from "../trainer.component";
     templateUrl: './reject-confirm.component.html',
     styleUrls: ['./reject-confirm.component.scss'],
 })
-export class RejectConfirmDialog{
+export class RejectConfirmDialog {
 
     constructor(
         public dialogRef: MatDialogRef<RejectConfirmDialog>,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private trainerService: TrainerService,
         private _snackBar: MatSnackBar,
-        ) { }
+    ) { }
 
     onSubmit(): void {
         //api call
-        //console.log(this.data.comment);
-        this.trainerService.putChangeStatus(trainerObjectModifier(this.data.user, "REJECTED"))
+        console.log('comment', this.data.comment);
+        this.trainerService.putChangeStatus(trainerObjectModifier(this.data.user, "REJECTED", this.data.comment))
             .then((resp: any) => {
                 this._snackBar.open("Status changed successfully", 'Ok', {
                     duration: 3000,
