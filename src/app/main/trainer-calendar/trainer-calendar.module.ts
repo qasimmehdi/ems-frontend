@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { TrainerCalendarComponent } from './trainer-calendar.component';
 import { TrainerCalendarService } from './trainer-calendar.service';
 import { DemoModule } from '../calendar/calendar.module';
+import { ToolbarModule } from 'app/layout/components/toolbar/toolbar.module';
 
 const routes: Routes = [
     {
@@ -65,7 +66,7 @@ const routes: Routes = [
         FuseSharedModule,
         FuseWidgetModule,
         MatDialogModule,
-        DemoModule
+        DemoModule,
     ],
     providers: [
         {

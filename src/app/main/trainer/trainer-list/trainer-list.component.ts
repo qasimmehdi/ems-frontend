@@ -84,6 +84,7 @@ export class TrainerListComponent implements OnInit {
         this.dataSource.sortingDataAccessor = (item, property) => {
             switch (property) {
                 case 'registeredAt': return new Date(item.createdAt);
+                case 'name': return item.name.toLowerCase();
                 default: return item[property];
             }
         };

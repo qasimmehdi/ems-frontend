@@ -33,36 +33,40 @@
 
                             </mat-autocomplete>
                         </mat-form-field>
+                        <mat-spinner diameter="20" style="margin-right: 15px;"
+                            [ngStyle]="showSearchLoader ? {'visibility': 'visible'} : {'visibility': 'hidden'}">
+                        </mat-spinner>
                     </div>
                 </form>
 
 
+                <ng-template *ngIf="false">
+                    <button mat-icon-button [matMenuTriggerFor]="packFilter" aria-label="Filter by packs">
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
+                    <mat-menu #packFilter="matMenu">
+                        <button mat-menu-item [matMenuTriggerFor]="vertebrates">Packs</button>
+                    </mat-menu>
 
-                <button mat-icon-button [matMenuTriggerFor]="packFilter" aria-label="Filter by packs">
-                    <mat-icon>filter_list</mat-icon>
-                </button>
-                <mat-menu #packFilter="matMenu">
-                    <button mat-menu-item [matMenuTriggerFor]="vertebrates">Packs</button>
-                </mat-menu>
-
-                <mat-menu #vertebrates="matMenu">
-                    <button mat-menu-item [ngClass]="selectedFilter === '1' ? 'selected-tc' : 'not-selected-tc'"
-                        (click)="filterClick('1')">
-                        1 day
-                    </button>
-                    <button mat-menu-item [ngClass]="selectedFilter === '2' ? 'selected-tc' : 'not-selected-tc'"
-                        (click)="filterClick('2')">
-                        2 days
-                    </button>
-                    <button mat-menu-item [ngClass]="selectedFilter === '5' ? 'selected-tc' : 'not-selected-tc'"
-                        (click)="filterClick('5')">
-                        5 days
-                    </button>
-                    <button mat-menu-item [ngClass]="selectedFilter === '10' ? 'selected-tc' : 'not-selected-tc'"
-                        (click)="filterClick('10')">
-                        10 days
-                    </button>
-                </mat-menu>
+                    <mat-menu #vertebrates="matMenu">
+                        <button mat-menu-item [ngClass]="selectedFilter === '1' ? 'selected-tc' : 'not-selected-tc'"
+                            (click)="filterClick('1')">
+                            1 day
+                        </button>
+                        <button mat-menu-item [ngClass]="selectedFilter === '2' ? 'selected-tc' : 'not-selected-tc'"
+                            (click)="filterClick('2')">
+                            2 days
+                        </button>
+                        <button mat-menu-item [ngClass]="selectedFilter === '5' ? 'selected-tc' : 'not-selected-tc'"
+                            (click)="filterClick('5')">
+                            5 days
+                        </button>
+                        <button mat-menu-item [ngClass]="selectedFilter === '10' ? 'selected-tc' : 'not-selected-tc'"
+                            (click)="filterClick('10')">
+                            10 days
+                        </button>
+                    </mat-menu>
+                </ng-template>
             </div>
         </div>
 

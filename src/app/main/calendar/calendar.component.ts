@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
@@ -12,13 +12,16 @@ import {
     startOfDay,
     endOfDay,
     format,
-    addHours
+    addHours,
 } from 'date-fns';
 import { Observable } from 'rxjs';
 import { colors } from './utils/colors';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventModal } from './event-modal/event-modal.component';
 import { Output, EventEmitter } from '@angular/core';
+import { environment } from 'environments/environment';
+import * as moment from 'moment';
+import { CalendarService } from './calendar.service';
 
 interface Film {
     id: number;
@@ -56,16 +59,21 @@ export class DemoComponent implements OnInit {
 
     activeDayIsOpen: boolean = false;
     @Output() screenResizeEvent2 = new EventEmitter<boolean>();
+    BASE_URL_APP = environment.apiUrl;
+    @Input() trainerId: string;
 
     constructor(private http: HttpClient,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private calendarService: CalendarService
     ) { }
 
     ngOnInit(): void {
-        this.fetchEvents();
+        this.fetchEvents(this.trainerId);
+        this.calendarService.getTrainerSchedule('5a9d4da7-20e6-406a-af3a-833f2cc804a3',
+        1604170800, 1606762799).then(res => console.log(res));
     }
 
-    fetchEvents(): void {
+    fetchEvents(trainerId: string): void {
         const getStart: any = {
             month: startOfMonth,
             week: startOfWeek,
@@ -77,6 +85,10 @@ export class DemoComponent implements OnInit {
             week: endOfWeek,
             day: endOfDay,
         }[this.view];
+
+        const start = moment(getStart(this.viewDate)).unix();
+        const end = moment(getEnd(this.viewDate)).unix();
+        console.log(start, end);
 
         const params = new HttpParams()
             .set(
@@ -128,10 +140,6 @@ export class DemoComponent implements OnInit {
 
     eventClicked(event: CalendarEvent<{ film: Film }>): void {
         this.openEventModal();
-        /* window.open(
-            `https://www.themoviedb.org/movie/${event.meta.film.id}`,
-            '_blank'
-        ); */
     }
 
     openEventModal(): void {

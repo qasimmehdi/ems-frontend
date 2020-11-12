@@ -21,8 +21,8 @@
         </div>
 
         <div class="content-card">
-            <mat-table class="user-table" matSort #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                fusePerfectScrollbar>
+            <mat-table [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}" class="user-table" matSort #table
+                [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
 
                 <ng-container matColumnDef="profileImage">
                     <mat-header-cell style="max-width: 88px;" *matHeaderCellDef></mat-header-cell>

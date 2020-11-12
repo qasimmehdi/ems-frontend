@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
+import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.component';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { TrainerCalendarService } from './trainer-calendar.service';
@@ -26,6 +27,7 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     private _unsubscribeAll: Subject<any>;
     calendarExpanded: boolean = false;
     noTrainersFound: boolean = false;
+    showSearchLoader: boolean = false;
 
     constructor(
         private trainerCalendarService: TrainerCalendarService,
@@ -60,6 +62,7 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
                 )
                 .subscribe((text: string) => {
                     if (text !== "") {
+                        this.showSearchLoader = true;
                         this.trainerCalendarService.getTrainersByName(text)
                             .then((res: any) => {
                                 this.options = [];
@@ -75,9 +78,11 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
                                     );
                             })
                             .catch(err => console.log(err))
+                            .finally(() => { this.showSearchLoader = false; });
                     } else {
                         this.options = [];
                         this.filteredOptions = new Observable<IOptions[]>();
+                        this.noTrainersFound = false;
                     }
 
                 });

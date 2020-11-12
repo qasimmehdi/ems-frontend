@@ -10,12 +10,18 @@
 }
 
 #trainer-cal {
-    .hide-search{
+    .mat-progress-spinner svg {
+        position: inherit;
+    }
+
+    .hide-search {
         display: none;
     }
-    .show-tab{
+
+    .show-tab {
         display: flex;
     }
+
     .top-bg {
         @include media-breakpoint("lt-md") {
             height: 256px;
