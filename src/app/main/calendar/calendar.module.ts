@@ -8,7 +8,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import * as material from '@angular/material';
 import { FuseConfirmDialogModule, FuseWidgetModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
 import { EventModal } from './event-modal/event-modal.component';
 
 @NgModule({
@@ -36,6 +36,7 @@ import { EventModal } from './event-modal/event-modal.component';
         FuseWidgetModule,
         MatDialogModule,
         CommonModule,
+        MatProgressSpinnerModule,
         HttpClientModule,
         CalendarModule.forRoot({
             provide: DateAdapter,

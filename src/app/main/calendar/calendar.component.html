@@ -1,14 +1,17 @@
 <div fxLayout="row" fxLayoutAlign="end none">
 
 </div>
-<mwl-demo-utils-calendar-header (screenResizeEvent)="onResizeClick2($event)" [(view)]="view" [(viewDate)]="viewDate" (viewDateChange)="fetchEvents()"
-  (viewChange)="fetchEvents()">
+<mwl-demo-utils-calendar-header (screenResizeEvent)="onResizeClick2($event)" [(view)]="view" [(viewDate)]="viewDate"
+  (viewDateChange)="fetchEvents()" (viewChange)="fetchEvents()">
 </mwl-demo-utils-calendar-header>
 
 <ng-template #loading>
-  <div class="text-center">
-    <i class="fas fa-spin fa-spinner fa-5x"></i> <br />
+  <div *ngIf="trainerId" class="loading-div">
+    <mat-spinner color="accent" diameter="40"></mat-spinner> <br />
     Loading events...
+  </div>
+  <div *ngIf="!trainerId" class="loading-div">
+    Please select a trainer
   </div>
 </ng-template>
 

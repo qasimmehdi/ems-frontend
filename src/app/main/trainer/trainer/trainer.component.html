@@ -73,7 +73,7 @@
                     <h2 *ngIf="trainer.status.toLowerCase() === 'rejected'" class="status">Rejected</h2>
                     <h2 *ngIf="trainer.status.toLowerCase() === 'unverified'" class="status">Unverified</h2>
 
-                    <div *ngIf="trainer.status.toLowerCase() === 'rejected' || trainer.status.toLowerCase() === 'unverified'"
+                    <div *ngIf="trainer.status.toLowerCase() === 'unverified'"
                         fxLayout="column" fxLayoutAlign="center stretch" style="align-self: center;">
                         <div *ngIf="trainer.status.toLowerCase() !== 'rejected'" class="awaiting">
                             <p>Verification Status</p>

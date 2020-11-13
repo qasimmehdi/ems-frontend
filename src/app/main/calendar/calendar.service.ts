@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
+import { from, Observable } from 'rxjs';
 
 const BASE_URL_ACCOUNT = environment.apiUrl;
 
@@ -12,8 +13,8 @@ export class CalendarService {
 
     constructor(private _httpClient: HttpClient) { }
 
-    getTrainerSchedule(trainerId: string, startTime, endTime) {
-        return new Promise((resolve) => {
+    getTrainerSchedule(trainerId: string, startTime, endTime): Observable<any> {
+        const Resp = from(new Promise((resolve) => {
             const promises = [];
             let data = [];
             for (let i = startTime + 1; i < endTime; i += 86400) {
@@ -27,10 +28,10 @@ export class CalendarService {
             }
             Promise.all(promises)
                 .then(() => {
-                    console.log(data);
                     resolve(data);
                 })
-        })
+        }))
+        return Resp;
 
     }
 

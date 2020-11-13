@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
-import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.component';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { TrainerCalendarService } from './trainer-calendar.service';
@@ -28,15 +28,19 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     calendarExpanded: boolean = false;
     noTrainersFound: boolean = false;
     showSearchLoader: boolean = false;
+    selectedTrainerId: string;
+    idFromRoute$: Observable<Params>;
 
     constructor(
         private trainerCalendarService: TrainerCalendarService,
+        private route: ActivatedRoute
     ) {
         this._unsubscribeAll = new Subject();
     }
 
     ngOnInit() {
         this.subscribeSearch();
+        this.idFromRoute$ = this.route.params;
     }
 
     ngOnDestroy = (): void => {
@@ -103,6 +107,6 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     }
 
     trainerSelected(trainerId: string): void {
-        console.log(trainerId);
+        this.selectedTrainerId = trainerId;
     }
 }

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
@@ -11,8 +11,7 @@ import {
     endOfWeek,
     startOfDay,
     endOfDay,
-    format,
-    addHours,
+    addMinutes
 } from 'date-fns';
 import { Observable } from 'rxjs';
 import { colors } from './utils/colors';
@@ -22,23 +21,9 @@ import { Output, EventEmitter } from '@angular/core';
 import { environment } from 'environments/environment';
 import * as moment from 'moment';
 import { CalendarService } from './calendar.service';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
-interface Film {
-    id: number;
-    title: string;
-    release_date: string;
-}
-
-function getTimezoneOffsetString(date: Date): string {
-    const timezoneOffset = date.getTimezoneOffset();
-    const hoursOffset = String(
-        Math.floor(Math.abs(timezoneOffset / 60))
-    ).padStart(2, '0');
-    const minutesOffset = String(Math.abs(timezoneOffset % 60)).padEnd(2, '0');
-    const direction = timezoneOffset > 0 ? '-' : '+';
-
-    return `T00:00:00${direction}${hoursOffset}:${minutesOffset}`;
-}
 
 @Component({
     selector: 'mwl-demo-component',
@@ -50,30 +35,32 @@ function getTimezoneOffsetString(date: Date): string {
     encapsulation: ViewEncapsulation.None
 })
 
-export class DemoComponent implements OnInit {
+export class DemoComponent implements OnChanges {
     view: CalendarView = CalendarView.Month;
 
     viewDate: Date = new Date();
 
-    events$: Observable<CalendarEvent<{ film: Film }>[]>;
+    events$: Observable<CalendarEvent<any>[]>;
 
     activeDayIsOpen: boolean = false;
+    isLoading: boolean = false;
     @Output() screenResizeEvent2 = new EventEmitter<boolean>();
-    BASE_URL_APP = environment.apiUrl;
     @Input() trainerId: string;
 
-    constructor(private http: HttpClient,
-        public dialog: MatDialog,
-        private calendarService: CalendarService
+    constructor(public dialog: MatDialog,
+        private calendarService: CalendarService,
+        private _snackBar: MatSnackBar,
     ) { }
 
-    ngOnInit(): void {
-        this.fetchEvents(this.trainerId);
-        this.calendarService.getTrainerSchedule('5a9d4da7-20e6-406a-af3a-833f2cc804a3',
-        1604170800, 1606762799).then(res => console.log(res));
+    ngOnChanges() {
+        if (this.trainerId) {
+            this.fetchEvents();
+            console.log('trainer changed', this.trainerId);
+        }
     }
 
-    fetchEvents(trainerId: string): void {
+    fetchEvents(): void {
+        this.isLoading = true;
         const getStart: any = {
             month: startOfMonth,
             week: startOfWeek,
@@ -88,42 +75,38 @@ export class DemoComponent implements OnInit {
 
         const start = moment(getStart(this.viewDate)).unix();
         const end = moment(getEnd(this.viewDate)).unix();
-        console.log(start, end);
 
-        const params = new HttpParams()
-            .set(
-                'primary_release_date.gte',
-                format(getStart(this.viewDate), 'YYYY-MM-DD')
-            )
-            .set(
-                'primary_release_date.lte',
-                format(getEnd(this.viewDate), 'YYYY-MM-DD')
-            )
-            .set('api_key', '0ec33936a68018857d727958dca1424f');
-        console.log(format(getStart(this.viewDate), 'YYYY-MM-DD'));
-
-        this.events$ = this.http
-            .get('https://api.themoviedb.org/3/discover/movie', { params })
+        this.events$ = this.calendarService.getTrainerSchedule(this.trainerId,
+            start, end)
             .pipe(
-                map(({ results }: { results: Film[] }) => {
-                    return results.map((film: Film) => {
-                        return {
-                            title: film.title,
-                            start: (
-                                addHours(film.release_date + getTimezoneOffsetString(this.viewDate), 6)
-                            ),
+                map((results) => {
+                    console.log(results);
+                    if (results.length === 0) {
+                        this._snackBar.open('No events in the selected period', 'Ok', {
+                            duration: 3000,
+                        });
+                    }
+                    return results.map((appointment) => {
+                        const tempStartDate = new Date(appointment.startDate * 1000);
+                        const data = {
+                            title: moment(tempStartDate).format('LT'),
+                            start: tempStartDate,
+                            end: addMinutes(tempStartDate, 30),
                             color: colors.yellow,
                             allDay: false,
                             meta: {
-                                film,
+                                appointment,
                             },
                         };
+                        console.log(data);
+                        return data;
                     });
                 })
             );
+            this.isLoading = false;
     }
 
-    dayClicked({ date, events, }: { date: Date; events: CalendarEvent<{ film: Film }>[]; }): void {
+    dayClicked({ date, events, }: { date: Date; events: CalendarEvent<any>[]; }): void {
         if (isSameMonth(date, this.viewDate)) {
             if (
                 (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -138,15 +121,15 @@ export class DemoComponent implements OnInit {
         }
     }
 
-    eventClicked(event: CalendarEvent<{ film: Film }>): void {
-        this.openEventModal();
+    eventClicked(event: CalendarEvent<any>): void {
+        this.openEventModal(event);
     }
 
-    openEventModal(): void {
+    openEventModal(event: CalendarEvent<any>): void {
         const dialogRef = this.dialog.open(EventModal, {
             width: '420px',
-            autoFocus: false
-            //data: { name: this.name, animal: this.animal }
+            autoFocus: false,
+            data: { ...event.meta.appointment }
         });
     }
 

@@ -11,3 +11,10 @@ mwl-calendar-month-view {
 .back-btn:focus{
     outline: none;
 }
+
+.loading-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
