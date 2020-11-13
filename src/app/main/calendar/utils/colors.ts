@@ -11,4 +11,12 @@ export const colors: any = {
       primary: '#e3bc08',
       secondary: '#FDF1BA',
     },
+    green: {
+      primary: "#24C768",
+      secondary: "#24C768"
+    },
+    gray: {
+      primary: "rgba(0, 0, 0, 0.12)",
+      secondary: "rgba(0, 0, 0, 0.12)"
+    }
   };

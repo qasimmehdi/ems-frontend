@@ -80,7 +80,6 @@ export class DemoComponent implements OnChanges {
             start, end)
             .pipe(
                 map((results) => {
-                    console.log(results);
                     if (results.length === 0) {
                         this._snackBar.open('No events in the selected period', 'Ok', {
                             duration: 3000,
@@ -89,16 +88,15 @@ export class DemoComponent implements OnChanges {
                     return results.map((appointment) => {
                         const tempStartDate = new Date(appointment.startDate * 1000);
                         const data = {
-                            title: moment(tempStartDate).format('LT'),
+                            title: moment(tempStartDate).format('LT')+ ' | ' + appointment.status,
                             start: tempStartDate,
                             end: addMinutes(tempStartDate, 30),
-                            color: colors.yellow,
+                            color: this.calculateColor(appointment.status),
                             allDay: false,
                             meta: {
                                 appointment,
                             },
                         };
-                        console.log(data);
                         return data;
                     });
                 })
@@ -126,10 +124,10 @@ export class DemoComponent implements OnChanges {
     }
 
     openEventModal(event: CalendarEvent<any>): void {
-        const dialogRef = this.dialog.open(EventModal, {
+        this.dialog.open(EventModal, {
             width: '420px',
             autoFocus: false,
-            data: { ...event.meta.appointment }
+            data: { id: event.meta.appointment.id }
         });
     }
 
@@ -139,6 +137,18 @@ export class DemoComponent implements OnChanges {
 
     onResizeClick2(event: boolean): void {
         this.screenResizeEvent2.emit(event);
+    }
+
+    calculateColor(status: string): string{
+        if (status === "SCHEDULED") {
+            return colors.gray;
+        }
+        else if (status === "COMPLETED") {
+            return colors.green;
+        }
+        else {
+            return colors.yellow;
+        }
     }
 
 }
