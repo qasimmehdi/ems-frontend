@@ -30,7 +30,7 @@ export class EventModal {
         this.getAppointmentDetails(data.id)
             .then((res: any) => {
                 this.time = moment(res.appointmentStartDate * 1000).format('LT');
-                this.date = moment(res.appointmentStartDate * 1000).format('DD/MM/YYYY');
+                this.date = moment(res.appointmentStartDate * 1000).format('LL');
                 this.status = res.appointmentStatus;
                 this.clientName = res.appUser.name;
                 this.clientId = res.appUser.id;

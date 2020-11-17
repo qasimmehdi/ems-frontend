@@ -77,7 +77,7 @@ const appRoutes: Routes = [
         ForgetPasswordModule,
         TeamsModule,
         UsersModule,
-        //ReportedModule,
+        ReportedModule,
         TrainerCalendarModule,
         CalendarModule.forRoot({
             provide: DateAdapter,

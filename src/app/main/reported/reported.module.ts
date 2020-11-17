@@ -11,6 +11,7 @@ import { AuthGuard } from '../auth-guard.service';
 import { InterceptorService } from '../interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { CommentModal } from './reported-list/comment-modal';
 
 const routes: Routes = [
     {
@@ -26,6 +27,7 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         ReportedListComponent,
+        CommentModal
     ],
     imports: [
         CommonModule,
@@ -53,7 +55,7 @@ const routes: Routes = [
         FuseConfirmDialogModule,
         FuseSharedModule,
         FuseWidgetModule,
-        MatDialogModule
+        MatDialogModule,
     ],
     providers: [
         {
@@ -68,7 +70,7 @@ const routes: Routes = [
     ],
     exports: [
     ],
-    entryComponents: [],
+    entryComponents: [CommentModal],
 })
 export class ReportedModule {
 }

@@ -13,6 +13,7 @@ import { trainerObjectModifier } from "../trainer.component";
 export class VerificationDialog {
 
     comment: string;
+    disableButtons: boolean = false;
 
     constructor(
         public dialog: MatDialog,
@@ -28,6 +29,7 @@ export class VerificationDialog {
     }
 
     onVerify(): void {
+        this.disableButtons = true;
         console.log("application vrified");
         this.trainerService.putChangeStatus(trainerObjectModifier(this.data.user, "VERIFIED"))
             .then((resp: any) => {
@@ -50,6 +52,7 @@ export class VerificationDialog {
                 }
             })
             .finally(() => {
+                this.disableButtons = false;
                 this.dialogRef.close(this.data);
             })
     }

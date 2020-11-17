@@ -1,8 +1,8 @@
 <div id="reported" class="page-layout carded fullwidth inner-scroll">
     <div class="top-bg accent"></div>
     <div class="center">
-        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
-            fxLayoutAlign.gt-sm="space-between center">
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
             <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Reported Users
@@ -19,53 +19,55 @@
                 </div>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="stretch">
-                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
-                    <span>Reported</span>
-                </button>
-
-                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
-                    <span>Blocked</span>
-                </button>
-
-                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
-                    <span>Suspended</span>
-                </button>
-                <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0 mx-4">
-                    <span>All</span>
-                </button>
+            <div style="max-height: 65px;" fxLayout="row">
+                <mat-form-field class="filter-feild" appearance="outline">
+                    <mat-select [value]="filters[3]" (selectionChange)="filterChange($event)">
+                        <mat-option *ngFor="let filter of filters" [value]="filter">
+                            {{filter.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
-
         <div class="content-card">
-            <mat-table *ngIf="!noUser" class="reported-table" #table [dataSource]="dataSource"
-                [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+            <mat-table [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}" class="reported-table" #table
+                [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar matSort>
+                <ng-container matColumnDef="profileImage">
+                    <mat-header-cell style="max-width: 88px;" *matHeaderCellDef></mat-header-cell>
+                    <mat-cell class="min-cell" *matCellDef="let trainer">
+                        <img [src]="regexesCopy.url.test(trainer.image) ? trainer.image : 'assets/images/avatars/profile_placeholder_male.jpg'"
+                            alt="Avatar" class="avatar" style="margin-right: 24px;"
+                            onerror="this.src='assets/images/avatars/profile_placeholder_male.jpg';">
+                    </mat-cell>
+                </ng-container>
+
                 <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
                     <mat-cell *matCellDef="let trainer">
                         <p class="text-truncate">{{trainer.name ? trainer.name : '---'}}</p>
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="type">
-                    <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
                     <mat-cell *matCellDef="let trainer">
                         <p class="text-truncate">
-                            {{trainer.type ? trainer.type : '---'}}</p>
+                            {{trainer.type ? trainer.type : '---'}}
+                        </p>
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="comment">
-                    <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
-                    <mat-cell *matCellDef="let trainer">
-                        <p class="text-truncate">
-                            {{trainer.comment ? trainer.comment : '---'}}
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Comment</mat-header-cell>
+                    <mat-cell *matCellDef="let trainer" (click)="openModal(comment)" style="cursor: pointer;">
+                        <p class="text-truncate" [matTooltip]="trainer.comment ? trainer.comment : comment">
+                            {{trainer.comment ? trainer.comment : comment}}
                         </p>
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="status">
-                    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
                     <mat-cell *matCellDef="let trainer">
                         <p class="text-truncate">
                             {{trainer.status ? trainer.status : '---'}}
@@ -73,16 +75,34 @@
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="profile">
-                    <mat-header-cell *matHeaderCellDef class="action-head"></mat-header-cell>
-                    <mat-cell *matCellDef="let trainer" class="action-column">
-                        <!-- fxHide fxShow.gt-xs -->
-                        <button mat-raised-button aria-label="Profile" color="accent">
-                            Profile
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef style="max-width: 64px;"></mat-header-cell>
+                    <mat-cell class="min-cell" *matCellDef="let trainer">
+                        <button mat-icon-button [matMenuTriggerFor]="listActionsMenu" aria-label="More actions menu">
+                            <mat-icon>more_vert</mat-icon>
                         </button>
-                        <button mat-raised-button aria-label="Block" color="accent">
-                            Block
-                        </button>
+                        <mat-menu #listActionsMenu="matMenu">
+                            <button mat-menu-item [routerLink]="'/trainers/' + trainer.id">
+                                <mat-icon>account_circle</mat-icon>
+                                <span>Profile</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>block</mat-icon>
+                                <span>Block</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>remove_circle_outline</mat-icon>
+                                <span>Suspend</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>check_circle_outline</mat-icon>
+                                <span>Un-block</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>check_circle_outline</mat-icon>
+                                <span>Activate</span>
+                            </button>
+                        </mat-menu>
                     </mat-cell>
                 </ng-container>
 

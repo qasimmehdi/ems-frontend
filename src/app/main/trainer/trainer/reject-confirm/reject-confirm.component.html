@@ -9,7 +9,7 @@
         <textarea matInput [(ngModel)]="data.comment"></textarea>
     </mat-form-field>
     <div fxLayout="row" fxLayoutAlign="space-evenly center">
-        <button mat-raised-button color="accent" (click)="onNoClick()">Cancel</button>
-        <button mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
+        <button [disabled]="disableButtons" mat-raised-button color="accent" (click)="onNoClick()">Cancel</button>
+        <button [disabled]="disableButtons" mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
     </div>
 </div>

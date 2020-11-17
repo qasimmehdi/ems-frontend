@@ -17,7 +17,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
-    "git-push-dev": "git add . && read -p \"Enter commit message : \" msg && git commit -m \"$msg\" && git push origin dev"
+    "gacp-dev": "git add . && read -p \"Enter commit message : \" msg && git commit -m \"$msg\" && git push origin dev"
   },
   "private": true,
   "dependencies": {

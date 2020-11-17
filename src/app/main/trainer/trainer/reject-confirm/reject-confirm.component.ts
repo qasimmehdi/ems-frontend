@@ -12,6 +12,8 @@ import { trainerObjectModifier } from "../trainer.component";
 })
 export class RejectConfirmDialog {
 
+    disableButtons: boolean = false;
+
     constructor(
         public dialogRef: MatDialogRef<RejectConfirmDialog>,
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -20,7 +22,7 @@ export class RejectConfirmDialog {
     ) { }
 
     onSubmit(): void {
-        //api call
+        this.disableButtons = true;
         console.log('comment', this.data.comment);
         this.trainerService.putChangeStatus(trainerObjectModifier(this.data.user, "REJECTED", this.data.comment))
             .then((resp: any) => {
@@ -43,6 +45,7 @@ export class RejectConfirmDialog {
                 }
             })
             .finally(() => {
+                this.disableButtons = false;
                 this.dialogRef.close(this.data);
             })
     }
