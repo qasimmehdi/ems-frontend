@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import {
@@ -15,14 +14,12 @@ import {
 } from 'date-fns';
 import { Observable } from 'rxjs';
 import { colors } from './utils/colors';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { EventModal } from './event-modal/event-modal.component';
 import { Output, EventEmitter } from '@angular/core';
-import { environment } from 'environments/environment';
 import * as moment from 'moment';
 import { CalendarService } from './calendar.service';
 import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
 
 
 @Component({

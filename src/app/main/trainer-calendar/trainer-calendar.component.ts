@@ -41,6 +41,10 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.subscribeSearch();
         this.idFromRoute$ = this.route.params;
+        this.idFromRoute$.subscribe(res => {
+            console.log(res);
+            this.selectedTrainerId = res.id;
+        })
     }
 
     ngOnDestroy = (): void => {

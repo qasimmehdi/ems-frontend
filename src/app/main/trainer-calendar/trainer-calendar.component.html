@@ -71,7 +71,7 @@
         </div>
 
         <div class="content-card" fusePerfectScrollbar [fusePerfectScrollbarOptions]="{'suppressScrollX': true}">
-            <mwl-demo-component (screenResizeEvent2)="resizeScreen($event)" [trainerId]="(idFromRoute$ | async).id">Loading...</mwl-demo-component>
+            <mwl-demo-component (screenResizeEvent2)="resizeScreen($event)" [trainerId]="selectedTrainerId">Loading...</mwl-demo-component>
         </div>
     </div>
 </div>

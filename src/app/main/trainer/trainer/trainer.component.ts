@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { VerificationDialog } from './dialog/dialog.component';
 import { ImageModal } from 'app/main/shared/image-modal/image-modal.component';
 import { regexes } from 'app/main/shared/regexes';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-gym',
@@ -45,7 +46,7 @@ export class TrainerComponent implements OnInit, OnDestroy {
         private trainerService: TrainerService,
         private _formBuilder: FormBuilder,
         private _matSnackBar: MatSnackBar,
-        private route: ActivatedRoute,
+        private _location: Location,
         public dialog: MatDialog
     ) {
         // Set the private defaults
@@ -98,6 +99,10 @@ export class TrainerComponent implements OnInit, OnDestroy {
             autoFocus: false,
             data: { src: e.srcElement.currentSrc },
         });
+    }
+
+    goBack(){
+        this._location.back();
     }
 }
 

@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 import * as moment from 'moment';
 import { ImageModal } from 'app/main/shared/image-modal/image-modal.component';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-gym',
@@ -43,7 +44,8 @@ export class UserComponent implements OnInit, OnDestroy {
         private _formBuilder: FormBuilder,
         private _matSnackBar: MatSnackBar,
         private route: ActivatedRoute,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        public _location: Location
     ) {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
@@ -74,12 +76,15 @@ export class UserComponent implements OnInit, OnDestroy {
 
     openImageModal(e): void {
         console.log( e.srcElement.currentSrc );
-        const dialogRef = this.dialog.open(ImageModal, {
+        this.dialog.open(ImageModal, {
             autoFocus: false,
             data: { src: e.srcElement.currentSrc },
         });
     }
 
+    goBack(){
+        this._location.back();
+    }
 }
 
 export const nameValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
