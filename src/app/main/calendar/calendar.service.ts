@@ -19,14 +19,17 @@ export class CalendarService {
             let data = [];
             this.getScheduleDays(trainerId, startTime)
                 .then((res: any) => {
-                    res.forEach((item, i) => {
-                        const promise = this.getTrainerScheduleByDay(trainerId, item)
-                            .then(resp => {
-                                if (resp.length > 0) {
-                                    data.push(...resp);
-                                }
-                            })
-                        promises.push(promise);
+                    res.forEach((item) => {
+                        console.log(startTime, endTime, (item >= startTime && item <= endTime ? item+' out' : item+' in '));
+                        if (item >= startTime && item <= endTime) {
+                            const promise = this.getTrainerScheduleByDay(trainerId, item)
+                                .then(resp => {
+                                    if (resp.length > 0) {
+                                        data.push(...resp);
+                                    }
+                                })
+                            promises.push(promise);
+                        }
                     });
                     Promise.all(promises)
                         .then(() => {
@@ -58,4 +61,6 @@ export class CalendarService {
                 }, reject);
         })
     }
+
+
 }

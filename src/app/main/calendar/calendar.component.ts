@@ -70,8 +70,8 @@ export class DemoComponent implements OnChanges {
             day: endOfDay,
         }[this.view];
 
-        const start = moment(getStart(this.viewDate)).unix();
-        const end = moment(getEnd(this.viewDate)).unix();
+        const start = moment(getStart(this.viewDate)).unix() + (-new Date().getTimezoneOffset()*60);
+        const end = moment(getEnd(this.viewDate)).unix() + (-new Date().getTimezoneOffset()*60);
 
         this.events$ = this.calendarService.getTrainerSchedule(this.trainerId,
             start, end)
@@ -84,6 +84,7 @@ export class DemoComponent implements OnChanges {
                     }
                     return results.map((appointment) => {
                         const tempStartDate = new Date(appointment.startDate * 1000);
+                        console.log(appointment.startDate, 'Date', tempStartDate);
                         const data = {
                             title: moment(tempStartDate).format('LT')+ ' | ' + appointment.status,
                             start: tempStartDate,
