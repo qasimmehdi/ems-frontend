@@ -31,9 +31,15 @@
                     </div>
 
                     <div fxLayout="column">
+                        <p class="p-bold">Bio: </p>
+                        <p>{{user?.bio ? user?.bio : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="column">
                         <p class="p-bold">Goals: </p>
                         <p>{{user?.goals ? user?.goals : "N/A" }}</p>
                     </div>
+
                     <div [fxLayout]="user?.trainingTypes?.length > 0 ? 'column' : 'row'" fxLayout.xs="column">
                         <p class="p-bold">Types of training:</p>
                         <p *ngIf="user?.trainingTypes?.length === 0">N/A</p>

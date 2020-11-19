@@ -54,7 +54,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'calendar',
-                title: 'Trainers Calender',
+                title: 'Trainer\'s Calender',
                 type: 'item',
                 url: '/calendar',
                 icon: 'calendar_today'

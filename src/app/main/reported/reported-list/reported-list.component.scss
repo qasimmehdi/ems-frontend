@@ -8,6 +8,15 @@ reported-list {
             }
         }
 
+        .mat-form-field-flex>.mat-form-field-outline {
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .mat-select-value {
+            color: black;
+        }
+
         .filter-feild {
             min-width: 135px;
 

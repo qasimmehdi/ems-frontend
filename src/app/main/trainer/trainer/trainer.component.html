@@ -30,6 +30,16 @@
                         <p>{{trainer?.createdAt ? moment(trainer?.createdAt).format("DD/MM/YYYY") : "N/A" }}</p>
                     </div>
 
+                    <div fxLayout="column">
+                        <p class="p-bold">Bio: </p>
+                        <p>{{trainer?.bio ? trainer?.bio : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="column">
+                        <p class="p-bold">Goals: </p>
+                        <p>{{trainer?.goals ? trainer?.goals : "N/A" }}</p>
+                    </div>
+
                     <div [fxLayout]="(trainer?.certifications?.length > 0 && trainer?.certifications?.length !== undefined) ? 'column' : 'row' "
                         fxLayout.xs="column">
                         <p class="p-bold">Certifications: </p>
@@ -73,9 +83,8 @@
                     <h2 *ngIf="trainer.status.toLowerCase() === 'rejected'" class="status">Rejected</h2>
                     <h2 *ngIf="trainer.status.toLowerCase() === 'unverified'" class="status">Unverified</h2>
 
-                    <div *ngIf="trainer.status.toLowerCase() === 'unverified'"
-                        fxLayout="column" fxLayoutAlign="center stretch" style="align-self: center;">
-                        <div *ngIf="trainer.status.toLowerCase() !== 'rejected'" class="awaiting">
+                    <div fxLayout="column" fxLayoutAlign="center stretch" style="align-self: center;">
+                        <div *ngIf="trainer.status.toLowerCase() === 'unverified'" class="awaiting">
                             <p>Verification Status</p>
                             <p>Awaiting Verification</p>
                         </div>

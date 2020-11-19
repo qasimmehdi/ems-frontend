@@ -21,7 +21,7 @@
 
             <div style="max-height: 65px;" fxLayout="row">
                 <mat-form-field class="filter-feild" appearance="outline">
-                    <mat-select [value]="filters[3]" (selectionChange)="filterChange($event)">
+                    <mat-select disableRipple="true" [value]="filters[3]" (selectionChange)="filterChange($event)">
                         <mat-option *ngFor="let filter of filters" [value]="filter">
                             {{filter.name}}
                         </mat-option>

@@ -76,7 +76,7 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
                                 this.options = [];
                                 this.noTrainersFound = res.content.length === 0 ? true : false
                                 res.content.forEach((e: any) => {
-                                    this.options.push({ name: e.name, id: e.id })
+                                    this.options.push({ name: e.name, id: e.authId })
                                 });
                                 this.trainerName.setValue(text);
                                 this.filteredOptions = this.trainerName.valueChanges
@@ -112,5 +112,6 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
 
     trainerSelected(trainerId: string): void {
         this.selectedTrainerId = trainerId;
+        this.filteredOptions = new Observable<IOptions[]>();
     }
 }

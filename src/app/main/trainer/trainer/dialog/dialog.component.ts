@@ -14,6 +14,8 @@ export class VerificationDialog {
 
     comment: string;
     disableButtons: boolean = false;
+    disableVerifyBtn: boolean = false;
+    disableRejectBtn: boolean = false;
 
     constructor(
         public dialog: MatDialog,
@@ -21,10 +23,17 @@ export class VerificationDialog {
         @Inject(MAT_DIALOG_DATA) public data: any,
         private trainerService: TrainerService,
         private _snackBar: MatSnackBar,
-    ) { }
+    ) {
+        console.log(data);
+        if(data.user.status === 'VERIFIED'){
+            this.disableVerifyBtn = true;
+        }
+        else if(data.user.status === 'REJECTED'){
+            this.disableRejectBtn = true;
+        }
+     }
 
     onReject(): void {
-        console.log("application rejected");
         this.openDialog();
     }
 

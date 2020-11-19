@@ -128,9 +128,11 @@ export class TrainerListComponent implements OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    filterClick(buttonName: "verified" | "unverified" | "rejected"): void {
-        this.selectedFilter = this.selectedFilter === buttonName ? "" : buttonName;
-        //console.log(this.pageIndex, this.limit);
+    filterClick(buttonName: "verified" | "unverified" | "rejected" | ""): void {
+        if(this.selectedFilter === buttonName){
+            return;
+        }
+        this.selectedFilter = buttonName;
         this.trainerService.getPageItem(0, this.limit, this.selectedFilter, this.searchKeyword.length > 0 ? this.searchKeyword : null);
     }
 }
