@@ -85,8 +85,7 @@
     max-width: 180px;
     max-height: 168px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto auto;
     cursor: pointer;
 }
 
@@ -96,7 +95,7 @@
 
 .profile-container {
     position: relative;
-    display: inline;
+    display: flex;
     width: 180px;
     height: 168px;
     background-color: black;

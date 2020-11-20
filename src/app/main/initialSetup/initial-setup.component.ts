@@ -68,7 +68,7 @@ export class InitialSetup implements OnInit, OnDestroy {
                     this._snackBar.open("System setup is already completed", 'Ok', {
                         duration: 2000,
                     });
-                    //this.router.navigateByUrl('login');
+                    this.router.navigateByUrl('login');
                 }
             })
             .catch(err => console.log(err));

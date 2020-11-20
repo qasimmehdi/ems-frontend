@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
-import { MatPaginator, MatSort, MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatDialog, MatSnackBar, MatTableDataSource, MatSortable } from '@angular/material';
 import { Subject, fromEvent } from 'rxjs';
 import { UserService } from '../user.service';
 import { takeUntil, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -80,6 +80,7 @@ export class UserListComponent implements OnInit {
                 this.totalLength = this.userService.pageItem.totalElements;
                 this.limit = this.userService.pageItem.size;
                 this.pageIndex = this.userService.pageItem.number;
+                this.sort.sort(({ id: 'registeredAt', start: 'desc'}) as MatSortable);
                 this.dataSource.sort = this.sort;
             });
         this.dataSource.sortingDataAccessor = (item, property) => {
