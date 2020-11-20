@@ -27,7 +27,12 @@
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Registered at: </p>
-                        <p>{{trainer?.createdAt ? moment(trainer?.createdAt).format("DD/MM/YYYY") : "N/A" }}</p>
+                        <p>{{trainer?.createdAt ? moment(trainer?.createdAt).format("MM/DD/YYYY") : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Date of birth: </p>
+                        <p>{{trainer?.dateOfBirth ? moment(trainer?.dateOfBirth).format("MM/DD/YYYY") : "N/A" }}</p>
                     </div>
 
                     <div fxLayout="column">

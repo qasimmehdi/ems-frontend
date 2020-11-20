@@ -52,7 +52,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Registered At</mat-header-cell>
                     <mat-cell *matCellDef="let user">
                         <p class="text-truncate">
-                            {{user.createdAt ? moment(user.createdAt).format("DD/MM/YYYY") : '---'}}
+                            {{user.createdAt ? moment(user.createdAt).format("MM/DD/YYYY") : '---'}}
                         </p>
                     </mat-cell>
                 </ng-container>

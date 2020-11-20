@@ -27,7 +27,12 @@
 
                     <div fxLayout="row" fxLayout.xs="column">
                         <p class="p-bold">Registered at: </p>
-                        <p>{{user?.createdAt ? moment(user.createdAt).format("DD/MM/YYYY") : "N/A" }}</p>
+                        <p>{{user?.createdAt ? moment(user.createdAt).format("MM/DD/YYYY") : "N/A" }}</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <p class="p-bold">Date of birth: </p>
+                        <p>{{user?.dateOfBirth ? moment(user?.dateOfBirth).format("MM/DD/YYYY") : "N/A" }}</p>
                     </div>
 
                     <div fxLayout="column">
