@@ -21,7 +21,7 @@
                             <mat-autocomplete #auto="matAutocomplete">
                                 <ng-template [ngIf]="(filteredOptions | async)?.length > 0">
                                     <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name"
-                                        (onSelectionChange)="trainerSelected(option.id)">
+                                        (onSelectionChange)="trainerSelected(option.id, option.name)">
                                         {{option.name}}
                                     </mat-option>
                                 </ng-template>

@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
@@ -34,7 +34,8 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
 
     constructor(
         private trainerCalendarService: TrainerCalendarService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {
         this._unsubscribeAll = new Subject();
     }
@@ -104,17 +105,13 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
 
     filterClick(buttonName: "1" | "2" | "5" | "10"): void {
         this.selectedFilter = this.selectedFilter === buttonName ? "" : buttonName;
-        //console.log(this.pageIndex, this.limit);
-        //this.trainerService.getPageItem(0, this.limit, this.selectedFilter);
     }
 
     resizeScreen(event: boolean): void {
         this.calendarExpanded = event;
     }
 
-    trainerSelected(trainerId: string): void {
-        this.selectedTrainerName = '';
-        this.selectedTrainerId = trainerId;
-        this.filteredOptions = new Observable<IOptions[]>();
+    trainerSelected(trainerId: string, name: string): void {
+        this.router.navigateByUrl(`/calendar/${name}/${trainerId}`);
     }
 }
