@@ -20,7 +20,7 @@ export class CalendarService {
             this.getScheduleDays(trainerId, startTime)
                 .then((res: any) => {
                     res.forEach((item) => {
-                        console.log(startTime, endTime, (item >= startTime && item <= endTime ? item+' out' : item+' in '));
+                        //console.log(startTime, endTime, (item >= startTime && item <= endTime ? item+' out' : item+' in '));
                         if (item >= startTime && item <= endTime) {
                             const promise = this.getTrainerScheduleByDay(trainerId, item)
                                 .then(resp => {

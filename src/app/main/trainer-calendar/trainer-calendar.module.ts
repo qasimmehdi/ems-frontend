@@ -25,7 +25,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'calendar/:id',
+        path: 'calendar/:name/:id',
         component: TrainerCalendarComponent,
         /* resolve: {
             data: TrainerCalendarService

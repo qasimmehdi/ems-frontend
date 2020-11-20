@@ -17,7 +17,7 @@ export class EventModal {
     clientName: string;
     clientId: string;
     status: string;
-    statusClass: "status-btn-schedule" | "status-btn-inprogress" | "status-btn-completed";
+    statusClass: "status-btn-schedule" | "status-btn-inprogress" | "status-btn-completed" | "status-btn-available";
 
     constructor(
         public dialog: MatDialog,
@@ -31,11 +31,11 @@ export class EventModal {
             .then((res: any) => {
                 this.time = moment(res.appointmentStartDate * 1000).format('LT');
                 this.date = moment(res.appointmentStartDate * 1000).format('LL');
-                this.status = res.appointmentStatus;
+                this.status = 'Available';//res.appointmentStatus;
                 this.clientName = res.appUser.name;
                 this.clientId = res.appUser.id;
                 if (res.appointmentStatus === "SCHEDULED") {
-                    this.statusClass = "status-btn-schedule";
+                    this.statusClass = "status-btn-available";
                 }
                 else if (res.appointmentStatus === "COMPLETED") {
                     this.statusClass = "status-btn-completed";

@@ -84,9 +84,8 @@ export class DemoComponent implements OnChanges {
                     }
                     return results.map((appointment) => {
                         const tempStartDate = new Date(appointment.startDate * 1000);
-                        console.log(appointment.startDate, 'Date', tempStartDate);
                         const data = {
-                            title: moment(tempStartDate).format('LT')+ ' | ' + appointment.status,
+                            title: moment(tempStartDate).format('LT')+ ' | Available',
                             start: tempStartDate,
                             end: addMinutes(tempStartDate, 30),
                             color: this.calculateColor(appointment.status),
@@ -139,7 +138,7 @@ export class DemoComponent implements OnChanges {
 
     calculateColor(status: string): string{
         if (status === "SCHEDULED") {
-            return colors.gray;
+            return colors.blue;
         }
         else if (status === "COMPLETED") {
             return colors.green;

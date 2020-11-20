@@ -30,6 +30,7 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     showSearchLoader: boolean = false;
     selectedTrainerId: string;
     idFromRoute$: Observable<Params>;
+    selectedTrainerName: string = '';
 
     constructor(
         private trainerCalendarService: TrainerCalendarService,
@@ -44,6 +45,7 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
         this.idFromRoute$.subscribe(res => {
             console.log(res);
             this.selectedTrainerId = res.id;
+            this.selectedTrainerName = res.name;
         })
     }
 
@@ -111,6 +113,7 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     }
 
     trainerSelected(trainerId: string): void {
+        this.selectedTrainerName = '';
         this.selectedTrainerId = trainerId;
         this.filteredOptions = new Observable<IOptions[]>();
     }

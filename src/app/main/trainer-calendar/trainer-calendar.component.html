@@ -6,7 +6,7 @@
             fxLayoutAlign.gt-sm="space-between center">
             <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Calendar
+                    {{selectedTrainerName === '' ? 'Calendar' : selectedTrainerName+ '\'s Calendar'}}
                 </span>
             </div>
 
