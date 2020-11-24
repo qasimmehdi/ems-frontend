@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashComponent } from './dash/dash.component';
 import { AuthGuard } from '../auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import {
   MatCardModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LeaderboardComponent } from './leaderboard.component';
 
 const routes: Routes = [
   {
-      path     : 'dashboard',
-      component: DashComponent,
+      path     : 'leaderboard',
+      component: LeaderboardComponent,
       //canActivate: [AuthGuard]
   },
 ];
@@ -27,6 +27,6 @@ const routes: Routes = [
     MatSortModule,
     MatTooltipModule
   ],
-  declarations: [DashComponent]
+  declarations: [LeaderboardComponent]
 })
-export class DashboardModule { }
+export class LeaderboardModule { }

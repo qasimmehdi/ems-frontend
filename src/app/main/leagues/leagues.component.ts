@@ -7,17 +7,17 @@ import { MatTableDataSource } from '@angular/material';
 const BASE_URL = environment.baseUrl;
 
 @Component({
-  selector: 'app-dash',
-  templateUrl: './dash.component.html',
-  styleUrls: ['./dash.component.scss'],
+  selector: 'app-leagues',
+  templateUrl: './leagues.component.html',
+  styleUrls: ['./leagues.component.scss'],
   animations: fuseAnimations
 })
 
-export class DashComponent implements OnInit {
+export class LeaguesComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'league',
-    'tournament',
+    'index',
+    'name',
     'players',
   ];
   filter = 'my_gyms';
@@ -33,24 +33,20 @@ export class DashComponent implements OnInit {
 
   data = [
     {
-      League: "My League 1",
-      Tournament: "Pakistan v Srilanka",
-      Players: "22"
+      name: "My League 1",
+      players: "22"
     },
     {
-      League: "My League 1",
-      Tournament: "Pakistan v Srilanka",
-      Players: "22"
+      name: "My League 1",
+      players: "22"
     },
     {
-      League: "My League 1",
-      Tournament: "Pakistan v Srilanka",
-      Players: "22"
+      name: "My League 1",
+      players: "22"
     },
     {
-      League: "My League 1",
-      Tournament: "Pakistan v Srilanka",
-      Players: "22"
+      name: "My League 1",
+      players: "22"
     }
   ]
 

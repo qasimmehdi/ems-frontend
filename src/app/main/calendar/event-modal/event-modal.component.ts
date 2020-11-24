@@ -31,14 +31,17 @@ export class EventModal {
             .then((res: any) => {
                 this.time = moment(res.appointmentStartDate * 1000).format('LT');
                 this.date = moment(res.appointmentStartDate * 1000).format('LL');
-                this.status = 'Available';//res.appointmentStatus;
+                this.status = res.appointmentStatus;
                 this.clientName = res.appUser.name;
                 this.clientId = res.appUser.id;
                 if (res.appointmentStatus === "SCHEDULED") {
-                    this.statusClass = "status-btn-available";
+                    this.statusClass = "status-btn-schedule";
                 }
                 else if (res.appointmentStatus === "COMPLETED") {
                     this.statusClass = "status-btn-completed";
+                }
+                else if (res.appointmentStatus === "AVAILABLE") {
+                    this.statusClass = "status-btn-available";
                 }
                 else {
                     this.statusClass = "status-btn-inprogress";

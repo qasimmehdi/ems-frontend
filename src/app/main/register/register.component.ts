@@ -10,19 +10,19 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { LOG_OUT, LOG_IN } from '../../store/actions/user.actions';
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
+import { RegisterService } from './register.service';
 import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
 import { regexes } from '../shared/regexes';
 
 @Component({
-    selector: 'login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
     loginForm: FormGroup;
     isLogginIn: boolean = false;
     user$: Observable<object>;
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private store: Store<AppState>,
         private router: Router,
-        private loginService: LoginService,
+        private registerService: RegisterService,
         private _snackBar: MatSnackBar,
         private authService: AuthService
     ) {
@@ -58,16 +58,12 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.loginForm = this._formBuilder.group({
             Email: ['', [Validators.required, Validators.pattern(regexes.email)]],
-            Password: ['', [Validators.required]]
+            Password: ['', [Validators.required]],
+            FullName: ['', [Validators.required]]
         });
-        if (this.authService.isUserLoggedIn()) {
-            this.router.navigateByUrl('dashboard')
-        }
-        //just for test
-        //localStorage.removeItem('access_token');
     }
 
-    login() {
+    register(){
         console.log(this.loginForm.value);
     }
 

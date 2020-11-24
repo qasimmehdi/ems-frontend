@@ -1,0 +1,38 @@
+<div id="leagues" class="page-layout carded fullwidth inner-scroll">
+
+  <div class="center">
+    <div class="content-card" style="margin-top: 5px;">
+      <div class="separator">
+        <h2 style="margin-top: 0 !important;">League Name</h2>
+      </div>
+      <div>
+        <div fxLayout="column">
+          <form fxLayout="column" name="leagueForm" (submit)="save()" [formGroup]="leagueForm" novalidate>
+
+            <mat-form-field appearance="outline" MatFormFieldControl="name">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="leagueForm.get('name').hasError('required')">
+                    Name is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" MatFormFieldControl="players">
+                <mat-label>Max Players</mat-label>
+                <input matInput formControlName="players">
+                <mat-error *ngIf="leagueForm.get('players').hasError('required')">
+                  Max players is required
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="submit-button"
+                    [disabled]="leagueForm.invalid">
+                Save
+            </button>
+
+        </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

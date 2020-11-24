@@ -112,6 +112,9 @@ export class TrainerCalendarComponent implements OnInit, OnDestroy {
     }
 
     trainerSelected(trainerId: string, name: string): void {
+        this.options = [];
+        this.filteredOptions = new Observable<IOptions[]>();
+        this.noTrainersFound = false;
         this.router.navigateByUrl(`/calendar/${name}/${trainerId}`);
     }
 }

@@ -19,17 +19,11 @@ const routes: Routes = [
     {
         path: 'calendar',
         component: TrainerCalendarComponent,
-        /* resolve: {
-            data: TrainerCalendarService
-        }, */
         canActivate: [AuthGuard]
     },
     {
         path: 'calendar/:name/:id',
         component: TrainerCalendarComponent,
-        /* resolve: {
-            data: TrainerCalendarService
-        }, */
         canActivate: [AuthGuard]
     }
 ];

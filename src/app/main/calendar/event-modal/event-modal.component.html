@@ -13,12 +13,13 @@
     <div fxLayout="row" fxLayoutAlign="end center">
         <button mat-flat-button [disableRipple]="true" [ngClass]="statusClass">{{status}}</button>
     </div>
-    <p>Trainer's Choice</p>
     <p>Time: {{time}}</p>
     <p>Date: {{date}}</p>
     <p>Single session</p>
     <div fxLayout="row" fxLayoutAlign="space-between center">
         <p>{{clientName ? clientName : 'N/A'}}</p>
-        <button [disabled]="clientName ? false : true" mat-raised-button color="accent" (click)="onProfileView()">View Profile</button>
+        <button [disabled]="clientName ? false : true" mat-raised-button color="accent" (click)="onProfileView()">
+            View Profile
+        </button>
     </div>
 </div>

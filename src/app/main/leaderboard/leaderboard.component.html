@@ -1,0 +1,52 @@
+<div id="leaderboard" class="page-layout carded fullwidth inner-scroll">
+
+  <div class="center">
+    <div class="content-card" style="margin-top: 5px;">
+      <div class="separator">
+        <h2 style="margin-top: 0 !important;">Leaderboard</h2>
+      </div>
+      <div>
+        <h3>League Name</h3>
+        <div>
+          <mat-table [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table1
+            [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
+            <ng-container matColumnDef="rank">
+              <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
+              <mat-cell *matCellDef="let league">
+                <p class="text-truncate">{{league.Rank ? league.Rank : '---'}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell *matCellDef="let league">
+                <p class="text-truncate">
+                  {{league.Name ? league.Name : '---'}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="points">
+              <mat-header-cell *matHeaderCellDef>Points</mat-header-cell>
+              <mat-cell *matCellDef="let league">
+                <p class="text-truncate">
+                  {{league.Points ? league.Points : '---'}}
+                </p>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+            <mat-row *matRowDef="let league; columns: displayedColumns;" class="product" matRipple>
+            </mat-row>
+          </mat-table>
+
+          <div class="no-user-found" *ngIf="noUser">
+            <h4>No Record Found</h4>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

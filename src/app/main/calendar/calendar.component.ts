@@ -138,10 +138,13 @@ export class DemoComponent implements OnChanges {
 
     calculateColor(status: string): string{
         if (status === "SCHEDULED") {
-            return colors.blue;
+            return colors.gray;
         }
         else if (status === "COMPLETED") {
             return colors.green;
+        }
+        else if (status === "AVAILABLE") {
+            return colors.blue;
         }
         else {
             return colors.yellow;

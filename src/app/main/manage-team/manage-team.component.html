@@ -1,0 +1,71 @@
+<div id="manage-team" class="page-layout carded fullwidth inner-scroll">
+
+  <div class="center">
+    <div class="content-card" style="margin-top: 5px;">
+      <div class="separator">
+        <h2 style="margin-top: 0 !important;">Manage Team</h2>
+      </div>
+      <div>
+        <div fxFill fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start">
+          <div style="width: 100%;">
+            <form [ngStyle]="data.length === 11 ? {'display': 'none'} : {'display': 'block'}"
+              class="search-form" style="max-width: 200px;">
+              <div fxFlex fxLayout="row"
+                fxLayoutAlign="start center"
+                style="max-width: 200px; border: 1px solid black; border-radius: 5px;"
+              >
+                <mat-icon class="search-icon">search</mat-icon>
+                <input type="text" placeholder="Pick one"
+                  aria-label="Number" matInput [formControl]="myControl"
+                  style="max-width: 150px;"
+                  [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name"
+                    (onSelectionChange)="playerSelected(option)">
+                    {{ option.name }}
+                  </mat-option>
+                </mat-autocomplete>
+
+              </div>
+            </form>
+            <button style="margin-top: 10px; background-color: #2D323E; color: white;" mat-button color="primary" (click)="saveTeam()">
+              Save
+            </button>
+          </div>
+          <div style="width: 100%;">
+            <mat-table [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table1
+              [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
+              <ng-container matColumnDef="cricketer">
+                <mat-header-cell *matHeaderCellDef>
+                  <h2>Team</h2>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let league;let i = index" style="display: block;">
+                  <p class="text-truncate">
+                    <b>{{i+1}}. {{league.name ? league.name : '---'}}</b> {{league.type ? league.type : '---'}}
+                  </p>
+                  <span>{{league.team ? league.team : '---'}}</span>
+                  <button mat-icon-button (click)="deletePlayer(i)"
+                   style="float: right;border: none; background: transparent;cursor: pointer;">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+              <mat-row *matRowDef="let league; columns: displayedColumns;let i = index;" class="product" matRipple>
+              </mat-row>
+            </mat-table>
+
+            <div class="no-user-found" *ngIf="noUser">
+              <h4>No Record Found</h4>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
