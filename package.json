@@ -11,13 +11,11 @@
     "build-stats": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --dev --stats-json",
     "build-prod": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod",
     "build-prod-stats": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --stats-json",
-    "deploy-dev-admin": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --configuration=dev && firebase target:apply hosting admin trainerhub-admin-1 && firebase deploy --only hosting:admin",
-    "deploy-qa-admin": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --configuration=qa && firebase target:apply hosting admin qa-trainerhub-admin && firebase deploy --only hosting:admin",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
-    "gacp-dev": "git add . && read -p \"Enter commit message : \" msg && git commit -m \"$msg\" && git push origin dev"
+    "gacp-main": "git add . && read -p \"Enter commit message : \" msg && git commit -m \"$msg\" && git push origin dev"
   },
   "private": true,
   "dependencies": {

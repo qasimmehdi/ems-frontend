@@ -9,7 +9,7 @@
         <div fxLayout="column">
           <form fxLayout="column" name="leagueForm" (submit)="save()" [formGroup]="leagueForm" novalidate>
 
-            <mat-form-field appearance="outline" MatFormFieldControl="name">
+            <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name">
                 <mat-error *ngIf="leagueForm.get('name').hasError('required')">
@@ -17,7 +17,7 @@
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" MatFormFieldControl="players">
+            <mat-form-field appearance="outline">
                 <mat-label>Max Players</mat-label>
                 <input matInput formControlName="players">
                 <mat-error *ngIf="leagueForm.get('players').hasError('required')">

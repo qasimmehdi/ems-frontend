@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule,
   MatButtonModule,
-  MatCardModule, MatFormFieldModule, MatIconModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
+  MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
 } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { ManageTeamComponent } from './manage-team.component';
@@ -33,7 +33,8 @@ const routes: Routes = [
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
   ],
   declarations: [ManageTeamComponent]
 })

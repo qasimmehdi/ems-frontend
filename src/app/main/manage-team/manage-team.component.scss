@@ -1,3 +1,4 @@
+@import "src/@fuse/scss/fuse";
 #manage-team {
 
     .dashboard-header {
@@ -6,6 +7,13 @@
         color: white;
         margin-top: 45px;
         margin-left: 35px;
+    }
+
+    .responsive-width{
+        max-width: 180px;
+        @include media-breakpoint("xs") {
+            max-width: 100%;
+        }
     }
 
     .content-card {

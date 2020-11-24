@@ -35,6 +35,7 @@ export class ManageTeamComponent implements OnInit {
   data = [];
 
   myControl: FormControl = new FormControl();
+  teamName: FormControl = new FormControl();
 
   options = [
     {
@@ -99,7 +100,8 @@ export class ManageTeamComponent implements OnInit {
   }
 
   saveTeam() {
-    console.log();
+    console.log(this.teamName.value);
+    console.log(this.data);
   }
 
   playerAlreadySelected(id): boolean {

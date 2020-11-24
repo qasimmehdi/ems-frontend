@@ -7,33 +7,36 @@
       </div>
       <div>
         <div fxFill fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start">
-          <div style="width: 100%;">
-            <form [ngStyle]="data.length === 11 ? {'display': 'none'} : {'display': 'block'}"
-              class="search-form" style="max-width: 200px;">
-              <div fxFlex fxLayout="row"
-                fxLayoutAlign="start center"
-                style="max-width: 200px; border: 1px solid black; border-radius: 5px;"
-              >
-                <mat-icon class="search-icon">search</mat-icon>
-                <input type="text" placeholder="Pick one"
-                  aria-label="Number" matInput [formControl]="myControl"
-                  style="max-width: 150px;"
-                  [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name"
-                    (onSelectionChange)="playerSelected(option)">
-                    {{ option.name }}
-                  </mat-option>
-                </mat-autocomplete>
+          <div fxLayout="column" style="width: 100%;">
 
+            <form
+              [ngStyle]="data.length === 11 ? {'display': 'none'} : {'display': 'block'}"
+              fxLayout="column">
+              <mat-form-field class="responsive-width">
+                <input matInput type="text" placeholder="Team Name" [formControl]="teamName" />
+              </mat-form-field>
+              <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field variant="outline">
+                  <input type="text" placeholder="Select players" aria-label="Number" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name"
+                      (onSelectionChange)="playerSelected(option)">
+                      {{ option.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
               </div>
             </form>
-            <button style="margin-top: 10px; background-color: #2D323E; color: white;" mat-button color="primary" (click)="saveTeam()">
+            <button style="margin-top: 10px; background-color: #2D323E; color: white;max-width: 100px;" mat-button
+              color="primary" (click)="saveTeam()">
               Save
             </button>
           </div>
           <div style="width: 100%;">
-            <mat-table [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table1
+            <mat-table
+              [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}"
+              style="border: 1px solid rgba(0, 0, 0, 0.12);" #table1
               [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
 
               <ng-container matColumnDef="cricketer">
@@ -46,7 +49,7 @@
                   </p>
                   <span>{{league.team ? league.team : '---'}}</span>
                   <button mat-icon-button (click)="deletePlayer(i)"
-                   style="float: right;border: none; background: transparent;cursor: pointer;">
+                    style="float: right;border: none; background: transparent;cursor: pointer;">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </mat-cell>
