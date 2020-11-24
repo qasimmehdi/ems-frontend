@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="login-form">
+
+        <h2 class="text-center">Add Points</h2>
+        <label for="exampleInputPassword1">Select Team</label>
+        <select (change)='get(team.value,type)' class="custom-select custom-select-sm" #team>
+          <option selected>Select Team</option>
+          <option *ngFor='let team of this.players[0].data'>{{team.name}}</option>
+
+        </select>
+        <p></p>
+        <label for="exampleInputPassword1">Select Type</label>
+        <select (change)='getplayername(type.value)' class="custom-select custom-select-sm" id='typ' #type>
+          <option selected>Select Type</option>
+          <option>Batsman</option>
+          <option>Bowler</option>
+          <option>Keeper</option>
+          <option>AllRounder</option>
+        </select>
+        <p></p>
+        <label for="exampleInputPassword1">Select Player</label>
+        <select class="custom-select custom-select-sm" #name>
+          <option *ngFor='let item of this.playersname'>{{item.name}}</option>
+        </select>
+        <p></p>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input type="number" class="form-control" name="runs" placeholder="runs" required="required" #runs>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input type="number" class="form-control" name="four" placeholder="four" required="required" #four>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input type="number" class="form-control" name="six" placeholder="six" required="required" #six>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input type="number" class="form-control" name="wickets" placeholder="wickets" required="required" #wics>
+          </div>
+        </div>
+        <div [hidden]='capcheck' class="form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" #cap>
+          <label class="form-check-label" for="exampleCheck1">Man of the Match</label>
+        </div>
+
+        <p></p>
+        <button (click)='add(name.value,runs.value,six.value,four.value,wics.value,cap)'
+          class="btn btn-primary">Add</button>
+        <br /><button style="background-color: white;"></button>
+      </div>
+    </div>
+    <div class="col">
+      <div class="login-form">
+
+        <form>
+          <h2 class="text-center">Points</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Player</th>
+                <th scope="col">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let team of this.selectedTeam;let i = index'>
+                <th scope="row">{{i+1}}</th>
+                <td>{{team.player}} {{team.captain}}</td>
+
+                <td>{{team.points}}</td>
+
+                <td><img (click)='del(i)' style="width:25px;" alt="Responsive image" src='/assets/img/del.png'></td>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </form>
+        <button (click)='save()' class="btn btn-primary">Save</button>
+        <br />
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
