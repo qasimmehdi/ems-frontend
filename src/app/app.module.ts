@@ -31,7 +31,6 @@ import { ForgetPasswordModule } from './main/authorizations/forget-password/forg
 import { ResetPasswordModule } from './main/authorizations/reset-password/reset-password.module';
 import { DashboardModule } from './main/dashboard/dashboard.module';
 import { ErrorInterceptor } from './main/error.interceptor';
-import { FirebaseModule } from './main/firebase/firebase.module';
 import { InterceptorService } from './main/interceptor.service';
 import { LeaderboardModule } from './main/leaderboard/leaderboard.module';
 import { LeaguesModule } from './main/leagues/leagues.module';
@@ -90,7 +89,7 @@ const appRoutes: Routes = [
         /* InitialSetupModule, */
 
         //Firebase
-        FirebaseModule,
+        //FirebaseModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
         AngularFirestoreModule,

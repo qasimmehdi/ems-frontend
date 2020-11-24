@@ -1,4 +1,3 @@
-import { database } from "firebase";
 import * as userActions from "../actions/user.actions"
 import { ActionWithPayload } from "../ActionWithPayload";
 

@@ -1,7 +1,6 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Role } from 'app/main/teams/role.enum';
 import { MatSnackBar } from '@angular/material';
 import { select, Store } from '@ngrx/store';
 import { AppState } from './app.state';
@@ -76,71 +75,6 @@ export class AppAuthGuard implements CanActivate {
     if (state.url === "/") {
       isAllowed = true;
       return isAllowed;
-    }
-
-    // IF PROFILE OBJECTS EXISTS
-    if (profile) {
-
-      // IF ROLE IS ADMIN
-      if (profile.userRole.find(role => role.name == Role.GAADMIN)) {
-        isAllowed = true;
-
-        // IF PROFILE IS NOT COMPLETED YET
-        // if (gym.stepsCompleted.split(",").length < 5 && state.url.includes("gym-")) {
-        //   return true
-        // }
-        if ((state.url !== "/" && state.url !== "/dashboards")) {
-          this.accessNotAllowed();
-          return false;
-        }
-      }
-
-      // IF ROLE IS FINANCE
-      // else if (profile.userRole.find(role => role.name == Role.GAFINANCE) && (state.url === "/finances" || state.url.includes("reports") || state.url.includes("disbursement"))) {
-      //   if (gym.isActive) {
-      //     return true
-      //   } else {
-      //     this.accessNotAllowed();
-      //     return false
-      //   }
-      // }
-
-      // IF ROLE IS LOGS
-      // else if (profile.userRole.find(role => role.name == Role.GALOGS) && (state.url === "/logs" || state.url.includes("reports"))) {
-      //   if (gym.isActive) {
-      //     return true
-      //   } else {
-      //     this.accessNotAllowed();
-      //     return false
-      //   }
-      // }
-
-      // IF ROLE IS CHECKIN
-      // else if (profile.userRole.find(role => role.name == Role.GMMANUALCHECKIN) && (state.url === "/dashboards" || state.url.includes("reports"))) {
-      //   if (gym.isActive) {
-      //     isAllowed = true;
-      //     return true
-      //   } else {
-      //     this.accessNotAllowed();
-      //     return false
-      //   }
-      // }
-      else {
-        // IF URL IS DASHBOARDS AND DASHBOARDS NOT ALLOWED, REDIRECTING TO SUBSCRIPTIONS
-        // if(profile.userRole && !profile.userRole.find(role => role.name == Role.GMMANUALCHECKIN) && state.url === "/dashboards") {
-        //   this._router.navigateByUrl("/subscriptions")
-        // }
-
-        // return new Observable<boolean>((observer) => {
-        //   setTimeout(() => {
-        //     console.log('done!');
-        //     observer.next(true);
-        //     observer.complete();
-        //   }, 3000);
-        // });
-        this.accessNotAllowed();
-        return false
-      }
     }
     return isAllowed;
     // return true
