@@ -20,7 +20,7 @@
             <ng-container matColumnDef="name">
               <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
               <mat-cell *matCellDef="let league">
-                <p class="text-truncate">{{league.name ? league.name : '---'}}</p>
+                <p class="text-truncate">{{league.Name ? league.Name : '---'}}</p>
               </mat-cell>
             </ng-container>
 
@@ -28,7 +28,7 @@
               <mat-header-cell *matHeaderCellDef>Players</mat-header-cell>
               <mat-cell *matCellDef="let league">
                 <p class="text-truncate">
-                  {{league.players ? league.players : '---'}}</p>
+                  {{league.maxParticipants ? league.maxParticipants : '---'}}</p>
               </mat-cell>
             </ng-container>
 

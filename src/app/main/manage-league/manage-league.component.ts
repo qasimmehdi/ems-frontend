@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { MatTableDataSource } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LeagueService } from '../../services/league.service';
 
 const BASE_URL = environment.baseUrl;
 
@@ -19,17 +20,22 @@ export class ManageLeagueComponent implements OnInit {
   leagueForm: FormGroup;
 
   constructor(private http: HttpClient,
-     private _formBuilder: FormBuilder) { }
+     private _formBuilder: FormBuilder,
+     private service:LeagueService) { }
 
   ngOnInit() {
     this.leagueForm = this._formBuilder.group({
-      name: ['', [Validators.required]],
-      players: ['', [Validators.required]]
+      Name: ['', [Validators.required]],
+      maxParticipants: ['', [Validators.required]]
   });
   }
 
   save(){
-    console.log(this.leagueForm.value);
+    this.service.addLeague(this.leagueForm.value).then(x => {
+      console.log(x);
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
 }

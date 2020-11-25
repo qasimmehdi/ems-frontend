@@ -11,7 +11,7 @@ import { AppState } from '../../app.state';
 import { LOG_OUT, LOG_IN } from '../../store/actions/user.actions';
 import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 import { regexes } from '../shared/regexes';
 
@@ -64,7 +64,12 @@ export class RegisterComponent implements OnInit {
     }
 
     register(){
-        console.log(this.loginForm.value);
+        this.authService.Register(this.loginForm.value).then(x => {
+            console.log(x);
+        }).catch(err => {
+            console.log(err);
+        })
+       
     }
 
 }

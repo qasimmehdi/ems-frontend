@@ -3,6 +3,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { MatTableDataSource } from '@angular/material';
+import { LeagueService } from '../../services/league.service';
 
 const BASE_URL = environment.baseUrl;
 
@@ -31,29 +32,15 @@ export class LeaguesComponent implements OnInit {
   isSorted: boolean = false;
   sortSwitch: number = 0;
 
-  data = [
-    {
-      name: "My League 1",
-      players: "22"
-    },
-    {
-      name: "My League 1",
-      players: "22"
-    },
-    {
-      name: "My League 1",
-      players: "22"
-    },
-    {
-      name: "My League 1",
-      players: "22"
-    }
-  ]
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private service:LeagueService) { }
 
   ngOnInit() {
-    this.dataSource = this.data;
+    this.service.getLeague().then(x => {
+      this.dataSource = x;
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   getDashboardData() {

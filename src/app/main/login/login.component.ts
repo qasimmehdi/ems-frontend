@@ -68,7 +68,11 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        console.log(this.loginForm.value);
+       this.loginService.Login(this.loginForm.value).then(x => {
+           console.log(x);
+       }).catch(err => {
+           console.log(err);
+       })
     }
 
 }
