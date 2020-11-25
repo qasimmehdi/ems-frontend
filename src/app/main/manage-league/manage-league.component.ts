@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeagueService } from '../../services/league.service';
+import { Router } from '@angular/router';
 
 const BASE_URL = environment.baseUrl;
 
@@ -19,7 +20,7 @@ export class ManageLeagueComponent implements OnInit {
 
   leagueForm: FormGroup;
 
-  constructor(private http: HttpClient,
+  constructor(private router: Router,
     private _formBuilder: FormBuilder,
     private service: LeagueService,
     private _matSnackBar: MatSnackBar) { }
@@ -37,13 +38,14 @@ export class ManageLeagueComponent implements OnInit {
       this._matSnackBar.open('League created successfully', 'OK', {
         verticalPosition: 'bottom',
         duration: 3000
-    });
+      });
+      this.router.navigateByUrl('/dashboard');
     }).catch(err => {
       console.log(err);
       this._matSnackBar.open('Something went wrong', 'OK', {
         verticalPosition: 'bottom',
         duration: 3000
-    });
+      });
     })
   }
 

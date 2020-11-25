@@ -3,26 +3,23 @@
   <div class="center">
     <div class="content-card" style="margin-top: 5px;">
       <div class="separator">
-        <h2 style="margin-top: 0 !important;">Your Leagues</h2>
+        <h1 style="margin-top: 0 !important;text-align: center;">Your Leagues</h1>
       </div>
       <div>
-        <h3>Managing</h3>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <h2>Managing</h2>
+          <button mat-raised-button color="primary" [routerLink]="'/manage-league'">
+            Create League
+          </button>
+        </div>
         <div>
-          <mat-table [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table1
-            [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+          <mat-table [ngStyle]="noMyLaegues ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table1
+            [dataSource]="myLeagues" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
 
             <ng-container matColumnDef="league">
               <mat-header-cell *matHeaderCellDef>League</mat-header-cell>
               <mat-cell *matCellDef="let league">
-                <p class="text-truncate">{{league.League ? league.League : '---'}}</p>
-              </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="tournament">
-              <mat-header-cell *matHeaderCellDef>Tournament</mat-header-cell>
-              <mat-cell *matCellDef="let league">
-                <p class="text-truncate">
-                  {{league.Tournament ? league.Tournament : '---'}}</p>
+                <p class="text-truncate">{{league.name ? league.name : '---'}}</p>
               </mat-cell>
             </ng-container>
 
@@ -30,7 +27,7 @@
               <mat-header-cell *matHeaderCellDef>Players</mat-header-cell>
               <mat-cell *matCellDef="let league">
                 <p class="text-truncate">
-                  {{league.Players ? league.Players : '---'}}
+                  {{league.maxParticipants ? league.maxParticipants : '---'}}
                 </p>
               </mat-cell>
             </ng-container>
@@ -38,7 +35,7 @@
             <ng-container matColumnDef="more">
               <mat-header-cell style="max-width: 89px" *matHeaderCellDef></mat-header-cell>
               <mat-cell style="max-width: fit-content;" *matCellDef="let league">
-                <button mat-raised-button color="primary" [routerLink]="'/add-points'">More</button>
+                <button mat-raised-button color="primary" [routerLink]="'/add-points/'+league.id">More</button>
               </mat-cell>
             </ng-container>
 
@@ -48,30 +45,27 @@
             </mat-row>
           </mat-table>
 
-          <div class="no-user-found" *ngIf="noUser">
-            <h4>No Record Found</h4>
+          <div class="no-user-found" *ngIf="noMyLaegues">
+            <h4>You have not created any leagues</h4>
           </div>
         </div>
       </div>
 
-      <div>
-        <h3>Participating</h3>
+      <div style="margin-top: 10px;">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <h2>Participating</h2>
+          <button mat-raised-button color="primary" [routerLink]="'/leagues'">
+            Join League
+          </button>
+        </div>
         <div>
-          <mat-table [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table2
-            [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+          <mat-table [ngStyle]="noJoinedLeagues ? {'display': 'none'} : {'display': 'block'}" class="trainer-table"
+            #table2 [dataSource]="joinedLeagues" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
 
             <ng-container matColumnDef="league">
               <mat-header-cell *matHeaderCellDef>League</mat-header-cell>
               <mat-cell *matCellDef="let league">
-                <p class="text-truncate">{{league.League ? league.League : '---'}}</p>
-              </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="tournament">
-              <mat-header-cell *matHeaderCellDef>Tournament</mat-header-cell>
-              <mat-cell *matCellDef="let league">
-                <p class="text-truncate">
-                  {{league.Tournament ? league.Tournament : '---'}}</p>
+                <p class="text-truncate">{{league.name ? league.name : '---'}}</p>
               </mat-cell>
             </ng-container>
 
@@ -79,7 +73,7 @@
               <mat-header-cell *matHeaderCellDef>Players</mat-header-cell>
               <mat-cell *matCellDef="let league">
                 <p class="text-truncate">
-                  {{league.Players ? league.Players : '---'}}
+                  {{league.maxParticipants ? league.maxParticipants : '---'}}
                 </p>
               </mat-cell>
             </ng-container>
@@ -87,7 +81,7 @@
             <ng-container matColumnDef="more">
               <mat-header-cell style="max-width: 89px" *matHeaderCellDef></mat-header-cell>
               <mat-cell style="max-width: fit-content;" *matCellDef="let league">
-                <button mat-raised-button color="primary" [routerLink]="'/manage-team'">More</button>
+                <button mat-raised-button color="primary" [routerLink]="'/manage-team/'+league.id">More</button>
               </mat-cell>
             </ng-container>
 
@@ -97,8 +91,8 @@
             </mat-row>
           </mat-table>
 
-          <div class="no-user-found" *ngIf="noUser">
-            <h4>No Record Found</h4>
+          <div class="no-user-found" *ngIf="noJoinedLeagues">
+            <h4>You have not joined any leagues</h4>
           </div>
         </div>
       </div>

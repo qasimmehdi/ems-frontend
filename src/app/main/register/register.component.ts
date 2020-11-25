@@ -63,13 +63,18 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    register(){
+    register() {
+        this.isLogginIn = true;
         this.authService.Register(this.loginForm.value).then(x => {
             console.log(x);
             this.router.navigateByUrl('/login');
-        }).catch(err => {
-            console.log(err);
         })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                this.isLogginIn = false;
+            })
 
     }
 

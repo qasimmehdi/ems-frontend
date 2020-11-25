@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { MatTableDataSource } from '@angular/material';
 import { LeagueService } from '../../services/league.service';
+import { Router } from '@angular/router';
 
 const BASE_URL = environment.baseUrl;
 
@@ -20,31 +21,36 @@ export class LeaguesComponent implements OnInit {
     'index',
     'name',
     'players',
+    'more',
   ];
-  filter = 'my_gyms';
   dataSource;
-  limit: number = 20;
-  skip: Number = 0;
-  totalLength: Number = 0;
-  pageIndex: Number = 0;
-  pageLimit: Number[] = [5, 10, 25, 100];
   noUser: boolean = false;
-  isSorted: boolean = false;
-  sortSwitch: number = 0;
 
 
-  constructor(private http: HttpClient,private service:LeagueService) { }
+
+  constructor(
+    private service: LeagueService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.service.getLeague().then(x => {
+    this.service.getLeague().then((x: any) => {
       this.dataSource = x;
+      this.noUser = x.length > 0 ? false : true;
     }).catch(err => {
       console.log(err)
     })
   }
 
-  getDashboardData() {
+  joinLeague(id) {
+    this.service.postJoinLeague(id)
+      .then(res => {
+        console.log(res);
+        this.router.navigateByUrl('/dashboard');
+      })
+      .catch(err => {
+        console.log(err);
 
+      })
   }
 
 }

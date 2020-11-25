@@ -5,8 +5,8 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root",
 })
 export class LeagueService {
-    baseurl = "http://13.127.241.178:5002/api/Leagues/";
-    constructor(private http: HttpClient) {}
+    baseurl = "http://182.189.94.159:27019/api/Leagues/";
+    constructor(private http: HttpClient) { }
 
     addLeague(payload) {
         return new Promise((resolve, reject) => {
@@ -18,11 +18,38 @@ export class LeagueService {
     }
 
     getLeague() {
-      return new Promise((resolve, reject) => {
-        this.http.get(this.baseurl + "getAll").subscribe(
-            (x) => resolve(x),
-            (err) => reject(err)
-        );
-    });
+        return new Promise((resolve, reject) => {
+            this.http.get(this.baseurl + "getleagues").subscribe(
+                (x) => resolve(x),
+                (err) => reject(err)
+            );
+        });
+    }
+
+    postJoinLeague(id){
+        return new Promise((resolve, reject) => {
+            this.http.post(this.baseurl + "join/"+id, {}).subscribe(
+                (x) => resolve(x),
+                (err) => reject(err)
+            );
+        });
+    }
+
+    getMyLeagues(){
+        return new Promise((resolve, reject) => {
+            this.http.get(this.baseurl + "getmyleagues").subscribe(
+                (x) => resolve(x),
+                (err) => reject(err)
+            );
+        });
+    }
+
+    getJoinedLeagues(){
+        return new Promise((resolve, reject) => {
+            this.http.get(this.baseurl + "getjoinedleagues").subscribe(
+                (x) => resolve(x),
+                (err) => reject(err)
+            );
+        });
     }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthGuard } from '../auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import {
+  MatButtonModule,
   MatCardModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -25,7 +26,8 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatButtonModule
   ],
   declarations: [LeaguesComponent]
 })

@@ -3,6 +3,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { MatTableDataSource } from '@angular/material';
+import { LeagueService } from 'app/services/league.service';
 
 const BASE_URL = environment.baseUrl;
 
@@ -17,51 +18,36 @@ export class DashComponent implements OnInit {
 
   displayedColumns: string[] = [
     'league',
-    'tournament',
     'players',
     'more'
   ];
   filter = 'my_gyms';
-  dataSource;
-  limit: number = 20;
-  skip: Number = 0;
-  totalLength: Number = 0;
-  pageIndex: Number = 0;
-  pageLimit: Number[] = [5, 10, 25, 100];
-  noUser: boolean = false;
-  isSorted: boolean = false;
-  sortSwitch: number = 0;
+  myLeagues: MatTableDataSource<any>;
+  joinedLeagues: MatTableDataSource<any>;
 
-  data = [
-    {
-      League: "My League 1",
-      Tournament: "Pakistan v Srilanka",
-      Players: "22"
-    },
-    {
-      League: "My League 1",
-      Tournament: "Pakistan v Srilanka",
-      Players: "22"
-    },
-    {
-      League: "My League 1",
-      Tournament: "Pakistan v Srilanka",
-      Players: "22"
-    },
-    {
-      League: "My League 1",
-      Tournament: "Pakistan v Srilanka",
-      Players: "22"
-    }
-  ]
+  noMyLaegues: boolean = true;
+  noJoinedLeagues: boolean = true;
 
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private service: LeagueService) { }
 
   ngOnInit() {
-    this.dataSource = this.data;
-  }
+    this.service.getMyLeagues()
+      .then((res: any) => {
+        console.log(res);
+        this.noMyLaegues = res.length > 0 ? false : true;
+        this.myLeagues = new MatTableDataSource(res);
+      })
+      .catch(err => console.log(err));
 
-  getDashboardData() {
+    this.service.getJoinedLeagues()
+      .then((res: any) => {
+        console.log(res);
+        this.noJoinedLeagues = res.length > 0 ? false : true;
+        this.joinedLeagues = new MatTableDataSource(res);
+      })
+      .catch(err => console.log(err));
 
   }
 

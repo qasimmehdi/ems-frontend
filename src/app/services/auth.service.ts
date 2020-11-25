@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  baseurl = "http://13.127.241.178:5002/api/Register"
+  baseurl = "http://182.189.94.159:27019/api/Register"
 
   constructor(private http:HttpClient) { }
 

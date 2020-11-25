@@ -18,14 +18,8 @@ const BASE_URL = environment.baseUrl;
 export class ManageTeamComponent implements OnInit {
     displayedColumns: string[] = ["cricketer"];
     dataSource: MatTableDataSource<any>;
-    limit: number = 20;
-    skip: Number = 0;
-    totalLength: Number = 0;
-    pageIndex: Number = 0;
-    pageLimit: Number[] = [5, 10, 25, 100];
     noUser: boolean = false;
-    isSorted: boolean = false;
-    sortSwitch: number = 0;
+
 
     data = [];
 
@@ -36,25 +30,27 @@ export class ManageTeamComponent implements OnInit {
 
     filteredOptions: Observable<any[]>;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     ngOnInit() {
         //call api and fill options[]
         //call api and fill data[]
         this.http
-        .get("http://13.127.241.178:5002/api/Teams/get")
-        .subscribe((x) => {
-            this.data = x;
-        });
+            .get("http://182.189.94.159:27019/api/Teams/get")
+            .subscribe((x: any) => {
+                this.data = x;
+                this.dataSource = new MatTableDataSource(this.data);
+            });
         this.http
-            .get("http://13.127.241.178:5002/api/Player/getall")
-            .subscribe((x) => {
+            .get("http://182.189.94.159:27019/api/Player/getall")
+            .subscribe((x: any) => {
                 this.options = x;
             });
+
         this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(""),
             map((val) => {
-                if (val) {
+                if (val && val !== "") {
                     return this.filter(val);
                 } else {
                     return this.options;
@@ -93,7 +89,7 @@ export class ManageTeamComponent implements OnInit {
         console.log(this.data);
         this.http
             .post(
-                "http://13.127.241.178:5002/api/Teams/addAll",
+                "http://182.189.94.159:27019/api/Teams/addAll",
                 this.data.map((x: any) => x.id)
             )
             .subscribe((x) => {
