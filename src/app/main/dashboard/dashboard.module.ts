@@ -4,6 +4,7 @@ import { DashComponent } from './dash/dash.component';
 import { AuthGuard } from '../auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import {
+  MatButtonModule,
   MatCardModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -12,7 +13,7 @@ const routes: Routes = [
   {
       path     : 'dashboard',
       component: DashComponent,
-      //canActivate: [AuthGuard]
+      canActivate: [AuthGuard]
   },
 ];
 
@@ -25,7 +26,8 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatButtonModule
   ],
   declarations: [DashComponent]
 })

@@ -110,7 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.document.body.classList.add(this.fuseConfig.colorTheme);
             });
 
-        if(localStorage.getItem("access_token")){
+        /* if(localStorage.getItem("access_token")){
             this.loginService.getProfile().then((myProfile: any) => {
                 this.store.dispatch({
                     type: LOG_IN,
@@ -120,7 +120,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 });
             })
             .catch(err => console.log(err));
-        }
+        } */
         // Subscribe Notifications from Firebase
         // this.notificationSubscriber()
     }

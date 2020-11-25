@@ -12,8 +12,13 @@ const routes: Routes = [
   {
       path     : 'leaderboard',
       component: LeaderboardComponent,
-      //canActivate: [AuthGuard]
+      canActivate: [AuthGuard]
   },
+  {
+    path     : 'leaderboard/:id',
+    component: LeaderboardComponent,
+    canActivate: [AuthGuard]
+},
 ];
 
 @NgModule({

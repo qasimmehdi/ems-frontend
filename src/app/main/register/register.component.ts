@@ -66,10 +66,11 @@ export class RegisterComponent implements OnInit {
     register(){
         this.authService.Register(this.loginForm.value).then(x => {
             console.log(x);
+            this.router.navigateByUrl('/login');
         }).catch(err => {
             console.log(err);
         })
-       
+
     }
 
 }

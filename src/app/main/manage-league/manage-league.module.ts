@@ -1,21 +1,26 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthGuard } from '../auth-guard.service';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
-  MatCardModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
+  MatCardModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth-guard.service';
 import { ManageLeagueComponent } from './manage-league.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
       path     : 'manage-league',
       component: ManageLeagueComponent,
-      //canActivate: [AuthGuard]
+      canActivate: [AuthGuard]
   },
+  {
+    path     : 'manage-league/:id',
+    component: ManageLeagueComponent,
+    canActivate: [AuthGuard]
+},
 ];
 
 @NgModule({

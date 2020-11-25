@@ -54,8 +54,7 @@ export class ManageTeamComponent implements OnInit {
 
   filteredOptions: Observable<any[]>;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     //call api and fill options[]

@@ -8,14 +8,20 @@ import {
   MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
 } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth-guard.service';
 import { AddpointsComponent } from './add-points.component';
 
 const routes: Routes = [
   {
       path     : 'add-points',
       component: AddpointsComponent,
-      //canActivate: [AuthGuard]
+      canActivate: [AuthGuard]
   },
+  {
+    path     : 'add-points/:id',
+    component: AddpointsComponent,
+    canActivate: [AuthGuard]
+},
 ];
 
 @NgModule({

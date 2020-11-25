@@ -19,6 +19,7 @@ export class DashComponent implements OnInit {
     'league',
     'tournament',
     'players',
+    'more'
   ];
   filter = 'my_gyms';
   dataSource;

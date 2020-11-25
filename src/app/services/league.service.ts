@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root",
 })
 export class LeagueService {
-    baseurl = "https://localhost:44305/api/Leagues/";
+    baseurl = "http://13.127.241.178:5002/api/Leagues/";
     constructor(private http: HttpClient) {}
 
     addLeague(payload) {

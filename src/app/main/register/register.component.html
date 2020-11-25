@@ -10,11 +10,11 @@
 
             <form name="loginForm"  [formGroup]="loginForm" novalidate>
                 <mat-form-field appearance="outline">
-                    <mat-label>Username</mat-label>
+                    <mat-label>Name</mat-label>
                     <input matInput formControlName="FullName">
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
                     <mat-error *ngIf="loginForm.get('FullName').hasError('required')">
-                        Username is required
+                        Name is required
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">

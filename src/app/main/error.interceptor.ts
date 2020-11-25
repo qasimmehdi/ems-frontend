@@ -18,9 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {
-                // auto logout if 401 response returned from api
-                // location.reload(true);
-                this._matSnackBar.open('Session expired, please login again.', 'OK', {
+                this._matSnackBar.open('Email or password was incorrect', 'OK', {
                     verticalPosition: 'bottom',
                     duration: 3000
                 });

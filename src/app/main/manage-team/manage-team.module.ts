@@ -8,14 +8,20 @@ import {
   MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
 } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth-guard.service';
 import { ManageTeamComponent } from './manage-team.component';
 
 const routes: Routes = [
   {
       path     : 'manage-team',
       component: ManageTeamComponent,
-      //canActivate: [AuthGuard]
+      canActivate: [AuthGuard]
   },
+  {
+    path     : 'manage-team/:id',
+    component: ManageTeamComponent,
+    canActivate: [AuthGuard]
+},
 ];
 
 @NgModule({

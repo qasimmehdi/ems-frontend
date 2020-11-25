@@ -68,8 +68,9 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-       this.loginService.Login(this.loginForm.value).then(x => {
-           console.log(x);
+       this.loginService.Login(this.loginForm.value).then((x: any) => {
+           localStorage.setItem('access_token', x.token);
+           this.router.navigateByUrl('/dashboard');
        }).catch(err => {
            console.log(err);
        })

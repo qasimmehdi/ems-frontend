@@ -12,7 +12,7 @@ const routes: Routes = [
   {
       path     : 'leagues',
       component: LeaguesComponent,
-      //canActivate: [AuthGuard]
+      canActivate: [AuthGuard]
   },
 ];
 
