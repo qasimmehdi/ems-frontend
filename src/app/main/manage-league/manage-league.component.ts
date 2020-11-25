@@ -40,6 +40,10 @@ export class ManageLeagueComponent implements OnInit {
     });
     }).catch(err => {
       console.log(err);
+      this._matSnackBar.open('Something went wrong', 'OK', {
+        verticalPosition: 'bottom',
+        duration: 3000
+    });
     })
   }
 
