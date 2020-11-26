@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
-import { MatTableDataSource } from '@angular/material';
+import { MatOptionSelectionChange, MatTableDataSource } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { LeagueService } from 'app/services/league.service';
 
-const BASE_URL = environment.baseUrl;
 
 @Component({
   selector: 'app-leaderboard',
@@ -30,9 +28,7 @@ export class LeaderboardComponent implements OnInit {
   options = [];
   filteredOptions: Observable<any[]>;
 
-
-  constructor(private http: HttpClient,
-    private service: LeagueService) { }
+  constructor(private service: LeagueService) { }
 
   ngOnInit() {
     this.service.getLeague()
@@ -50,25 +46,28 @@ export class LeaderboardComponent implements OnInit {
     );
   }
 
-  leagueSelected(option) {
-    this.dataSource = new MatTableDataSource([]);
-    console.log(option);
-    this.noData = false;
-    this.service.getLeaderboard(option.id)
-    .then((res: any) => {
-      let data = res;
-      data.sort(function(a, b) {
-        var keyA = new Date(a.totalPoints),
-          keyB = new Date(b.totalPoints);
-        // Compare the 2 dates
-        if (keyA < keyB) return 1;
-        if (keyA > keyB) return -1;
-        return 0;
-      });
-      console.log('sorted ',data);
-      this.dataSource = new MatTableDataSource(data);
-    })
-    .catch(err => console.log(err));
+  leagueSelected(event: MatOptionSelectionChange, option) {
+    if (event.source.selected) {
+      console.log('leagye selected');
+      this.dataSource = new MatTableDataSource([]);
+      console.log(option);
+      this.noData = false;
+      this.service.getLeaderboard(option.id)
+        .then((res: any) => {
+          let data = res;
+          data.sort(function (a, b) {
+            var keyA = new Date(a.totalPoints),
+              keyB = new Date(b.totalPoints);
+            if (keyA < keyB) return 1;
+            if (keyA > keyB) return -1;
+            return 0;
+          });
+          console.log('sorted ', data);
+          this.dataSource = new MatTableDataSource(data);
+        })
+        .catch(err => console.log(err));
+    }
+
   }
 
   filter(val): any[] {

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { MatTableDataSource } from "@angular/material";
+import { MatOptionSelectionChange, MatTableDataSource } from "@angular/material";
 import { fuseAnimations } from "@fuse/animations";
 import { environment } from "environments/environment";
 import { Observable } from "rxjs";
@@ -67,11 +67,12 @@ export class ManageTeamComponent implements OnInit {
         });
     }
 
-    playerSelected(option) {
-        console.log(option);
-        if (!this.playerAlreadySelected(option.id)) {
+    playerSelected(event: MatOptionSelectionChange, option) {
+        console.log('playerSelected');
+        if (event.source.selected && !this.playerAlreadySelected(option.id)) {
             this.data.push(option);
             this.dataSource = new MatTableDataSource(this.data);
+            this.options = this.options.filter(item => item.id !== option.id);
         }
 
         //this.myControl.setValue('', {emitEvent: false});
@@ -79,6 +80,7 @@ export class ManageTeamComponent implements OnInit {
 
     deletePlayer(i) {
         console.log(i);
+        this.options.push(this.data[i]);
         this.data = this.data.filter((_, j) => j !== i);
         console.log(this.data);
         this.dataSource = new MatTableDataSource(this.data);
