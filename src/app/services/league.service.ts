@@ -26,16 +26,16 @@ export class LeagueService {
         });
     }
 
-    postJoinLeague(id){
+    postJoinLeague(id) {
         return new Promise((resolve, reject) => {
-            this.http.post(this.baseurl + "join/"+id, {}).subscribe(
+            this.http.post(this.baseurl + "join/" + id, {}).subscribe(
                 (x) => resolve(x),
                 (err) => reject(err)
             );
         });
     }
 
-    getMyLeagues(){
+    getMyLeagues() {
         return new Promise((resolve, reject) => {
             this.http.get(this.baseurl + "getmyleagues").subscribe(
                 (x) => resolve(x),
@@ -44,9 +44,27 @@ export class LeagueService {
         });
     }
 
-    getJoinedLeagues(){
+    getJoinedLeagues() {
         return new Promise((resolve, reject) => {
             this.http.get(this.baseurl + "getjoinedleagues").subscribe(
+                (x) => resolve(x),
+                (err) => reject(err)
+            );
+        });
+    }
+
+    addPoints(data) {
+        return new Promise((resolve, reject) => {
+            this.http.post("http://182.189.94.159:27019/api/Points/addBatch", data).subscribe(
+                (x) => resolve(x),
+                (err) => reject(err)
+            );
+        });
+    }
+
+    getLeaderboard(id) {
+        return new Promise((resolve, reject) => {
+            this.http.get(this.baseurl+'getPoints/'+id).subscribe(
                 (x) => resolve(x),
                 (err) => reject(err)
             );

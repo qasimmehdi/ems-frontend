@@ -3,6 +3,10 @@ import { fuseAnimations } from '@fuse/animations';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { MatTableDataSource } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { LeagueService } from 'app/services/league.service';
 
 const BASE_URL = environment.baseUrl;
 
@@ -20,48 +24,58 @@ export class LeaderboardComponent implements OnInit {
     'name',
     'points',
   ];
-  filter = 'my_gyms';
-  dataSource;
-  limit: number = 20;
-  skip: Number = 0;
-  totalLength: Number = 0;
-  pageIndex: Number = 0;
-  pageLimit: Number[] = [5, 10, 25, 100];
-  noUser: boolean = false;
-  isSorted: boolean = false;
-  sortSwitch: number = 0;
+  dataSource: MatTableDataSource<any>;
+  noData: boolean = true;
+  myControl: FormControl = new FormControl();
+  options = [];
+  filteredOptions: Observable<any[]>;
 
-  data = [
-    {
-      Rank: "1",
-      Name: "Qasim",
-      Points: "212"
-    },
-    {
-      Rank: "2",
-      Name: "Qasim",
-      Points: "212"
-    },
-    {
-      Rank: "3",
-      Name: "Qasim",
-      Points: "212"
-    },
-    {
-      Rank: "4",
-      Name: "Qasim",
-      Points: "212"
-    },
-  ]
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private service: LeagueService) { }
 
   ngOnInit() {
-    this.dataSource = this.data;
+    this.service.getLeague()
+      .then((x: any) => {
+        console.log(x);
+        this.options = x;
+      })
+      .catch(err => console.log(err));
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(""),
+      map((val) => {
+        return this.filter(val);
+      })
+    );
   }
 
-  getDashboardData() {
+  leagueSelected(option) {
+    this.dataSource = new MatTableDataSource([]);
+    console.log(option);
+    this.noData = false;
+    this.service.getLeaderboard(option.id)
+    .then((res: any) => {
+      let data = res;
+      data.sort(function(a, b) {
+        var keyA = new Date(a.totalPoints),
+          keyB = new Date(b.totalPoints);
+        // Compare the 2 dates
+        if (keyA < keyB) return 1;
+        if (keyA > keyB) return -1;
+        return 0;
+      });
+      console.log('sorted ',data);
+      this.dataSource = new MatTableDataSource(data);
+    })
+    .catch(err => console.log(err));
+  }
 
+  filter(val): any[] {
+    return this.options.filter((option) => {
+      console.log("filter");
+      return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+    });
   }
 
 }

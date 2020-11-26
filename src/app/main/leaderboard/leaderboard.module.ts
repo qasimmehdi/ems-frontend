@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthGuard } from '../auth-guard.service';
-import { Routes, RouterModule } from '@angular/router';
-import {
-  MatCardModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
-} from '@angular/material';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatAutocompleteModule,
+  MatCardModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
+} from '@angular/material';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth-guard.service';
 import { LeaderboardComponent } from './leaderboard.component';
 
 const routes: Routes = [
@@ -30,7 +32,12 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [LeaderboardComponent]
 })

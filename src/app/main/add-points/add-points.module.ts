@@ -13,11 +13,6 @@ import { AddpointsComponent } from './add-points.component';
 
 const routes: Routes = [
   {
-      path     : 'add-points',
-      component: AddpointsComponent,
-      canActivate: [AuthGuard]
-  },
-  {
     path     : 'add-points/:id',
     component: AddpointsComponent,
     canActivate: [AuthGuard]

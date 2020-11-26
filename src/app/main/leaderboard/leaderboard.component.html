@@ -6,15 +6,24 @@
         <h2 style="margin-top: 0 !important;">Leaderboard</h2>
       </div>
       <div>
-        <h3>League Name</h3>
+        <mat-form-field variant="outline">
+          <input type="text" placeholder="Search Leagues" aria-label="Number" matInput [formControl]="myControl"
+            [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name"
+              (onSelectionChange)="leagueSelected(option)">
+              {{ option.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
         <div>
-          <mat-table [ngStyle]="noUser ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table1
+          <mat-table [ngStyle]="noData ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table1
             [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
 
             <ng-container matColumnDef="rank">
               <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
-              <mat-cell *matCellDef="let league">
-                <p class="text-truncate">{{league.Rank ? league.Rank : '---'}}</p>
+              <mat-cell *matCellDef="let league;let i = index">
+                <p class="text-truncate">{{i+1}}</p>
               </mat-cell>
             </ng-container>
 
@@ -22,7 +31,7 @@
               <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
               <mat-cell *matCellDef="let league">
                 <p class="text-truncate">
-                  {{league.Name ? league.Name : '---'}}</p>
+                  {{league.userName ? league.userName : '---'}}</p>
               </mat-cell>
             </ng-container>
 
@@ -30,19 +39,19 @@
               <mat-header-cell *matHeaderCellDef>Points</mat-header-cell>
               <mat-cell *matCellDef="let league">
                 <p class="text-truncate">
-                  {{league.Points ? league.Points : '---'}}
+                  {{league.totalPoints ? league.totalPoints : '---'}}
                 </p>
               </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
 
-            <mat-row *matRowDef="let league; columns: displayedColumns;" class="product" matRipple>
+            <mat-row *matRowDef="let league; columns: displayedColumns;let i = index" class="product" matRipple>
             </mat-row>
           </mat-table>
 
-          <div class="no-user-found" *ngIf="noUser">
-            <h4>No Record Found</h4>
+          <div class="no-user-found" *ngIf="noData">
+            <h4>Please select a league</h4>
           </div>
         </div>
       </div>

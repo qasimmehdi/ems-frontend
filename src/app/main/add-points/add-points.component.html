@@ -18,19 +18,22 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <mat-form-field variant="outline">
-            <input type="text" placeholder="Runs" matInput >
-          </mat-form-field>
-          <mat-form-field variant="outline">
-            <input type="text" placeholder="Fours" matInput >
-          </mat-form-field>
-          <mat-form-field variant="outline">
-            <input type="text" placeholder="Sixes" matInput >
-          </mat-form-field>
-          <mat-form-field variant="outline">
-            <input type="text" placeholder="Wickets" matInput >
-          </mat-form-field>
-          <button mat-raised-button color="primary">Save</button>
+          <form name="pointsForm" (submit)="calculatePoints()" fxLayout="column" [formGroup]="pointsForm" novalidate>
+
+            <mat-form-field variant="outline">
+              <input type="number" placeholder="Runs" matInput formControlName="runs">
+            </mat-form-field>
+            <mat-form-field variant="outline" >
+              <input type="number" placeholder="Fours" matInput formControlName="fours">
+            </mat-form-field>
+            <mat-form-field variant="outline">
+              <input type="number" placeholder="Sixes" matInput formControlName="sixes">
+            </mat-form-field>
+            <mat-form-field variant="outline">
+              <input type="number" placeholder="Wickets" matInput formControlName="wickets">
+            </mat-form-field>
+            <button [disabled]="pointsForm.invalid || selectedPlayerId === ''" mat-raised-button color="primary">Save</button>
+          </form>
         </div>
       </div>
 
