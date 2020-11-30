@@ -5,7 +5,7 @@ import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
 import * as moment from 'moment';
 import { EventModal } from 'app/main/event-modal/event-modal.component';
 
-export const BASE_URL_DEBUG = "http://localhost:8080";
+export const BASE_URL_DEBUG = "https://employee-webeng.herokuapp.com";
 export const BASE_URL = "https://employee-webeng.herokuapp.com";
 
 @Component({
