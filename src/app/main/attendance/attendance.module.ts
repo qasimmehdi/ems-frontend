@@ -5,18 +5,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule,
   MatButtonModule,
-  MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
+  MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSnackBarModule, MatSortModule, MatTableModule, MatTooltipModule
 } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth-guard.service';
-import { AddpointsComponent } from './add-points.component';
+import { AttendanceComponent } from './attendance.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 const routes: Routes = [
   {
-    path     : 'add-points/:id',
-    component: AddpointsComponent,
+    path: 'attendance',
+    component: AttendanceComponent,
+  },
+  {
+    path: 'attendance/:id',
+    component: AttendanceComponent,
     canActivate: [AuthGuard]
-},
+  },
 ];
 
 @NgModule({
@@ -32,7 +37,9 @@ const routes: Routes = [
     FormsModule,
     MatButtonModule,
     MatInputModule,
+    QRCodeModule,
+    MatSnackBarModule
   ],
-  declarations: [AddpointsComponent]
+  declarations: [AttendanceComponent]
 })
-export class AddPointsModule { }
+export class AttendanceModule { }

@@ -3,105 +3,110 @@
   <div class="center">
     <div class="content-card" style="margin-top: 5px;">
       <div class="separator">
-        <h1 style="margin-top: 0 !important;text-align: center;">Your Leagues</h1>
+        <h1 style="margin-top: 0 !important;text-align: center;">Employees</h1>
       </div>
       <div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <h2>Managing</h2>
-          <button mat-raised-button color="primary" [routerLink]="'/manage-league'">
-            Create League
+          <button mat-raised-button color="accent" (click)="addEmp('Add')">
+            Add Employee
           </button>
         </div>
         <div>
-          <mat-table [ngStyle]="noMyLaegues ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table1
-            [dataSource]="myLeagues" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+          <mat-table [ngStyle]="noEmployees ? {'display': 'none'} : {'display': 'block'}" class="trainer-table" #table1
+            [dataSource]="employees" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
 
-            <ng-container matColumnDef="league">
-              <mat-header-cell *matHeaderCellDef>League</mat-header-cell>
-              <mat-cell *matCellDef="let league">
-                <p class="text-truncate">{{league.name ? league.name : '---'}}</p>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell *matCellDef="let emp">
+                <p class="text-truncate">{{emp.name ? emp.name : '---'}}</p>
               </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="players">
-              <mat-header-cell *matHeaderCellDef>Players</mat-header-cell>
-              <mat-cell *matCellDef="let league">
-                <p class="text-truncate">
-                  {{league.maxParticipants ? league.maxParticipants : '---'}}
-                </p>
+            <ng-container matColumnDef="fatherName">
+              <mat-header-cell *matHeaderCellDef>Father Name</mat-header-cell>
+              <mat-cell *matCellDef="let emp">
+                <p class="text-truncate">{{emp.fatherName ? emp.fatherName : '---'}}</p>
               </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="more">
-              <mat-header-cell style="max-width: 89px" *matHeaderCellDef></mat-header-cell>
-              <mat-cell style="max-width: fit-content;" *matCellDef="let league">
-                <button mat-raised-button color="primary" [routerLink]="'/add-points/'+league.id">
-                  Manage
+            <ng-container matColumnDef="cnic">
+              <mat-header-cell *matHeaderCellDef>CNIC</mat-header-cell>
+              <mat-cell *matCellDef="let emp">
+                <p class="text-truncate">{{emp.cnic ? emp.cnic : '---'}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+              <mat-cell *matCellDef="let emp">
+                <p class="text-truncate">{{emp.email ? emp.email : '---'}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="grade">
+              <mat-header-cell *matHeaderCellDef>Grade</mat-header-cell>
+              <mat-cell *matCellDef="let emp">
+                <p class="text-truncate">{{emp.grade ? emp.grade : '---'}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="joinDate">
+              <mat-header-cell *matHeaderCellDef>Join Date</mat-header-cell>
+              <mat-cell *matCellDef="let emp">
+                <p class="text-truncate">{{emp.joinDate ? moment.unix(emp.joinDate).format("MM/DD/YYYY") : '---'}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="allowances">
+              <mat-header-cell *matHeaderCellDef>Allowances</mat-header-cell>
+              <mat-cell *matCellDef="let emp">
+                <p class="text-truncate">{{emp.allowances ? emp.allowances : '---'}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="allowedLeaves">
+              <mat-header-cell *matHeaderCellDef>Allowed Leaves</mat-header-cell>
+              <mat-cell *matCellDef="let emp">
+                <p class="text-truncate">{{emp.allowedLeaves ? emp.allowedLeaves : '---'}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="remainingLeaves">
+              <mat-header-cell *matHeaderCellDef>Remaining Leaves</mat-header-cell>
+              <mat-cell *matCellDef="let emp">
+                <p class="text-truncate">{{emp.remainingLeaves ? emp.remainingLeaves : '---'}}</p>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+              <mat-header-cell style="max-width: 40px" *matHeaderCellDef></mat-header-cell>
+              <mat-cell style="max-width: fit-content;" *matCellDef="let emp">
+                <button mat-icon-button color="accent" (click)="openDialog(emp, 'Edit')">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <mat-header-cell style="max-width: 64px" *matHeaderCellDef></mat-header-cell>
+              <mat-cell style="max-width: fit-content;" *matCellDef="let emp">
+                <button mat-icon-button color="accent" (click)="deleteEmp(emp._id.$oid)">
+                  <mat-icon>delete</mat-icon>
                 </button>
               </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
 
-            <mat-row *matRowDef="let league; columns: displayedColumns;" class="product" matRipple>
+            <mat-row *matRowDef="let emp; columns: displayedColumns;" class="product" matRipple>
             </mat-row>
           </mat-table>
 
-          <div class="no-user-found" *ngIf="noMyLaegues">
-            <h4>You have not created any leagues</h4>
+          <div class="no-user-found" *ngIf="noEmployees">
+            <h4>No Employees available</h4>
           </div>
         </div>
       </div>
-
-      <div style="margin-top: 10px;">
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <h2>Participating</h2>
-          <button mat-raised-button color="primary" [routerLink]="'/leagues'">
-            Join League
-          </button>
-        </div>
-        <div>
-          <mat-table [ngStyle]="noJoinedLeagues ? {'display': 'none'} : {'display': 'block'}" class="trainer-table"
-            #table2 [dataSource]="joinedLeagues" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
-
-            <ng-container matColumnDef="league">
-              <mat-header-cell *matHeaderCellDef>League</mat-header-cell>
-              <mat-cell *matCellDef="let league">
-                <p class="text-truncate">{{league.name ? league.name : '---'}}</p>
-              </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="players">
-              <mat-header-cell *matHeaderCellDef>Players</mat-header-cell>
-              <mat-cell *matCellDef="let league">
-                <p class="text-truncate">
-                  {{league.maxParticipants ? league.maxParticipants : '---'}}
-                </p>
-              </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="more">
-              <mat-header-cell style="max-width: 89px" *matHeaderCellDef></mat-header-cell>
-              <mat-cell style="max-width: fit-content;" *matCellDef="let league">
-                <button mat-raised-button color="primary" [routerLink]="'/manage-team/'+league.id">
-                  Edit Team
-                </button>
-              </mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-
-            <mat-row *matRowDef="let league; columns: displayedColumns;" class="product" matRipple>
-            </mat-row>
-          </mat-table>
-
-          <div class="no-user-found" *ngIf="noJoinedLeagues">
-            <h4>You have not joined any leagues</h4>
-          </div>
-        </div>
-      </div>
-
-
     </div>
   </div>
 </div>

@@ -22,8 +22,8 @@ import { environment } from 'environments/environment';
 import 'firebase/firestore';
 import 'hammerjs';
 import { ToastrModule } from 'ngx-toastr';
-import { AddPointsModule } from './main/add-points/add-points.module';
 import { AppAuthGuard } from './main/app.authguard';
+import { AttendanceModule } from './main/attendance/attendance.module';
 import { AuthGuard } from './main/auth-guard.service';
 import { AuthService } from './main/auth.service';
 import { AuthorizationsModule } from './main/authorizations/authorizations.module';
@@ -75,7 +75,7 @@ const appRoutes: Routes = [
         AuthorizationsModule,
         ResetPasswordModule,
         ForgetPasswordModule,
-        AddPointsModule,
+        AttendanceModule,
         /* TeamsModule,
         UsersModule,
         ReportedModule,

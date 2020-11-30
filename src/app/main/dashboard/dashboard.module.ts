@@ -5,9 +5,11 @@ import { AuthGuard } from '../auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import {
   MatButtonModule,
-  MatCardModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTooltipModule
+  MatCardModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSnackBarModule, MatSortModule, MatTableModule, MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { EventModal } from '../event-modal/event-modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -27,8 +29,18 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatTooltipModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
-  declarations: [DashComponent]
+  declarations: [
+    DashComponent,
+    EventModal
+  ],
+  entryComponents: [EventModal]
 })
 export class DashboardModule { }

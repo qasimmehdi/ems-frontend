@@ -18,6 +18,10 @@ const routes = [
         path: '',
         component: LoginComponent,
     },
+    {
+        path: 'login/:action',
+        component: LoginComponent,
+    },
 ];
 
 @NgModule({

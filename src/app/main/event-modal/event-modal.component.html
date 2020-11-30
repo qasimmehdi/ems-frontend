@@ -1,0 +1,105 @@
+<div fxLayout="row" fxLayoutAlign="end start">
+    <button mat-icon-button class="close-btn" [disableRipple]="true" [autofocus]="false" (click)="onNoClick()">
+        <mat-icon>cancel</mat-icon>
+    </button>
+</div>
+<div class="event-modal" fxLayout="column" fxLayoutAlign="center none">
+    <h1 style="text-align: center;">{{data.action}} Employee</h1>
+    <form fxLayout="column" name="employeeForm" (submit)="data.action === 'Edit' ? saveEmployee() : createEmployee()"
+        [formGroup]="employeeForm" novalidate>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+            <mat-error *ngIf="employeeForm.get('email').hasError('required')">
+                Email is required
+            </mat-error>
+            <mat-error *ngIf="!employeeForm.get('email').hasError('required') &&
+                        employeeForm.get('email').hasError('pattern')">
+                Please enter a valid email address
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+
+            <mat-error *ngIf="employeeForm.get('password').hasError('required')">
+                Password is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+
+            <mat-error *ngIf="employeeForm.get('name').hasError('required')">
+                Name is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Father Name</mat-label>
+            <input matInput type="text" formControlName="fatherName">
+
+            <mat-error *ngIf="employeeForm.get('fatherName').hasError('required')">
+                Father Name is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>CNIC</mat-label>
+            <input matInput type="text" formControlName="cnic">
+
+            <mat-error *ngIf="employeeForm.get('cnic').hasError('required')">
+                CNIC is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Grade</mat-label>
+            <input matInput type="text" formControlName="grade">
+
+            <mat-error *ngIf="employeeForm.get('grade').hasError('required')">
+                Grade is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Join Date</mat-label>
+            <input matInput type="date" formControlName="joinDate">
+
+            <mat-error *ngIf="employeeForm.get('joinDate').hasError('required')">
+                Join Date is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Allowances</mat-label>
+            <input matInput type="text" formControlName="allowances">
+
+            <mat-error *ngIf="employeeForm.get('allowances').hasError('required')">
+                Allowances is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Allowed Leaves</mat-label>
+            <input matInput type="text" formControlName="allowedLeaves">
+
+            <mat-error *ngIf="employeeForm.get('allowedLeaves').hasError('required')">
+                Allowed Leaves is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Remaining Leaves</mat-label>
+            <input matInput type="text" formControlName="remainingLeaves">
+
+            <mat-error *ngIf="employeeForm.get('remainingLeaves').hasError('required')">
+                Remaining Leaves is required
+            </mat-error>
+        </mat-form-field>
+
+
+        <button mat-raised-button color="primary" class="submit-button" aria-label="LOG IN"
+            [disabled]="employeeForm.invalid || isSaving">
+            Save
+        </button>
+
+    </form>
+</div>

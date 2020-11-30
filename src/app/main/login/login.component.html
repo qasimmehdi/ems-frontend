@@ -4,7 +4,7 @@
 
         <div id="login-form" (submit)="login()" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
 
-            <div class="gr-title">Fantasy League</div>
+            <div class="gr-title">Employee Management System</div>
 
             <!-- <div class="logo">
                 <img src="assets/images/logos/th-logo-blue.png">
@@ -16,23 +16,23 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="Email">
+                    <input matInput formControlName="email">
                     <mat-icon matSuffix class="secondary-text">mail</mat-icon>
-                    <mat-error *ngIf="loginForm.get('Email').hasError('required')">
+                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
                         Email is required
                     </mat-error>
                     <mat-error
-                        *ngIf="!loginForm.get('Email').hasError('required') &&
-                                loginForm.get('Email').hasError('pattern')">
+                        *ngIf="!loginForm.get('email').hasError('required') &&
+                                loginForm.get('email').hasError('pattern')">
                         Please enter a valid email address
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" formControlName="Password">
+                    <input matInput type="password" formControlName="password">
                     <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
-                    <mat-error *ngIf="loginForm.get('Password').hasError('required')">
+                    <mat-error *ngIf="loginForm.get('password').hasError('required')">
                         Password is required
                     </mat-error>
                 </mat-form-field>

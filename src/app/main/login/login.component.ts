@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { LOG_OUT, LOG_IN } from '../../store/actions/user.actions';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
@@ -26,17 +26,24 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     isLogginIn: boolean = false;
     user$: Observable<object>;
+    actionFromRoute$: Observable<Params>;
+    action: string;
 
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
-        private store: Store<AppState>,
+        private route: ActivatedRoute,
         private router: Router,
         private loginService: LoginService,
         private _snackBar: MatSnackBar,
         private authService: AuthService
     ) {
         // Configure the layout
+        this.actionFromRoute$ = this.route.params;
+        this.actionFromRoute$.subscribe(res => {
+            console.log(res.action);
+            this.action = res.action;
+        })
         this._fuseConfigService.config = {
             layout: {
                 navbar: {
@@ -57,8 +64,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this._formBuilder.group({
-            Email: ['', [Validators.required, Validators.pattern(regexes.email)]],
-            Password: ['', [Validators.required]]
+            email: ['', [Validators.required, Validators.pattern(regexes.email)]],
+            password: ['', [Validators.required]]
         });
         if (this.authService.isUserLoggedIn()) {
             this.router.navigateByUrl('dashboard')
@@ -68,12 +75,17 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-       this.loginService.Login(this.loginForm.value).then((x: any) => {
-           localStorage.setItem('access_token', x.token);
-           this.router.navigateByUrl('/dashboard');
-       }).catch(err => {
-           console.log(err);
-       })
+        this.loginService.Login(this.loginForm.value).then((x: any) => {
+            localStorage.setItem('access_token', x.jwt);
+            if(x.role === 'employee'){
+                this.router.navigateByUrl('/attendance/' + x.employee._id.$oid);
+            }
+            else if(x.role === 'admin'){
+                this.router.navigateByUrl('/dashboard');
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
 }
