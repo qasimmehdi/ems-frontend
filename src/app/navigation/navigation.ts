@@ -19,7 +19,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'attendance',
-                title: '/attendance',
+                title: 'Attendance',
                 type: 'item',
                 icon: 'dashboard',
                 url: '/attendance'
