@@ -63,12 +63,7 @@ const appRoutes: Routes = [
 
         //page modules
         LoginModule,
-        RegisterModule,
         DashboardModule,
-        LeaderboardModule,
-        ManageTeamModule,
-        LeaguesModule,
-        ManageLeagueModule,
         /* GymsModule,
         TeamsModule,
         SettingsModule, */
